@@ -48,7 +48,7 @@ class OperacionesMYSQL
 
     require("conexion.php");
 
-    $sql= "UPDATE meta SET prioridad='baja' WHERE idMeta=4";
+    $sql= "UPDATE usuario SET nombre='admin' WHERE idUsuario=1";
 
     try {
 
