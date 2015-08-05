@@ -1,6 +1,6 @@
 <?php
-define('HOSTNAME', 'localhost');
-define('USERNAME', 'root');
-define('PASSWORD', '');
-define('DATABASE', 'i_wish');
+define('HOSTNAME', "192.185.67.190");
+define('USERNAME', 'globaled_cikapp');
+define('PASSWORD', 'Cikapp2015!');
+define('DATABASE', 'globaled_cikapp1');
  ?>

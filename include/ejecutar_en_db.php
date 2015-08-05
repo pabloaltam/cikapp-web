@@ -11,7 +11,7 @@ class OperacionesMYSQL
     # NOTA: Al final de cada funcion NO OLVIDAR $con=null
 
     require("conexion.php");
-    $query = "SELECT * FROM meta";
+    $query = "SELECT * FROM usuario";
     print("<table>");
 
     try {
@@ -21,12 +21,12 @@ class OperacionesMYSQL
       foreach ( $resultado as $rows) {
 
         print("<tr>");
-        print("<td>".$rows["idMeta"]."</td>");
-        print("<td>".utf8_encode($rows["titulo"])."</td>");
-        print("<td>".utf8_encode($rows["descripcion"])."</td>");
-        print("<td>".$rows["prioridad"]."</td>");
-        print("<td>".$rows["fechaLim"]."</td>");
-        print("<td>".$rows["categoria"]."</td>");
+        print("<td>".$rows["idUsuario"]."</td>");
+        print("<td>".utf8_encode($rows["nombre"])."</td>");
+        print("<td>".utf8_encode($rows["apellidoPaterno"])."</td>");
+        print("<td>".$rows["apellidoMaterno"]."</td>");
+        print("<td>".$rows["rut"]."</td>");
+        print("<td>".$rows["password"]."</td>");
         print("</tr>");
 
       }
