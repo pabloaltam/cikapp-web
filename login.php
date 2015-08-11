@@ -31,10 +31,8 @@
                                 if (isset($_POST["txtRut"])) {
                                     include './include/ejecutar_en_db.php';
                                     $objBD = new OperacionesMYSQL();
-                                    if($objBD->crearUsuario($_POST["txtRut"], $_POST["txtNombre"], $_POST["txtApellidos"], $_POST["txtEmail"],
-                                            $_POST["txtPass"], $_POST["txtFechaNacimiento"], $_POST["txtCiudad"], $_POST["txtEstudios"],
-                                            $_POST["cboExperiencia"], $_POST["txtAreasInteres"], $_POST["txtIngles"],
-                                            $_POST["txtRentaMinima"], $_POST["txtRentaMaxima"])){
+                                    if($objBD->crearUsuario($_POST["txtRut"], $_POST["txtEmail"],
+                                            $_POST["txtPass"])){
                                         print 'Exito';
                                     } else {
                                         print 'Fracaso';

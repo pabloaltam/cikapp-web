@@ -60,39 +60,21 @@ class OperacionesMYSQL {
         }
     }
 
-    function crearUsuario($rut, $nombre, $apellido, $email, $password, $fechaNacimiento, $idResidencia, $estudios, $experiencia, $areasInteres, $idIngles, $expectativaRentaMin, $expectativaRentaMax) {
+    function crearUsuario($rut, $email, $password) {
 
         # Insertando en la Base de Datos con PDOStatement
-        $sql = "INSERT INTO `usuario`
-  (`rut`,
-    `nombre`,
-    `apellido`,
-    `email`,
-    `password`,
-    `fechaNacimiento`,
-    `idResidencia`,
-    `estudios`,
-    `experiencia`,
-    `areasInteres`,
-    `idIngles`,
-    `expectativaRentaMin`,
-    `expectativaRentaMax`)
-      VALUES
-      (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO `usuario` (`rut`, `email`, `password`) VALUES (?,?,?)";
 
         try {
             if ($this->validarRut($rut)) {
                 require("conexion.php");
                 $count = $con->prepare($sql);
-                $count->execute(array($rut, $nombre, $apellido, $email, sha1($password),
-                    $fechaNacimiento, $idResidencia, $estudios, $experiencia,
-                    $areasInteres, $idIngles, $expectativaRentaMin, $expectativaRentaMax));
-                if($count-> rowCount()>0){
+                $count->execute(array($rut, $email, sha1($password)));
+                if (($count->rowCount()) > 0) {
                     return TRUE;
-                }  else {
-                    return FALSE;    
+                } else {
+                    return FALSE;
                 }
-                
             } else {
                 print FALSE;
             }
@@ -113,40 +95,40 @@ class OperacionesMYSQL {
         require("conexion.php");
         $query = "SELECT rut FROM usuario";
         try {
-            
-        if (strpos($rut, "-") == false) {
-            $RUT[0] = substr($rut, 0, -1);
-            $RUT[1] = substr($rut, -1);
-        } else {
-            $RUT = explode("-", trim($rut));
-        }
-        $elRut = str_replace(".", "", trim($RUT[0]));
-        $factor = 2;
-        $suma = 0;
-        for ($i = strlen($elRut) - 1; $i >= 0; $i--):
-            $factor = $factor > 7 ? 2 : $factor;
-            $suma += $elRut{$i} * $factor++;
-        endfor;
-        $resto = $suma % 11;
-        $dv = 11 - $resto;
-        if ($dv == 11) {
-            $dv = 0;
-        } else if ($dv == 10) {
-            $dv = "k";
-        } else {
-            $dv = $dv;
-        }
-        if ($dv == trim(strtolower($RUT[1]))) {            
-            $resultado = $con->query($query);
-            foreach ($resultado as $fila) {
-                if ($fila["rut"] == $rut) {
-                    return FALSE;
-                }
+
+            if (strpos($rut, "-") == false) {
+                $RUT[0] = substr($rut, 0, -1);
+                $RUT[1] = substr($rut, -1);
+            } else {
+                $RUT = explode("-", trim($rut));
             }
-            return TRUE;
-        } else {
-            return FALSE;
-        }
+            $elRut = str_replace(".", "", trim($RUT[0]));
+            $factor = 2;
+            $suma = 0;
+            for ($i = strlen($elRut) - 1; $i >= 0; $i--):
+                $factor = $factor > 7 ? 2 : $factor;
+                $suma += $elRut{$i} * $factor++;
+            endfor;
+            $resto = $suma % 11;
+            $dv = 11 - $resto;
+            if ($dv == 11) {
+                $dv = 0;
+            } else if ($dv == 10) {
+                $dv = "k";
+            } else {
+                $dv = $dv;
+            }
+            if ($dv == trim(strtolower($RUT[1]))) {
+                $resultado = $con->query($query);
+                foreach ($resultado as $fila) {
+                    if ($fila["rut"] == $rut) {
+                        return FALSE;
+                    }
+                }
+                return TRUE;
+            } else {
+                return FALSE;
+            }
         } catch (PDOException $e) {
             //EN caso de ERROR
         } finally {
