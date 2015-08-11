@@ -88,9 +88,9 @@ class OperacionesMYSQL {
                     $fechaNacimiento, $idResidencia, $estudios, $experiencia,
                     $areasInteres, $idIngles, $expectativaRentaMin, $expectativaRentaMax));
 
-                print($count->rowCount() . " Filas afectadas");
+                return $count -> rowCount();
             } else {
-                print '<h1>Rut ya ingresado</h1>';
+                print -1;
             }
         } catch (PDOException $e) {
 
@@ -157,7 +157,7 @@ class OperacionesMYSQL {
 # Asi se llaman a las funciones desde otras paginas
 # no olvidar el include a este archivo
 
-$pruebaOBJ = new OperacionesMYSQL();
+/*$pruebaOBJ = new OperacionesMYSQL();
 # Esta insertando pero aun falta todas las validaciones y la seguridad.
 # Falta validad si que el usuario no existe.
 # IMPORTANTE: El Rut tiene que contener puntos
@@ -165,3 +165,4 @@ $pruebaOBJ->crearUsuario("22222222-2", "victor", "muñoz", "viktor_viro@hotmail.
 print("</br>");
 $pruebaOBJ->traerDatos();
 print("</br>");
+*/

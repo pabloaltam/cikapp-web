@@ -26,30 +26,115 @@
       <p class="click2select">Presiona para elegir</p>
       <div class="tab-content">
         <div class="tab-pane fade in active" id="new">
+            <form action="" method="POST" autocomplete="none" name="frmRegistrar">
+                <?php
+                 if(isset($_POST["btnEnviar"]))
+                 {
+                     include './include/ejecutar_en_db.php';
+                 }
+                ?>
           <br>
           <fieldset>
+              
             <div class="form-group">
               <div class="right-inner-addon">
                 <i class="fa fa-envelope"></i>
-                <input class="form-control input-lg" placeholder="Rut" type="text">
+                <input class="form-control input-lg" placeholder="Rut" name="txtRut" type="text">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-user"></i>
+                <input class="form-control input-lg" placeholder="Nombre" name="txtNombre" type="text">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-user"></i>
+                <input class="form-control input-lg" placeholder="Apellidos" name="txtApellidos" type="text">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-calendar"></i>
+                <input class="form-control input-lg" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" type="text">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-globe"></i>
+                <input class="form-control input-lg" placeholder="Cuidad" name="txtCiudad" type="text">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-graduation-cap"></i>
+                <input class="form-control input-lg" placeholder="Estudios" name="txtEstudios" type="text">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-calendar-check-o"></i>
+                <select class="form-control input-lg" placeholder="Seleccione..." name="cboExperiencia">
+                    <option value="0">Seleccione...</option>
+                    <?php
+                                    for ($i=1;$i<=50;$i++){
+                                        if($i<10){
+                                        print "<option value='{$i}'>0{$i}</option>";
+                                        } elseif($i < 50) {
+                                        
+                                            print "<option value='{$i}'>{$i}</option>";    
+                                        
+                                        
+                                        } else {
+                                            print "<option value='51'>50 o más</option>";
+                                        }
+                                        
+                                    }
+                    ?>
+                </select>
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-envelope"></i>
+                <input class="form-control input-lg" placeholder="Áreas de interés" name="txtAreasInteres" type="text">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-envelope"></i>
+                <input class="form-control input-lg" placeholder="Nivel de inglés" name="txtIngles" type="text">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-minus"></i>
+                <input class="form-control input-lg" placeholder="Espectativa de renta minima" name="txtRentaMinima" type="text">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-plus"></i>
+                <input class="form-control input-lg" placeholder="Espectativa de renta máxima" name="txtRentaMaxima" type="text">
               </div>
             </div>
             <div class="form-group">
               <div class="right-inner-addon">
                 <i class="fa fa-envelope"></i>
-                <input class="form-control input-lg" placeholder="Correo electrónico" type="text">
+                <input class="form-control input-lg" placeholder="Correo electrónico" name="txtEmail" type="text">
               </div>
             </div>
             <div class="form-group">
               <div class="right-inner-addon">
                 <i class="fa fa-key"></i>
-                <input class="form-control input-lg" placeholder="Contraseña" type="password">
+                <input class="form-control input-lg" placeholder="Contraseña" name="txtPass" type="password">
               </div>
             </div>
             <div class="form-group">
               <div class="right-inner-addon">
                 <i class="fa fa-key"></i>
-                <input class="form-control input-lg" placeholder="Confirmar contraseña" id="" type="password">
+                <input class="form-control input-lg" placeholder="Confirmar contraseña" name="txtRepPass" id="" type="password">
               </div>
             </div>
           </fieldset>
@@ -57,9 +142,10 @@
 
           <div class="tab-content">
             <div class="tab-pane fade in active text-center" id="pp">
-              <button class="btn btn-primary btn-lg btn-block">Registrarme</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnEnviar">Registrarme</button>
             </div>
           </div>
+            </form>
         </div>
         <div class="tab-pane fade" id="user">
           <br>
