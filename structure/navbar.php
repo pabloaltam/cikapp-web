@@ -9,7 +9,9 @@
     <link href="structure/css/style.css" rel="stylesheet">
     </head>
     <body>
-<nav class="navbar navbar-default">
+        
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Navegar</span>
@@ -21,8 +23,8 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
         <form class="navbar-form navbar-right">
-            <a class="btn btn-success" href="login.php" role="button">Persona</a>
-            <a class="btn btn-success" href="sign-empresa.php" role="button">Empresa</a>
+            <a class="btn btn-success" href="login.php" role="button"><i class="fa fa-user"></i> Persona</a>
+            <a class="btn btn-success" href="sign-empresa.php" role="button"><i class="fa fa-users"></i> Empresa</a>
             </form>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="index.php">Inicio</a></li>
@@ -40,5 +42,6 @@
             </li>
         </ul>
 
+    </div>
     </div>
 </nav>

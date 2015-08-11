@@ -1,3 +1,79 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+.navbar-default {
+    background-color: #2980B9;
+    border-color: #2980B9;
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #ECF0F1;
+    background-color: transparent;
+}
+.navbar-default .navbar-brand {
+ color: #FFFFFF;   
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #FFFFFF;
+    background-color: #2C3E50;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #ECF0F1;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    background-color: #E7BE04;
+    color: #FFFFFF;
+}
+
+.btn-primary {
+    background-color: #2980B9;
+    border-color: #2980B9;
+    color: #FFFFFF;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+    color: #FFFFFF;
+    background-color: #3498DB;
+    border-color: #3498DB;
+}
+
+.btn-success {
+    background-color: #E7BA2B;
+    border-color: #2980B9;
+    color: #FFFFFF;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success {
+    color: #FFFFFF;
+    background-color: #D9AF28;
+    border-color: #D9AF28;
+}
+
 .sign-in-up .left-inner-addon {
     position: relative;
 }
