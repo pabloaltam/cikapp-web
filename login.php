@@ -46,81 +46,8 @@
 
                                     <div class="form-group">
                                         <div class="right-inner-addon">
-                                            <i class="fa fa-envelope"></i>
+                                            <i class="fa fa-user"></i>
                                             <input class="form-control input-lg" id="txtRut" required placeholder="Rut" name="txtRut" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-user"></i>
-                                            <input class="form-control input-lg" required placeholder="Nombre" name="txtNombre" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-user"></i>
-                                            <input class="form-control input-lg" required placeholder="Apellidos" name="txtApellidos" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-calendar"></i>
-                                            <input class="form-control input-lg" required placeholder="Fecha de nacimiento" name="txtFechaNacimiento" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-globe"></i>
-                                            <input class="form-control input-lg" required placeholder="Cuidad" name="txtCiudad" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-graduation-cap"></i>
-                                            <input class="form-control input-lg" required placeholder="Estudios" name="txtEstudios" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-calendar-check-o"></i>
-                                            <select class="form-control input-lg" required placeholder="Seleccione..." name="cboExperiencia">
-                                                <option value="0">Años de experiencia</option>
-                                                <?php
-                                                for ($i = 1; $i <= 50; $i++) {
-                                                    if ($i < 10) {
-                                                        print "<option value='{$i}'>0{$i}</option>";
-                                                    } elseif ($i < 50) {
-                                                        print "<option value='{$i}'>{$i}</option>";
-                                                    } else {
-                                                        print "<option value='51'>50 o más</option>";
-                                                    }
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-envelope"></i>
-                                            <input class="form-control input-lg" required placeholder="Áreas de interés" name="txtAreasInteres" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-envelope"></i>
-                                            <input class="form-control input-lg" required placeholder="Nivel de inglés" name="txtIngles" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-minus"></i>
-                                            <input class="form-control input-lg" required placeholder="Espectativa de renta minima" name="txtRentaMinima" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="right-inner-addon">
-                                            <i class="fa fa-plus"></i>
-                                            <input class="form-control input-lg" required placeholder="Espectativa de renta máxima" name="txtRentaMaxima" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -156,7 +83,7 @@
                             <fieldset>
                                 <div class="form-group">
                                     <div class="right-inner-addon">
-                                        <i class="fa fa-envelope"></i>
+                                        <i class="fa fa-user"></i>
                                         <input class="form-control input-lg" placeholder="Rut" type="text">
                                     </div>
                                 </div>
