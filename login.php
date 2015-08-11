@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <div class="right-inner-addon">
                                             <i class="fa fa-envelope"></i>
-                                            <input class="form-control input-lg" required placeholder="Rut" name="txtRut" type="text">
+                                            <input class="form-control input-lg" id="txtRut" required placeholder="Rut" name="txtRut" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -177,7 +177,10 @@
             </div>
         </div>
 
+        
 
 <?php include 'structure/footer.php'; ?>
+        <script src="structure/js/jquery.Rut.min.js"></script>
+        <script src="structure/js/login.js"></script>
     </body>
 </html>
