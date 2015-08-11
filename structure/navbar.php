@@ -1,5 +1,14 @@
-<link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="structure/css/style.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cikapp - We are working!</title>
+    <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="structure/css/style.css" rel="stylesheet">
+    </head>
+    <body>
 <nav class="navbar navbar-default">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -13,6 +22,7 @@
     <div id="navbar" class="navbar-collapse collapse">
         <form class="navbar-form navbar-right">
             <a class="btn btn-success" href="login.php" role="button">Persona</a>
+            <a class="btn btn-success" href="sign-empresa.php" role="button">Empresa</a>
             </form>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="index.php">Inicio</a></li>
@@ -29,7 +39,6 @@
               </ul>
             </li>
         </ul>
-            
+
     </div>
 </nav>
-

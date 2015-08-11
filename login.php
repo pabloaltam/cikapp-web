@@ -177,7 +177,7 @@
             </div>
         </div>
 
-        
+
 
 <?php include 'structure/footer.php'; ?>
         <script src="structure/js/jquery.Rut.min.js"></script>
