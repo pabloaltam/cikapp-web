@@ -84,13 +84,17 @@ class OperacionesMYSQL {
             if ($this->validarRut($rut)) {
                 require("conexion.php");
                 $count = $con->prepare($sql);
-                $count->execute(array($rut, $nombre, $apellido, $email, $password,
+                $count->execute(array($rut, $nombre, $apellido, $email, sha1($password),
                     $fechaNacimiento, $idResidencia, $estudios, $experiencia,
                     $areasInteres, $idIngles, $expectativaRentaMin, $expectativaRentaMax));
-
-                return $count -> rowCount();
+                if($count-> rowCount()>0){
+                    return TRUE;
+                }  else {
+                    return FALSE;    
+                }
+                
             } else {
-                print -1;
+                print FALSE;
             }
         } catch (PDOException $e) {
 
