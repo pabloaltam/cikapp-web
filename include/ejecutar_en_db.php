@@ -69,7 +69,7 @@ class OperacionesMYSQL {
             if ($this->validarRut($rut)) {
                 require("conexion.php");
                 $count = $con->prepare($sql);
-                $count->execute(array($rut, $email, sha1($password)));
+                $count->execute(array($rut, $email, sha1(md5($password))));
                 if (($count->rowCount()) > 0) {
                     return TRUE;
                 } else {
