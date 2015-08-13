@@ -31,8 +31,14 @@
                                 if (isset($_POST["txtRut"])) {
                                     include './include/ejecutar_en_db.php';
                                     $objBD = new OperacionesMYSQL();
-                                    if ($objBD->crearUsuario(filter_input(INPUT_POST, "txtRut"), filter_input(INPUT_POST, "txtEmail"), filter_input(INPUT_POST, "txtPass"))) {
-                                        print 'Exito';
+                                    $codigoverificacion = rand(0000000000, 9999999999); // Conseguimos un codigo aleatorio de 10 digitos. 
+                                    if ($objBD->crearUsuario(filter_input(INPUT_POST, "txtRut"), filter_input(INPUT_POST, "txtEmail"), filter_input(INPUT_POST, "txtPass"),$codigoverificacion)) {
+                                        $email = filter_input(INPUT_POST, "txtEmail");
+                                        $headers = "From: admin@cikapp.com";
+                                        $mensaje = "Usted solicito un registro en cikapp.com, para confirmarlo debe hacer click en el siguiente enlace: \r\nhttp://www.cikapp.com/web/usuario/confirmar.php?cod=" . $codigoverificacion;
+                                        if (!mail("$email", "Confirmacion de registro en www.cikapp.com", "$mensaje", "$headers"))
+                                            die("No se pudo enviar el email de confirmacion.");
+                                        echo "Tu cuenta ha sido registrada, sin embargo, esta requiere que la confirmes desde el email que ingresaste en el registro.";
                                     } else {
                                         print 'Fracaso';
                                     }
@@ -43,26 +49,26 @@
 
                                     <div class="form-group" id="campoRut">
                                         <div class="right-inner-addon">
-                                            <i class="fa fa-user"></i>
+                                            <i id="imgRut" class="fa fa-user"></i>
                                             <input class="form-control input-lg" id="txtRut" required placeholder="Rut" name="txtRut" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group" id="campoEmail">
                                         <div class="right-inner-addon">
-                                            <i class="fa fa-envelope"></i>
+                                            <i id="imgEmail" class="fa fa-envelope"></i>
                                             <input id="txtEmail" class="form-control input-lg" required placeholder="Correo electrónico" name="txtEmail" type="email">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="right-inner-addon">
-                                            <i class="fa fa-key"></i>
+                                            <i id="imgPass" class="fa fa-key"></i>
                                             <input class="form-control input-lg" required placeholder="Contraseña" name="txtPass" type="password">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <div class="right-inner-addon">
-                                            <i class="fa fa-key"></i>
+                                            <i id="imgPassRep" class="fa fa-key"></i>
                                             <input class="form-control input-lg" required placeholder="Confirmar contraseña" name="txtRepPass" id="" type="password">
                                         </div>
                                     </div>
@@ -106,7 +112,7 @@
 
 
 
-        <?php include 'structure/footer.php'; ?>
+<?php include 'structure/footer.php'; ?>
         <script src="structure/js/jquery.Rut.min.js"></script>
         <script src="structure/js/login.js"></script>
     </body>

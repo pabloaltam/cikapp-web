@@ -4,10 +4,10 @@ class OperacionesMYSQL {
 
     function traerDatos() {
 
-        # incluir el archivo
-        # conexion cada vez que se quiera
-        # hacer algun trabajo con la Base de datos
-        # NOTA: Al final de cada funcion NO OLVIDAR $con=null
+# incluir el archivo
+# conexion cada vez que se quiera
+# hacer algun trabajo con la Base de datos
+# NOTA: Al final de cada funcion NO OLVIDAR $con=null
 
         require("conexion.php");
         $query = "SELECT * FROM usuario";
@@ -30,7 +30,7 @@ class OperacionesMYSQL {
 
             print("</table>");
         } catch (PDOException $e) {
-            //EN caso de ERROR
+//EN caso de ERROR
         } finally {
 
             $resultado = null;
@@ -50,26 +50,30 @@ class OperacionesMYSQL {
             print($count . " Filas afectadas");
         } catch (PDOException $e) {
 
-            # QUE HACER EN CASO DE ERROR
+# QUE HACER EN CASO DE ERROR
         } finally {
 
-            # Este codigo se ejecuta siempre
-            # Aunque de una PDOException.
+# Este codigo se ejecuta siempre
+# Aunque de una PDOException.
 
             $con = null;
         }
     }
 
-    function crearUsuario($rut, $email, $password) {
+    function crearUsuario($rut, $email, $password, $codigo) {
 
-        # Insertando en la Base de Datos con PDOStatement
-        $sql = "INSERT INTO `usuario` (`rut`, `email`, `password`) VALUES (?,?,?)";
+# Insertando en la Base de Datos con PDOStatement
+        $sql = "INSERT INTO usuario (rut, email, password, codigo) VALUES (?,?,?,?)";
 
         try {
             if ($this->validarRut($rut)) {
                 require("conexion.php");
                 $count = $con->prepare($sql);
-                $count->execute(array($rut, $email, sha1(md5($password))));
+                $count->bindParam(1, $rut, PDO::PARAM_STR);
+                $count->bindParam(2, $email, PDO::PARAM_STR);
+                $count->bindParam(3, sha1(md5($password)), PDO::PARAM_STR);
+                $count->bindParam(4, $codigo, PDO::PARAM_INT);
+                $count->execute();
                 if (($count->rowCount()) > 0) {
                     return TRUE;
                 } else {
@@ -80,13 +84,7 @@ class OperacionesMYSQL {
             }
         } catch (PDOException $e) {
 
-            # QUE HACER EN CASO DE ERROR
-        } finally {
-
-            # Este codigo se ejecuta siempre
-            # Aunque de una PDOException.
-
-            $con = null;
+# QUE HACER EN CASO DE ERROR
         }
     }
 
@@ -130,11 +128,35 @@ class OperacionesMYSQL {
                 return FALSE;
             }
         } catch (PDOException $e) {
-            //EN caso de ERROR
-        } finally {
+//EN caso de ERROR
+        }
+    }
 
+    function validarCodigo($codigo) {
+
+        require("conexion.php");
+        $query = "SELECT * FROM usuario where codigo={$codigo}";
+
+        try {
+
+            $resultado = $con->query($query);
+            foreach ($resultado as $rows) {
+                if (count($rows)!= 0) {
+                    $sqlUpdate = "Update usuario SET codigo='1' WHERE idUsuario={$rows['idUsuario']}";
+                    $count = $con->exec($sqlUpdate);
+                    if($count == 1){
+                     return TRUE;   
+                    } else {
+                        return FALSE;    
+                    }
+                }
+            }
+            
             $resultado = null;
             $con = null;
+            return FALSE;
+        } catch (PDOException $e) {
+        //EN caso de ERROR
         }
     }
 
