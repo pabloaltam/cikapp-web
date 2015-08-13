@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Cikapp - Inicio de sesión</title>
-    </head>
 
-    <body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cikapp - Inicio de sesión</title>
+</head>
 
-        <?php include 'structure/navbar.php'; ?>
+<body>
+
+    <?php include 'structure/navbar.php'; ?>
 
 
         <div class="container sign-in-up">
@@ -44,9 +45,8 @@
                                     }
                                 }
                                 ?>
-                                <br>
-                                <fieldset>
-
+                                    <br>
+                                    <fieldset>
                                     <div class="form-group" id="campoRut">
                                         <div class="right-inner-addon">
                                             <i id="imgRut" class="fa fa-user"></i>
@@ -71,17 +71,16 @@
                                             <i id="imgPassRep" class="fa fa-key"></i>
                                             <input class="form-control input-lg" required placeholder="Confirmar contraseña" name="txtRepPass" id="" type="password">
                                         </div>
-                                    </div>
-                                    <div id="passwordDescription"></div>
-                                    <div id="passwordStrength" class="strength0"></div>
-                                </fieldset>
-                                <hr>
+                                        <div id="passwordDescription"></div>
+                                        <div id="passwordStrength" class="strength0"></div>
+                                    </fieldset>
+                                    <hr>
 
-                                <div class="tab-content">
-                                    <div class="tab-pane fade in active text-center" id="pp">
-                                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnEnviar">Registrarme</button>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active text-center" id="pp">
+                                            <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnEnviar">Registrarme</button>
+                                        </div>
                                     </div>
-                                </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="user">
@@ -112,8 +111,17 @@
 
 
 
+<<<<<<< HEAD
+        <?php include 'structure/footer.php'; ?>
+            <script src="structure/js/jquery.Rut.min.js"></script>
+            <script src="structure/js/login.js"></script>
+</body>
+
+</html>
+=======
 <?php include 'structure/footer.php'; ?>
         <script src="structure/js/jquery.Rut.min.js"></script>
         <script src="structure/js/login.js"></script>
     </body>
 </html>
+>>>>>>> origin/master
