@@ -27,14 +27,11 @@ class OperacionesMYSQL {
                 print("<td>" . $rows["password"] . "</td>");
                 print("</tr>");
             }
-
+            $resultado = null;
+            $con = null;
             print("</table>");
         } catch (PDOException $e) {
 //EN caso de ERROR
-        } finally {
-
-            $resultado = null;
-            $con = null;
         }
     }
 
@@ -47,16 +44,11 @@ class OperacionesMYSQL {
         try {
 
             $count = $con->exec($sql);
+            $con = null;
             print($count . " Filas afectadas");
         } catch (PDOException $e) {
 
 # QUE HACER EN CASO DE ERROR
-        } finally {
-
-# Este codigo se ejecuta siempre
-# Aunque de una PDOException.
-
-            $con = null;
         }
     }
 
@@ -75,11 +67,17 @@ class OperacionesMYSQL {
                 $count->bindParam(4, $codigo, PDO::PARAM_INT);
                 $count->execute();
                 if (($count->rowCount()) > 0) {
+                    $con=NULL;
+                    $count=NULL;
                     return TRUE;
                 } else {
+                    $con=NULL;
+                    $count=NULL;
                     return FALSE;
                 }
             } else {
+                $con=NULL;
+                $count=NULL;
                 print FALSE;
             }
         } catch (PDOException $e) {
@@ -120,11 +118,17 @@ class OperacionesMYSQL {
                 $resultado = $con->query($query);
                 foreach ($resultado as $fila) {
                     if ($fila["rut"] == $rut) {
+                        $con = NULL;
+                        $resultado = NULL;
                         return FALSE;
                     }
                 }
+                $con = NULL;
+                $resultado = NULL;
                 return TRUE;
             } else {
+                $con = NULL;
+                $resultado = NULL;
                 return FALSE;
             }
         } catch (PDOException $e) {
@@ -141,22 +145,26 @@ class OperacionesMYSQL {
 
             $resultado = $con->query($query);
             foreach ($resultado as $rows) {
-                if (count($rows)!= 0) {
+                if (count($rows) != 0) {
                     $sqlUpdate = "Update usuario SET codigo='1' WHERE idUsuario={$rows['idUsuario']}";
                     $count = $con->exec($sqlUpdate);
-                    if($count == 1){
-                     return TRUE;   
+                    if ($count == 1) {
+                        $resultado = null;
+                        $con = null;
+                        return TRUE;
                     } else {
-                        return FALSE;    
+                        $resultado = null;
+                        $con = null;
+                        return FALSE;
                     }
                 }
             }
-            
+
             $resultado = null;
             $con = null;
             return FALSE;
         } catch (PDOException $e) {
-        //EN caso de ERROR
+            //EN caso de ERROR
         }
     }
 
