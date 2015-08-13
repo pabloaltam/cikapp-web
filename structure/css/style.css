@@ -1,8 +1,6 @@
 body {
-    min-height: 2000px;
-    padding-top: 70px;
+    background-color: #2C3E50;
 }
-
 .navbar-default {
     background-color: #2C3E50;
     border-color: #2C3E50;
@@ -40,6 +38,10 @@ body {
 .navbar-default .navbar-nav > .open > a:focus {
     background-color: #FFAD00;
     color: #FFFFFF;
+}
+
+.btn {
+    border-radius: 0px;
 }
 
 .btn-primary {
@@ -106,10 +108,34 @@ body {
 .sign-in-up .click2select {
     text-align: center;
     margin-top: 1em;
+    color: #F5C52D;
+    font-style: italic;
+    font-size: 12px;
 }
 
 .sign-in-up .paywith {
     padding: 12px 12px 0 0;
     margin: 0;
     font-weight: bold;
+}
+
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritence from `body` */
+  background-color: #fff;
+  border: 1px solid #fff;
 }

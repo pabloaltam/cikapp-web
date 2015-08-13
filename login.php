@@ -108,20 +108,8 @@
                 </div>
             </div>
         </div>
-
-
-
-<<<<<<< HEAD
-        <?php include 'structure/footer.php'; ?>
-            <script src="structure/js/jquery.Rut.min.js"></script>
-            <script src="structure/js/login.js"></script>
-</body>
-
-</html>
-=======
+            
 <?php include 'structure/footer.php'; ?>
         <script src="structure/js/jquery.Rut.min.js"></script>
         <script src="structure/js/login.js"></script>
-    </body>
-</html>
->>>>>>> origin/master
+
