@@ -9,30 +9,23 @@ class OperacionesMYSQL {
 # hacer algun trabajo con la Base de datos
 # NOTA: Al final de cada funcion NO OLVIDAR $con=null
 
-        require("conexion.php");
+        require './include/conexion.php';
         $query = "SELECT * FROM usuario";
         print("<table>");
 
-        try {
+        $resultado = $mysqli->query($query);
 
-            $resultado = $con->query($query);
+        while ($rows = $resultado->fetch_assoc()) {
 
-            foreach ($resultado as $rows) {
-
-                print("<tr>");
-                print("<td>" . $rows["idUsuario"] . "</td>");
-                print("<td>" . $rows["nombre"] . "</td>");
-                print("<td>" . $rows["apellido"] . "</td>");
-                print("<td>" . $rows["rut"] . "</td>");
-                print("<td>" . $rows["password"] . "</td>");
-                print("</tr>");
-            }
-            $resultado = null;
-            $con = null;
-            print("</table>");
-        } catch (PDOException $e) {
-//EN caso de ERROR
+            print("<tr>");
+            print("<td>" . $rows["idUsuario"] . "</td>");
+            print("<td>" . $rows["nombre"] . "</td>");
+            print("<td>" . $rows["apellido"] . "</td>");
+            print("<td>" . $rows["rut"] . "</td>");
+            print("<td>" . $rows["password"] . "</td>");
+            print("</tr>");
         }
+        print("</table>");
     }
 
     function actualizarDatos() {
@@ -55,29 +48,26 @@ class OperacionesMYSQL {
     function crearUsuario($rut, $email, $password, $codigo) {
 
 # Insertando en la Base de Datos con PDOStatement
-        $sql = "INSERT INTO usuario (rut, email, password, codigo) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO usuario (rut, email, password, codigo) VALUES (?,?,?,?);";
 
         try {
             if ($this->validarRut($rut)) {
                 require("conexion.php");
-                $count = $con->prepare($sql);
-                $count->bindParam(1, $rut, PDO::PARAM_STR);
-                $count->bindParam(2, $email, PDO::PARAM_STR);
-                $count->bindParam(3, sha1(md5($password)), PDO::PARAM_STR);
-                $count->bindParam(4, $codigo, PDO::PARAM_INT);
-                $count->execute();
-                if (($count->rowCount()) > 0) {
-                    $con=NULL;
-                    $count=NULL;
+
+                if ($stmt = $mysqli->prepare($sql)) {
+                    /* ligar parámetros para marcadores */
+                    $stmt->bind_param("sssi", $rut, $email, sha1(md5($password)), $codigo);
+                    /* ejecutar la consulta */
+                    $stmt->execute();
+                    /* cerrar sentencia */
+                    $stmt->close();
                     return TRUE;
                 } else {
-                    $con=NULL;
-                    $count=NULL;
-                    return FALSE;
+                    return FALSE;  
                 }
             } else {
-                $con=NULL;
-                $count=NULL;
+                $con = NULL;
+                $count = NULL;
                 print FALSE;
             }
         } catch (PDOException $e) {
@@ -115,9 +105,9 @@ class OperacionesMYSQL {
                 $dv = $dv;
             }
             if ($dv == trim(strtolower($RUT[1]))) {
-                $resultado = $con->query($query);
-                foreach ($resultado as $fila) {
-                    if ($fila["rut"] == $rut) {
+                $resultado = $mysqli->query($query);
+                while ($rows = $resultado->fetch_assoc()) {
+                    if ($rows["rut"] == $rut) {
                         $con = NULL;
                         $resultado = NULL;
                         return FALSE;
@@ -138,34 +128,20 @@ class OperacionesMYSQL {
 
     function validarCodigo($codigo) {
 
-        require("conexion.php");
-        $query = "SELECT * FROM usuario where codigo={$codigo}";
-
-        try {
-
-            $resultado = $con->query($query);
-            foreach ($resultado as $rows) {
+        require 'conexion.php';
+        $query = "SELECT * FROM usuario where codigo={$codigo};";
+            $resultado = $mysqli->query($query);
+            while ($rows = $resultado->fetch_assoc()) {
                 if (count($rows) != 0) {
                     $sqlUpdate = "Update usuario SET codigo='1' WHERE idUsuario={$rows['idUsuario']}";
-                    $count = $con->exec($sqlUpdate);
-                    if ($count == 1) {
-                        $resultado = null;
-                        $con = null;
+                    if ($mysqli->query($sqlUpdate)) {
                         return TRUE;
                     } else {
-                        $resultado = null;
-                        $con = null;
                         return FALSE;
                     }
                 }
             }
-
-            $resultado = null;
-            $con = null;
-            return FALSE;
-        } catch (PDOException $e) {
-            //EN caso de ERROR
-        }
+            return NULL;
     }
 
 }

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cikapp - Inicio de sesión</title>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cikapp - Inicio de sesión</title>
+    </head>
 
-<body>
+    <body>
 
-    <?php include 'structure/navbar.php'; ?>
+        <?php include 'structure/navbar.php'; ?>
 
 
         <div class="container sign-in-up">
@@ -30,13 +30,13 @@
                             <form action="" method="POST" autocomplete="off" name="frmRegistrar">
                                 <?php
                                 if (isset($_POST["txtRut"])) {
-                                    include './include/ejecutar_en_db.php';
+                                    include 'include/ejecutar_en_db.php';
                                     $objBD = new OperacionesMYSQL();
                                     $codigoverificacion = rand(0000000000, 9999999999); // Conseguimos un codigo aleatorio de 10 digitos. 
-                                    if ($objBD->crearUsuario(filter_input(INPUT_POST, "txtRut"), filter_input(INPUT_POST, "txtEmail"), filter_input(INPUT_POST, "txtPass"),$codigoverificacion)) {
+                                    if ($objBD->crearUsuario(filter_input(INPUT_POST, "txtRut"), filter_input(INPUT_POST, "txtEmail"), filter_input(INPUT_POST, "txtPass"), $codigoverificacion)) {
                                         $email = filter_input(INPUT_POST, "txtEmail");
                                         $headers = "From: admin@cikapp.com";
-                                        $mensaje = "Usted solicito un registro en cikapp.com, para confirmarlo debe hacer click en el siguiente enlace: \r\nhttp://www.cikapp.com/web/usuario/confirmar.php?cod=" . $codigoverificacion;
+                                        $mensaje = "Usted solicito un registro en cikapp.com, para confirmarlo debe hacer click en el siguiente enlace: \r\nhttp://localhost/cikapp-web/usuario/confirmar.php?cod=" . $codigoverificacion;
                                         if (!mail("$email", "Confirmacion de registro en www.cikapp.com", "$mensaje", "$headers"))
                                             die("No se pudo enviar el email de confirmacion.");
                                         echo "Tu cuenta ha sido registrada, sin embargo, esta requiere que la confirmes desde el email que ingresaste en el registro.";
@@ -45,8 +45,8 @@
                                     }
                                 }
                                 ?>
-                                    <br>
-                                    <fieldset>
+                                <br>
+                                <fieldset>
                                     <div class="form-group" id="campoRut">
                                         <div class="right-inner-addon">
                                             <i id="imgRut" class="fa fa-user"></i>
@@ -73,14 +73,14 @@
                                         </div>
                                         <div id="passwordDescription"></div>
                                         <div id="passwordStrength" class="strength0"></div>
-                                    </fieldset>
-                                    <hr>
+                                </fieldset>
+                                <hr>
 
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade in active text-center" id="pp">
-                                            <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnEnviar">Registrarme</button>
-                                        </div>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active text-center" id="pp">
+                                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnEnviar">Registrarme</button>
                                     </div>
+                                </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="user">
@@ -108,8 +108,8 @@
                 </div>
             </div>
         </div>
-            
-<?php include 'structure/footer.php'; ?>
+
+        <?php include 'structure/footer.php'; ?>
         <script src="structure/js/jquery.Rut.min.js"></script>
         <script src="structure/js/login.js"></script>
 

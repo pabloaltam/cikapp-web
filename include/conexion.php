@@ -1,11 +1,7 @@
 <?php
-
-require_once 'datos.php';
-  try {
-  $con = new PDO('mysql:host='.HOSTNAME.';dbname='.DATABASE.';port=3306', USERNAME, PASSWORD);
-  }
-  catch (PDOException $e) {
-  print "¡Error!: " . $e->getMessage();
-  die();
-  }
- ?>
+  require_once 'datos.php';
+$mysqli = new mysqli(HOSTNAME, USERNAME,PASSWORD, DATABASE);
+if ($mysqli -> connect_errno) {
+die( "Fallo la conexión a MySQL: (" . $mysqli -> mysqli_connect_errno() 
+. ") " . $mysqli -> mysqli_connect_error());
+}
