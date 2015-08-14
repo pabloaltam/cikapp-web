@@ -1,7 +1,3 @@
-body{
-
-}
-
 .form-control::-moz-placeholder{
    color: #DDDDDD;
    opacity: 1;
@@ -1223,6 +1219,5 @@ input.ct-red + span.switch-left, input.ct-red + span + label + span.switch-right
     margin: 0;
     font-weight: bold;
 }
-
 
 
