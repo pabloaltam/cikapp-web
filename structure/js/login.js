@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
 $(document).ready(function () {
     $('#txtRut').Rut({
         on_error: function () {
@@ -44,5 +45,40 @@ $(document).ready(function () {
         }
 
     });
+
+    $("#txtRut").focusout(function () {
+        if ($("#txtRut").val() !== "") {
+            var parametros = {
+                "txtRut": $("#txtRut").val()
+            };
+            $.ajax({
+                data: parametros,
+                url: 'include/resultado-ajax.php',
+                type: 'post',
+                beforeSend: function () {
+                    $("#imgRut").removeClass("fa-user");
+                    $("#imgRut").removeClass("fa-check-circle");
+                    $("#imgRut").removeClass("fa-exclamation-circle");
+                    $("#imgRut").addClass("fa-spinner fa-pulse");
+                },
+                success: function (response) {
+                    if (response) {
+                        $("#imgRut").removeClass("fa-spinner fa-pulse");
+                        $("#campoRut").addClass("has-error");
+                        $("#imgRut").removeClass("fa-user");
+                        $("#imgRut").removeClass("fa-check-circle");
+                        $("#imgRut").addClass("fa-exclamation-circle");
+                    } else {
+                        $("#imgRut").removeClass("fa-spinner fa-pulse");
+                        $("#campoRut").removeClass("has-error");
+                        $("#campoRut").addClass("has-success");
+                        $("#imgRut").removeClass("fa-exclamation-circle");
+                        $("#imgRut").addClass("fa-check-circle");
+                    }
+                }
+            });
+        }
+    });
 });
 
+*/

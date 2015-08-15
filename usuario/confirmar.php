@@ -10,15 +10,16 @@ if (isset($_GET["cod"])){
     $resultado=$OBJ ->validarCodigo($_GET["cod"]);
 if($resultado!=NULL){
     if($resultado){
-     header("Location: home.php?status=1");   
+     header("Location: ../edit-user-profile.php?status=1");   
     }  else {
         print '<h1>Ups...</h1>'
         . '<p>No hemos podido dar de alta al usuario. </p>';
     }
     }
     else {
-        print '<h1>Ups...</h1>'
-        . '<p>El usuario ya ha sido dado de alta anteriormente. </p>';
+        print "<h1>Ups...</h1>"
+        . "<p>El usuario ya ha sido dado de alta anteriormente. ir a <a href='../edit-user-profile.php'>Home</a></p>";
+        
     }
 } else {
     print '<h1>Ups...</h1>'

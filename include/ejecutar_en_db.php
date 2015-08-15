@@ -45,84 +45,95 @@ class OperacionesMYSQL {
         }
     }
 
-    function crearUsuario($rut, $email, $password, $codigo) {
+    function crearUsuario($rut, $email, $password1, $password2, $codigo) {
 
 # Insertando en la Base de Datos con PDOStatement
         $sql = "INSERT INTO usuario (rut, email, password, codigo) VALUES (?,?,?,?);";
+        $rut = str_replace('.', '', $rut);
+        if ($this->RutValidate($rut)) {
+            if ($this->emailValidate($email)) {
 
-        try {
-            if ($this->validarRut($rut)) {
-                require("conexion.php");
+                if ($this->passwordValidate($password1, $password2)) {
 
-                if ($stmt = $mysqli->prepare($sql)) {
-                    /* ligar parámetros para marcadores */
-                    $stmt->bind_param("sssi", $rut, $email, sha1(md5($password)), $codigo);
-                    /* ejecutar la consulta */
-                    $stmt->execute();
-                    /* cerrar sentencia */
-                    $stmt->close();
-                    return TRUE;
+                    require("conexion.php");
+                    if ($stmt = $mysqli->prepare($sql)) {
+                        /* ligar parámetros para marcadores */
+                        $stmt->bind_param("sssi", $rut, $email, sha1(md5($password1)), $codigo);
+                        /* ejecutar la consulta */
+                        $stmt->execute();
+                        /* cerrar sentencia */
+                        $stmt->close();
+                        return TRUE;
+                    } else {
+                        return FALSE;
+                    }
                 } else {
-                    return FALSE;  
+                    return FALSE;
                 }
             } else {
-                $con = NULL;
-                $count = NULL;
-                print FALSE;
+                return FALSE;
             }
-        } catch (PDOException $e) {
-
-# QUE HACER EN CASO DE ERROR
+        } else {
+            return FALSE;
         }
     }
 
-    function validarRut($rut) {
-
-        require("conexion.php");
-        $query = "SELECT rut FROM usuario";
-        try {
-
-            if (strpos($rut, "-") == false) {
-                $RUT[0] = substr($rut, 0, -1);
-                $RUT[1] = substr($rut, -1);
-            } else {
-                $RUT = explode("-", trim($rut));
-            }
-            $elRut = str_replace(".", "", trim($RUT[0]));
-            $factor = 2;
-            $suma = 0;
-            for ($i = strlen($elRut) - 1; $i >= 0; $i--):
-                $factor = $factor > 7 ? 2 : $factor;
-                $suma += $elRut{$i} * $factor++;
-            endfor;
-            $resto = $suma % 11;
-            $dv = 11 - $resto;
-            if ($dv == 11) {
-                $dv = 0;
-            } else if ($dv == 10) {
-                $dv = "k";
-            } else {
-                $dv = $dv;
-            }
-            if ($dv == trim(strtolower($RUT[1]))) {
+    /**
+     * Validador de RUT con digito verificador 
+     *
+     * @param string $rut
+     * @return boolean
+     */
+    function RutValidate($rut) {
+        $rut = str_replace('.', '', $rut);
+        if (preg_match('/^(\d{1,9})-((\d|k|K){1})$/', $rut, $d)) {
+            $s = 1;
+            $r = $d[1];
+            for ($m = 0; $r != 0; $r/=10)
+                $s = 1;$r = $d[1];
+            for ($m = 0; $r != 0; $r/=10)
+                $s = ($s + $r % 10 * (9 - $m++ % 6)) % 11;
+            if (chr($s ? $s + 47 : 75) == strtoupper($d[2])) {
+                require("conexion.php");
+                $query = "SELECT rut FROM usuario";
                 $resultado = $mysqli->query($query);
                 while ($rows = $resultado->fetch_assoc()) {
                     if ($rows["rut"] == $rut) {
-                        $con = NULL;
-                        $resultado = NULL;
                         return FALSE;
                     }
                 }
-                $con = NULL;
-                $resultado = NULL;
                 return TRUE;
             } else {
-                $con = NULL;
-                $resultado = NULL;
                 return FALSE;
             }
-        } catch (PDOException $e) {
-//EN caso de ERROR
+        }
+    }
+
+    function emailValidate($email) {
+        require 'conexion.php';
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $query = "SELECT email FROM usuario WHERE email='{$email}'";
+            $resultado = $mysqli->query($query);
+            while ($rows = $resultado->fetch_assoc()) {
+                if ($rows["email"] === $email) {
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function passwordValidate($password1, $password2) {
+        if (trim($password1) == TRUE && trim($password2) == TRUE) {
+            if ($password1 === $password2) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
         }
     }
 
@@ -130,31 +141,18 @@ class OperacionesMYSQL {
 
         require 'conexion.php';
         $query = "SELECT * FROM usuario where codigo={$codigo};";
-            $resultado = $mysqli->query($query);
-            while ($rows = $resultado->fetch_assoc()) {
-                if (count($rows) != 0) {
-                    $sqlUpdate = "Update usuario SET codigo='1' WHERE idUsuario={$rows['idUsuario']}";
-                    if ($mysqli->query($sqlUpdate)) {
-                        return TRUE;
-                    } else {
-                        return FALSE;
-                    }
+        $resultado = $mysqli->query($query);
+        while ($rows = $resultado->fetch_assoc()) {
+            if (count($rows) != 0) {
+                $sqlUpdate = "Update usuario SET codigo='1' WHERE idUsuario={$rows['idUsuario']}";
+                if ($mysqli->query($sqlUpdate)) {
+                    return TRUE;
+                } else {
+                    return FALSE;
                 }
             }
-            return NULL;
+        }
+        return NULL;
     }
 
 }
-
-# Asi se llaman a las funciones desde otras paginas
-# no olvidar el include a este archivo
-
-/*$pruebaOBJ = new OperacionesMYSQL();
-# Esta insertando pero aun falta todas las validaciones y la seguridad.
-# Falta validad si que el usuario no existe.
-# IMPORTANTE: El Rut tiene que contener puntos
-$pruebaOBJ->crearUsuario("22222222-2", "victor", "muñoz", "viktor_viro@hotmail.com", sha1("hola"), "30-03-1993", 1, "Ingeneria Informatica", 2, "Programación", 2, 1000000, 1200000);
-print("</br>");
-$pruebaOBJ->traerDatos();
-print("</br>");
-*/
