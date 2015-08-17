@@ -36,7 +36,7 @@
                                     if ($objBD->crearUsuario(filter_input(INPUT_POST, "txtRut"), filter_input(INPUT_POST, "txtEmail"), filter_input(INPUT_POST, "txtPass"),  filter_input(INPUT_POST, "txtRepPass"), $codigoverificacion)) {
                                         $email = filter_input(INPUT_POST, "txtEmail");
                                         $headers = "From: admin@cikapp.com";
-                                        $mensaje = "Usted solicito un registro en cikapp.com, para confirmarlo debe hacer click en el siguiente enlace: \r\nhttp://localhost/cikapp-web/usuario/confirmar.php?cod=" . $codigoverificacion;
+                                        $mensaje = "Usted solicito un registro en cikapp.com, para confirmarlo debe hacer click en el siguiente enlace: \r\nhttp://localhost/cikapp-web/usuario/confirmar.php?cod=" . $codigoverificacion."&Type=usuario";
                                         if (!mail("$email", "Confirmacion de registro en www.cikapp.com", "$mensaje", "$headers")) {
                                             echo "<p>No se pudo enviar el email de confirmacion.</p>";
                                         } else {

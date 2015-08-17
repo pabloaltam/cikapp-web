@@ -26,30 +26,50 @@
       <p class="click2select">Presiona para elegir</p>
       <div class="tab-content">
         <div class="tab-pane fade in active" id="new">
+            <form action="" method="POST" autocomplete="off" name="frmRegistrar" id="frmRegistrar">
+            <?php
+                                if (isset($_POST["txtRut"])) {
+                                    include 'include/ejecutar_en_db.php';
+                                    $objBD = new OperacionesMYSQL();
+                                    $codigoverificacion = rand(0000000000, 9999999999); // Conseguimos un codigo aleatorio de 10 digitos. 
+                                    if ($objBD->crearEmpresa(filter_input(INPUT_POST, "txtRut"), filter_input(INPUT_POST, "txtEmail"), filter_input(INPUT_POST, "txtPass"),  filter_input(INPUT_POST, "txtRepPass"), $codigoverificacion)) {
+                                        $email = filter_input(INPUT_POST, "txtEmail");
+                                        $headers = "From: admin@cikapp.com";
+                                        $mensaje = "Usted solicito un registro en cikapp.com, para confirmarlo debe hacer click en el siguiente enlace: \r\nhttp://localhost/cikapp-web/usuario/confirmar.php?cod=" . $codigoverificacion."&Type=empresa";
+                                        if (!mail("$email", "Confirmacion de registro en www.cikapp.com", "$mensaje", "$headers")) {
+                                            echo "<p>No se pudo enviar el email de confirmacion.</p>";
+                                        } else {
+                                            echo "<p>Tu cuenta ha sido registrada, sin embargo, esta requiere que la confirmes desde el email que ingresaste en el registro.<p>";
+                                        }
+                                    } else {
+                                        print '<p>Tu cuenta no pudo ser registrada, sin embargo puede volver a inténtalo dentro de unos minutos. Si el problema persiste comuníquese con nosotros por medio del formulario de contacto.</p>';
+                                    }
+                                }
+                                ?>
           <br>
           <fieldset>
             <div class="form-group">
               <div class="right-inner-addon">
                 <i class="fa fa-envelope"></i>
-                <input class="form-control input-lg" placeholder="Rut" type="text">
+                <input class="form-control input-lg" placeholder="Rut" type="text" name="txtRut">
               </div>
             </div>
             <div class="form-group">
               <div class="right-inner-addon">
                 <i class="fa fa-envelope"></i>
-                <input class="form-control input-lg" placeholder="Correo electrónico" type="text">
+                <input class="form-control input-lg" placeholder="Correo electrónico" type="text" name="txtEmail">
               </div>
             </div>
             <div class="form-group">
               <div class="right-inner-addon">
                 <i class="fa fa-key"></i>
-                <input class="form-control input-lg" placeholder="Contraseña" type="password">
+                <input class="form-control input-lg" placeholder="Contraseña" type="password" name="txtPass">
               </div>
             </div>
             <div class="form-group">
               <div class="right-inner-addon">
                 <i class="fa fa-key"></i>
-                <input class="form-control input-lg" placeholder="Confirmar contraseña" id="" type="password">
+                <input class="form-control input-lg" placeholder="Confirmar contraseña" id="" type="password" name="txtRepPass">
               </div>
             </div>
           </fieldset>
@@ -57,9 +77,10 @@
 
           <div class="tab-content">
             <div class="tab-pane fade in active text-center" id="pp">
-              <button class="btn btn-primary btn-lg btn-block">Registrar empresa</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnEnviar">Registrar empresa</button>
             </div>
           </div>
+          </form>
         </div>
         <div class="tab-pane fade" id="user">
           <br>

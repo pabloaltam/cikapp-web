@@ -108,11 +108,58 @@ class OperacionesMYSQL {
             }
         }
     }
+    
+    /**
+     * Validador de RUT con digito verificador 
+     *
+     * @param string $rut
+     * @return boolean
+     */
+    function RutEmpresaValidate($rut) {
+        $rut = str_replace('.', '', $rut);
+        if (preg_match('/^(\d{1,9})-((\d|k|K){1})$/', $rut, $d)) {
+            $s = 1;
+            $r = $d[1];
+            for ($m = 0; $r != 0; $r/=10)
+                $s = 1;$r = $d[1];
+            for ($m = 0; $r != 0; $r/=10)
+                $s = ($s + $r % 10 * (9 - $m++ % 6)) % 11;
+            if (chr($s ? $s + 47 : 75) == strtoupper($d[2])) {
+                require("conexion.php");
+                $query = "SELECT rut FROM empresa";
+                $resultado = $mysqli->query($query);
+                while ($rows = $resultado->fetch_assoc()) {
+                    if ($rows["rut"] == $rut) {
+                        return FALSE;
+                    }
+                }
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
 
     function emailValidate($email) {
         require 'conexion.php';
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $query = "SELECT email FROM usuario WHERE email='{$email}'";
+            $resultado = $mysqli->query($query);
+            while ($rows = $resultado->fetch_assoc()) {
+                if ($rows["email"] === $email) {
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    function emailEmpresaValidate($email) {
+        require 'conexion.php';
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $query = "SELECT email FROM empresa WHERE email='{$email}'";
             $resultado = $mysqli->query($query);
             while ($rows = $resultado->fetch_assoc()) {
                 if ($rows["email"] === $email) {
@@ -137,6 +184,36 @@ class OperacionesMYSQL {
         }
     }
 
+    function crearEmpresa($rut, $email, $password1, $password2, $codigo) {
+# Insertando en la Base de Datos con PDOStatement
+        $sql = "INSERT INTO empresa (rut, email, password, codigo) VALUES (?,?,?,?);";
+        $rut = str_replace('.', '', $rut);
+        if ($this->RutEmpresaValidate($rut)) {
+            if ($this->emailEmpresaValidate($email)) {
+                if ($this->passwordValidate($password1, $password2)) {
+                    require("conexion.php");
+                    if ($stmt = $mysqli->prepare($sql)) {
+                        /* ligar parámetros para marcadores */
+                        $stmt->bind_param("sssi", $rut, $email, sha1(md5($password1)), $codigo);
+                        /* ejecutar la consulta */
+                        $stmt->execute();
+                        /* cerrar sentencia */
+                        $stmt->close();
+                        return TRUE;
+                    } else {
+                        return FALSE;
+                    }
+                } else {
+                    return FALSE;
+                }
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
     function validarCodigo($codigo) {
 
         require 'conexion.php';
@@ -145,6 +222,24 @@ class OperacionesMYSQL {
         while ($rows = $resultado->fetch_assoc()) {
             if (count($rows) != 0) {
                 $sqlUpdate = "Update usuario SET codigo='1' WHERE idUsuario={$rows['idUsuario']}";
+                if ($mysqli->query($sqlUpdate)) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
+        return NULL;
+    }
+    
+    function validarCodigoEmpresa($codigo) {
+
+        require 'conexion.php';
+        $query = "SELECT * FROM empresa where codigo={$codigo};";
+        $resultado = $mysqli->query($query);
+        while ($rows = $resultado->fetch_assoc()) {
+            if (count($rows) != 0) {
+                $sqlUpdate = "UPDATE empresa SET codigo='1' WHERE idEmpresa={$rows['idEmpresa']}";
                 if ($mysqli->query($sqlUpdate)) {
                     return TRUE;
                 } else {
