@@ -12,14 +12,14 @@ if (isset($_GET["cod"]) && isset($_GET["Type"])) {
         $resultado = $OBJ->validarCodigo($_GET["cod"]);
         if ($resultado != NULL) {
             if ($resultado) {
-                header("Location: ../edit-user-profile.php?status=1");
+                header("Location: ../login.php#user");
             } else {
                 print '<h1>Ups...</h1>'
                         . '<p>No hemos podido dar de alta al usuario. </p>';
             }
         } else {
             print "<h1>Ups...</h1>"
-                    . "<p>El usuario ya ha sido dado de alta anteriormente. ir a <a href='../edit-user-profile.php'>Home</a></p>";
+                    . "<p>El usuario ya ha sido dado de alta anteriormente. ir a <a href='../login.php#user'>Home</a></p>";
         }
     } elseif ($_GET["Type"] === "empresa") {
         $resultado = $OBJ->validarCodigoEmpresa($_GET["cod"]);
