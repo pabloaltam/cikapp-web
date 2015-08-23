@@ -51,7 +51,13 @@
             <div class="form-group">
               <div class="right-inner-addon">
                 <i class="fa fa-envelope"></i>
-                <input class="form-control input-lg" placeholder="Rut" type="text" name="txtRut">
+                <input class="form-control input-lg" placeholder="Rut empresa" type="text" name="txtRut">
+              </div>
+            </div>
+              <div class="form-group">
+              <div class="right-inner-addon">
+                <i class="fa fa-envelope"></i>
+                <input class="form-control input-lg" placeholder="Razón social" type="text" name="txtRut">
               </div>
             </div>
             <div class="form-group">

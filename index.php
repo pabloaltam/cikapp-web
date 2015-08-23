@@ -17,8 +17,8 @@
           <img src="structure/img/cover.jpg" alt="Cikapp Carousel">
         </div>
       </div>
-        </br>
-      <!-- Controls 
+      </br>
+      <!-- Controls
       <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
         <span class="fa fa-angle-left"></span>
       </a>

@@ -7,9 +7,10 @@
     <title>Cikapp - We are working!</title>
     <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="structure/css/shit.css" rel="stylesheet">
+    <script src="live.js"></script>
     </head>
     <body>
-        
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
     <div class="navbar-header">
@@ -23,8 +24,8 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
         <form class="nav navbar-nav navbar-right">
-            
-<!--     
+
+<!--
 <div class="btn-group">
   <a class="btn btn-warning btn-round dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-fw"></i>Cuenta <span class="fa fa-caret-down"></span></a>
   <ul class="dropdown-menu">
@@ -35,7 +36,7 @@
 -->
             <a class="btn btn-warning btn-round" href="login.php" role="button"><i class="fa fa-user"></i> Persona</a>
             <a class="btn btn-warning btn-round" href="sign-empresa.php" role="button"><i class="fa fa-users"></i> Empresa</a>
-         
+
         </form>
 
         <ul class="nav navbar-nav">
