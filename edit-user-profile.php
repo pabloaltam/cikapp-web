@@ -61,8 +61,15 @@
           <label class="col-lg-3 control-label">Región:</label>
           <div class="col-lg-3">
             <div class="ui-select">
-              <select id="pais" class="form-control">
-                <option value="Chile">IX Región</option>
+              <select id="region" class="form-control">
+              <?php
+              require 'include/conexion.php';
+              $query = "SELECT * FROM region";
+              $resultado = $mysqli->query($query);
+              while ($rows = $resultado->fetch_assoc()) {
+                print("<option value='".$rows['REGION_ID']."'>".$rows['REGION_NOMBRE']."</option>");
+              }
+              ?>
               </select>
             </div>
           </div>
@@ -71,7 +78,7 @@
           <label class="col-lg-3 control-label">Ciudad:</label>
           <div class="col-lg-3">
             <div class="ui-select">
-              <select id="pais" class="form-control">
+              <select id="ciudad" class="form-control">
                 <option value="Chile">Temuco</option>
               </select>
             </div>
@@ -107,5 +114,6 @@
     </div>
   </div>
 </div>
-
+  <script src="structure/jquery/jquery-1.11.3.min.js"></script>
+<script src="structure/js/jquery-perfiles.js"></script>
 <?php include 'structure/footer.php';?>
