@@ -4,9 +4,10 @@
         include('ejecutar_en_db.php');
         $obj = new OperacionesMYSQL();
         //$obj->RutValidate($user)
-        if($obj->RutValidate($user)) {
-            require('config.php'); //Incluimos la conexion a la base de datos.
-            $sql = "SELECT * FROM usuario WHERE rut= ? and password= ?";
+        $user = str_replace('.', '', $user);
+        if($obj->RutValidateLogin($user)) {
+            require('conexion.php'); //Incluimos la conexion a la base de datos.
+            $sql = "SELECT nombre,email FROM usuario WHERE rut= ? and password= ?";
             //$pass_encriptada = sha1(md5($pass)); //Encriptacion
             //$sql = "SELECT * FROM usuario WHERE rut= '$user' and password= '$pass_encriptada'";
             if($res = $mysqli->prepare($sql)) {

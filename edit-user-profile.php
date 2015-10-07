@@ -79,7 +79,7 @@
           <div class="col-lg-3">
             <div class="ui-select">
               <select id="ciudad" class="form-control">
-                <option value="Chile">Temuco</option>
+                <option value="0">Seleccione ciudad...</option>
               </select>
             </div>
           </div>

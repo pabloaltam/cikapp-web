@@ -108,6 +108,31 @@ class OperacionesMYSQL {
             }
         }
     }
+
+    function RutValidateLogin($rut) {
+        $rut = str_replace('.', '', $rut);
+        if (preg_match('/^(\d{1,9})-((\d|k|K){1})$/', $rut, $d)) {
+            $s = 1;
+            $r = $d[1];
+            for ($m = 0; $r != 0; $r/=10)
+                $s = 1;$r = $d[1];
+            for ($m = 0; $r != 0; $r/=10)
+                $s = ($s + $r % 10 * (9 - $m++ % 6)) % 11;
+            if (chr($s ? $s + 47 : 75) == strtoupper($d[2])) {
+                require("conexion.php");
+                $query = "SELECT rut FROM usuario";
+                $resultado = $mysqli->query($query);
+                while ($rows = $resultado->fetch_assoc()) {
+                    if ($rows["rut"] == $rut) {
+                        return TRUE;
+                    }
+                }
+                return FALSE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
     
     /**
      * Validador de RUT con digito verificador 

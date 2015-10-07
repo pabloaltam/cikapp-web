@@ -90,18 +90,16 @@
                                 
                                 <?php
                                     include_once 'include/sign_in.php';
- 
                                     if (isset($_POST['rut'], $_POST['pass'])) {
                                         $user = filter_input(INPUT_POST, "rut");
                                         $pass = filter_input(INPUT_POST, "pass");
-                                        
                                         if( !($user == '') and !($pass == '') ){
                                             //$res = login($user, $pass);
                                             if (login($user, $pass) == TRUE) {
                                                 // Login success
                                                 //echo "<p> Bienvenido! </p>";//. $_SESSION['usuario'];
-                                                //header('Location: edit-user-profile.php');
-                                                echo "<meta http-equiv='Refresh' content='2;url= edit-user-profile.php'>";
+                                                header('Location: edit-user-profile.php');
+                                                //echo "<meta http-equiv='Refresh' content='2;url= edit-user-profile.php'>";
                                             } else {
                                                 // Login failed
                                                 echo '<p>Datos incorrectos, intente nuevamente por favor.</p>';
