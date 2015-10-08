@@ -5,6 +5,7 @@ if($_GET['id']==null){$usuarioActual='11111111';}else{$usuarioActual=$_GET['id']
 $obj_publicaciones = new publicacion();
 $var_publicaciones=$obj_publicaciones->obtienePublicacionesUsuario($usuarioActual);
 $var_cantidad_publicaciones=count($var_publicaciones);
+//ANYsffgfdd
 ?>
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
   <div class="container">
