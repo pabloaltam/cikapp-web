@@ -36,7 +36,7 @@ if (isset($_GET["cod"]) && isset($_GET["Type"])) {
         }
     } else {
         print "<h1>Ups...</h1>"
-                    . "<p> Su solicitos no es válida. Por favor contáctenos si está teniendo problemas al tratar de validar su sesión."
+                    . "<p> Su solicitud no es válida. Por favor contáctenos si está teniendo problemas al tratar de validar su sesión."
                 . "<br/> ir a <a href='../edit-company-profile.php'>Home</a></p>";
     }
 } else {

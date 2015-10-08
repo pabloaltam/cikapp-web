@@ -90,28 +90,24 @@
                                 
                                 <?php
                                     include_once 'include/sign_in.php';
-                                    if (isset($_POST['rut'], $_POST['pass'])) {
+                                    if (isset($_POST['login'])) {
+                                        
                                         $user = filter_input(INPUT_POST, "rut");
                                         $pass = filter_input(INPUT_POST, "pass");
+                                        
                                         if( !($user == '') and !($pass == '') ){
-                                            //$res = login($user, $pass);
                                             if (login($user, $pass) == TRUE) {
                                                 // Login success
-                                                //echo "<p> Bienvenido! </p>";//. $_SESSION['usuario'];
-                                                header('Location: edit-user-profile.php');
-                                                //echo "<meta http-equiv='Refresh' content='2;url= edit-user-profile.php'>";
+                                                echo "<p> Bienvenido! </p>". $_SESSION['idUsuario']." ". $_SESSION['rut']." ".$_SESSION['email'];
+                                                echo '</br><a href="edit-user-profile.php">continuar al perfil usuario</a>';
                                             } else {
                                                 // Login failed
-                                                echo '<p>Datos incorrectos, intente nuevamente por favor.</p>';
-                                                //header('Location: ../index.php?error=1');
-                                                //echo "<meta http-equiv='Refresh' content='2;url= index.php'>";
+                                                echo "<meta http-equiv='Refresh' content='2;url= index.php'>";
                                             }
                                         }else{
                                             echo '<p>Es necesario que ingrese sus datos primero</p>';
                                         }
-                                    } else {
-                                        echo '<p>Si cuenta con un registro previo a continuación ingrese sus datos.</p>';
-                                    }
+                                    }                                    
                                 ?>
                             <br>
                             <fieldset>
