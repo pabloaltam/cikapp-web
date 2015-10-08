@@ -1,7 +1,11 @@
-<?php include 'structure/navbar.php'; ?>
-
-    
-        <!-- Header -->
+<?php include 'structure/navbar.php'; 
+ini_set("display_errors",1);
+include'publicacion.class.php';
+if($_GET['id']==null){$usuarioActual='11111111';}else{$usuarioActual=$_GET['id'];}  
+$obj_publicaciones = new publicacion();
+$var_publicaciones=$obj_publicaciones->obtienePublicacionesUsuario($usuarioActual);
+$var_cantidad_publicaciones=count($var_publicaciones);
+?>
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
   <div class="container">
     <div class="navbar-header">
@@ -182,7 +186,6 @@
     
     </div>
     <div class="col-md-4">
-              
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-title">
@@ -192,32 +195,66 @@
         </div>
         <div class="panel-body">
           
-          <form class="form form-vertical">
+    <!-- FORMULARIO -->
+			
+			
+<form class="form form-vertical">
+	<div class="control-group">
+		<label>Cargo</label>
+		<div class="controls">
+			<input type="text" class="form-control" placeholder="Nombre Puesto o Cargo del Trabajo">
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label>Lugar del trabajo</label>
+		<div class="controls">
+			<input type="text" class="form-control" placeholder="Lugar del Trabajo">
+		</div>
+	</div>
+	
+	<div class="control-group">
+	<label>Tipo de Contrato</label>
+	<div class="controls">
+		<input type="text" class="form-control" placeholder="Tipo del Contrato del Trabajo">
+	</div>
+	
+	<div class="control-group">
+		<label>Tipo de Jornada Laboral</label>
+		<div class="controls">
+			<input type="text" class="form-control" placeholder="Tipo de Jornada Laboral del Trabajo">
+		</div>
+	</div>
+		
+		<div class="control-group">
+			<label>Fecha de Inicio</label>
+			<div class="controls">
+				<input type="date" class="form-control" name="fecha_inicio" step="1" min="<?php echo date("Y-m-d");?>" max="2015-12-31" value="<?php echo date("Y-m-d");?>">
+			</div>
+		</div>      
+          	
+
             <div class="control-group">
-              <label>Nombre del Cargo</label>
+              <label>Publicación</label>
               <div class="controls">
-                <input type="text" class="form-control" placeholder="Puesto de Trabajo">
-              </div>
-            </div>      
-            </div>   
-            <div class="control-group">
-              <label>Descripcion</label>
-              <div class="controls">
-                <textarea class="form-control"></textarea>
+                <textarea class="form-control" placeholder="Descripcion breve y funciones"></textarea>
               </div>
             </div> 
+
             <div class="control-group">
-              <label>Prioridad</label>
+              <label>Tipo del Plan de Publicacion</label>
               <div class="controls">
-                <select class="form-control"><option>Alta</option></option><option>Normal</option><option>Baja</option></select>
+                <select class="form-control"><option>A</option></option><option>AA</option><option>AAA</option><option>Nicho</option></select>
               </div>
             </div>    
+
              <div class="control-group">
               <label>Confirmar Contraseña</label>
               <div class="controls">
                 <input type="password" class="form-control" placeholder="clave">
                 
               </div>
+
             <div class="control-group">
               <label></label>
               <div class="controls">
@@ -225,10 +262,15 @@
                   Publicar
                 </button>
               </div>
+
             </div>   
             
           </form>
-          
+			
+			
+			
+	<!-- FORMULARIO -->
+
           
         </div><!--/panel content-->
       </div><!--/panel-->
