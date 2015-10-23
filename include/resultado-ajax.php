@@ -26,6 +26,7 @@ if (isset($_POST['txtRut'])){
         {
             $id=$row['COMUNA_ID'];
             $data=$row['COMUNA_NOMBRE'];
+            
             echo '<option value="'.$id.'">'.$data.'</option>';
         }
 
