@@ -274,5 +274,20 @@ class OperacionesMYSQL {
         }
         return NULL;
     }
+    function editarUsuario($idUsuario,$nombre,$apellido,$apellidoM,$email,$skype,$COMUNA_ID){	 
+		include("./include/conexion.php");
+		$actualizaUsuario = "UPDATE usuario SET nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM',email='$email', skype='$skype', COMUNA_ID=$COMUNA_ID WHERE idUsuario='$idUsuario';";
+                $resultado = $mysqli->query($actualizaUsuario);
+		$mysqli->close();
+                return $resultado;
+	}
+    
+    function editarImagenUsuario($idUsuario,$rutaImagen){	 
+		include("./include/conexion.php");
+		$actualizaUsuario = "UPDATE usuario SET rutaImagen='$rutaImagen' WHERE idUsuario='$idUsuario';";
+                $resultado = $mysqli->query($actualizaUsuario);
+		$mysqli->close();
+                return $resultado;
+	}
 
 }
