@@ -7,7 +7,6 @@
     <title>Cikapp - We are working!</title>
     <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="structure/css/shit.css" rel="stylesheet">
-    <script src="live.js"></script>
     </head>
     <body>
 
@@ -34,8 +33,8 @@
   </ul>
 </div>
 -->
-            <a class="btn btn-warning btn-round" href="login.php" role="button"><i class="fa fa-user"></i> Persona</a>
-            <a class="btn btn-warning btn-round" href="sign-empresa.php" role="button"><i class="fa fa-users"></i> Empresa</a>
+            <a class="btn btn-warning btn-round" href="registro.php" role="button"><i class="fa fa-user"></i> Registrarse</a>
+            <a class="btn btn-warning btn-round" href="login.php" role="button"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
 
         </form>
 
