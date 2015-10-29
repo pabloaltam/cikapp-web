@@ -287,7 +287,11 @@ class OperacionesMYSQL {
 		$actualizaUsuario = "UPDATE usuario SET rutaImagen='$rutaImagen' WHERE idUsuario='$idUsuario';";
                 $resultado = $mysqli->query($actualizaUsuario);
 		$mysqli->close();
-                return $resultado;
+                if($resultado) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
 	}
 
 }

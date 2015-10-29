@@ -18,32 +18,29 @@
                     $COMUNA_ID = $_POST['COMUNA_ID'];
 
 
-                    $uploadedfileload = "true";
-                    $uploadedfile_size = $_FILES['uploadedfile'][size];
-                    echo $_FILES[uploadedfile][name];
-                    if ($_FILES[uploadedfile][size] > 200000) {
+                    $uploadedfileload = true;
+                    $uploadedfile_size = $_FILES["uploadedfile"]["size"];
+                    $msg="";
+                    if ($_FILES["uploadedfile"]["size"] > 200000) {
                         $msg = $msg . "El archivo es mayor que 200KB, debes reduzcirlo antes de subirlo<BR>";
-                        $uploadedfileload = "false";
+                        $uploadedfileload = false;
                     }
 
-                    if (!($_FILES[uploadedfile][type] == "image/jpeg" OR $_FILES[uploadedfile][type] == "image/gif" OR $_FILES[uploadedfile][type] == "image/png")) {
+                    if (!($_FILES["uploadedfile"]["type"] == "image/jpeg" OR $_FILES["uploadedfile"]["type"] == "image/gif" OR $_FILES["uploadedfile"]["type"] == "image/png")) {
                         $msg = $msg . " Tu archivo tiene que ser JPG o GIF. Otros archivos no son permitidos<BR>";
-                        $uploadedfileload = "false";
+                        $uploadedfileload = false;
                     }
-
-                    $file_name = $_FILES[uploadedfile][name];
+                    $file_name = $_FILES["uploadedfile"]["name"];
                     $add = "uploads/$file_name";
-                    if ($uploadedfileload == "true") {
-
-                        if (move_uploaded_file($_FILES[uploadedfile][tmp_name], $add)) {
-                            $test = $Obj_operaciones->editarImagenUsuario($idUsuario, $add);
-                            if ($test) {
-                                echo 'ÉXITO: Imagen Actualizada.';
+                    if ($uploadedfileload) {
+                        if (move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $add)) {
+                            if ($Obj_operaciones->editarImagenUsuario($idUsuario, $add)) {
+                                echo 'ÉXITO: Imagen actualizada, sin embargo la imagen será revisada para ver si cumple con las reglas de Cikapp.<br>';
                             } else {
-                                echo 'ERROR: Intentelo más tarde.';
+                                echo 'ERROR: Intentelo más tarde.<br>';
                             }
                         } else {
-                            echo "Error al subir el archivo";
+                            echo "Error al subir el archivo<br>";
                         }
                     } else {
                         echo $msg;
@@ -52,9 +49,9 @@
 
                     $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID);
                     if ($test) {
-                        echo 'ÉXITO: Usuario actualizado.';
+                        echo 'ÉXITO: Los datos del usuario han sido actualizados correctamente.<br>';
                     } else {
-                        echo 'ERROR: Intentelo más tarde.';
+                        echo 'ERROR: Intentelo más tarde.<br>';
                     }
                 }
                 if (isset($_SESSION['idUsuario'])) {
@@ -69,6 +66,7 @@
                         $apellidoM = $rows['apellidoM'];
                         $email = $rows['email'];
                         $skype = $rows['skype'];
+                        $COMUNA_IDusuario = $rows['COMUNA_ID']; 
                         $pass = $rows['password'];
                         $rutaImagen = $rows['rutaImagen'];
                     }
@@ -147,6 +145,16 @@
                                     $query = "SELECT * FROM region";
                                     $resultado = $mysqli->query($query);
                                     while ($rows = $resultado->fetch_assoc()) {
+                                        $sql = "select REGION_ID from comuna a, provincia b, region c where COMUNA_PROVINCIA_ID = PROVINCIA_ID and PROVINCIA_REGION_ID = REGION_ID and COMUNA_ID=$COMUNA_IDusuario;";
+                                        $resultado2 = $mysqli->query($sql);
+                                        while ($rows2 = $resultado2->fetch_assoc()) {
+                                            if($rows['REGION_ID']===$rows2['REGION_ID'])
+                                            {
+                                              print("<option value='" . $rows['REGION_ID'] . "' selected='selected'>" . $rows['REGION_NOMBRE'] . "</option>");
+                                              break;
+                                            }
+                                        }
+                                        
                                         print("<option value='" . $rows['REGION_ID'] . "'>" . $rows['REGION_NOMBRE'] . "</option>");
                                     }
                                     ?>
@@ -159,8 +167,15 @@
                         <div class="col-lg-3">
                             <div class="ui-select">
                                 <select id="ciudad" class="form-control" name="COMUNA_ID">
+                                    <?php
+                                    
+                                    
+                                    
+                                    ?>
+                                    
                                     <option value="0">Seleccione ciudad...</option>
                                 </select>
+                                        
                             </div>
                         </div>
                     </div>
