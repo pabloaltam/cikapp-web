@@ -133,7 +133,7 @@ class OperacionesMYSQL {
             }
         }
     }
-    
+
     /**
      * Validador de RUT con digito verificador 
      *
@@ -180,7 +180,7 @@ class OperacionesMYSQL {
             return FALSE;
         }
     }
-    
+
     function emailEmpresaValidate($email) {
         require 'conexion.php';
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -256,7 +256,7 @@ class OperacionesMYSQL {
         }
         return NULL;
     }
-    
+
     function validarCodigoEmpresa($codigo) {
 
         require 'conexion.php';
@@ -274,24 +274,37 @@ class OperacionesMYSQL {
         }
         return NULL;
     }
-    function editarUsuario($idUsuario,$nombre,$apellido,$apellidoM,$email,$skype,$COMUNA_ID){	 
-		include("./include/conexion.php");
-		$actualizaUsuario = "UPDATE usuario SET nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM',email='$email', skype='$skype', COMUNA_ID=$COMUNA_ID WHERE idUsuario='$idUsuario';";
-                $resultado = $mysqli->query($actualizaUsuario);
-		$mysqli->close();
-                return $resultado;
-	}
-    
-    function editarImagenUsuario($idUsuario,$rutaImagen){	 
-		include("./include/conexion.php");
-		$actualizaUsuario = "UPDATE usuario SET rutaImagen='$rutaImagen' WHERE idUsuario='$idUsuario';";
-                $resultado = $mysqli->query($actualizaUsuario);
-		$mysqli->close();
-                if($resultado) {
-                    return TRUE;
-                } else {
-                    return FALSE;
-                }
-	}
+
+    function editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID) {
+        include("./include/conexion.php");
+        $actualizaUsuario = "UPDATE usuario SET nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM',email='$email', skype='$skype', COMUNA_ID=$COMUNA_ID WHERE idUsuario='$idUsuario';";
+        $resultado = $mysqli->query($actualizaUsuario);
+        $mysqli->close();
+        return $resultado;
+    }
+
+    function editarImagenUsuario($idUsuario, $rutaImagen) {
+        include("./include/conexion.php");
+        $actualizaUsuario = "UPDATE usuario SET rutaImagen='$rutaImagen' WHERE idUsuario='$idUsuario';";
+        $resultado = $mysqli->query($actualizaUsuario);
+        $mysqli->close();
+        if ($resultado) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function esIgual($val, $val2) {
+        include './include/conexion.php';
+        $query = "SELECT password FROM usuario where idUsuario=$val";
+        $resultado = $mysqli->query($query);
+        while ($rows = $resultado->fetch_assoc()) {
+            if ($rows['password'] === sha1(md5($val2))) {
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
 
 }
