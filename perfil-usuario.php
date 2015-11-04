@@ -15,19 +15,17 @@
                 <li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
               </ul>
             </div>
-            <!--/col--> 
+            <!--/col-->
             <div class="col-xs-12 col-sm-8">
-              <h2>Jane Doe</h2>
-              <p><strong>About: </strong> Web Designer / UI Expert. </p>
-              <p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>
-              <p><strong>Skills: </strong>
-                <span class="label label-info tags">html5</span> 
-                <span class="label label-info tags">css3</span>
-                <span class="label label-info tags">jquery</span>
-                <span class="label label-info tags">bootstrap3</span>
+              <h2>Nombre Apellido1 Apellido2</h2>
+              <p><strong>Correo electrónico </strong> hola@hola.com</p>
+              <p><strong>Ubicación </strong> País, Región, Ciudad</p>
+              <p>Skype <strong>Usuario </strong>
+                <span class="label label-info tags">campo1</span>
+                <span class="label label-info tags">campo2</span>
               </p>
             </div>
-            <!--/col-->          
+            <!--/col-->
             <div class="clearfix"></div>
             <div class="col-xs-12 col-sm-4">
               <h2><strong> 20,7K </strong></h2>
@@ -44,7 +42,7 @@
             <div class="col-xs-12 col-sm-4">
               <h2><strong>43</strong></h2>
               <p><small>Snippets</small></p>
-              <button type="button" class="btn btn-primary btn-block"><span class="fa fa-gear"></span> Options </button>  
+              <button type="button" class="btn btn-primary btn-block"><span class="fa fa-gear"></span> Options </button>
             </div>
             <!--/col-->
           </div>
@@ -54,9 +52,9 @@
       </div>
       <!--/panel-->
     </div>
-    <!--/col--> 
+    <!--/col-->
   </div>
-  <!--/row--> 
+  <!--/row-->
 </div>
 <!--/container-->
 <?php include 'structure/footer.php';?>
