@@ -1,4 +1,4 @@
-<?php include 'structure/navbar.php'; ?>
+<?php include 'structure/navbarFinSession.php'; ?>
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-xs-10">

@@ -1,69 +1,72 @@
-<?php include 'structure/navbar.php'; ?>
+<?php include 'structure/navbarFinSession.php'; ?>
 
 <div class="container">
     <h1 class="page-header">Edita tu perfil</h1>
 
 
     <?php
-    session_start();
     if (isset($_POST['nombre'])) {
 
         include './include/ejecutar_en_db.php';
 
         $Obj_operaciones = new OperacionesMYSQL();
-        
-        if($Obj_operaciones->esIgual($_SESSION['idUsuario'], $_POST['pwd1']) && $_POST['pwd1']===$_POST['pwd2']){
-        $idUsuario = $_SESSION['idUsuario'];
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $apellidoM = $_POST['apellidoM'];
-        $email = $_POST['email'];
-        $skype = $_POST['skype'];
-        $COMUNA_ID = $_POST['COMUNA_ID'];
-        $pwd1 = $_POST['pwd1'];
-        $pwd1 = $_POST['pwd2'];
-        if ($_FILES["uploadedfile"]["size"] > 0) {
-            $uploadedfileload = true;
-            $uploadedfile_size = $_FILES["uploadedfile"]["size"];
-            $msg = "";
-            if ($_FILES["uploadedfile"]["size"] > 200000) {
-                $msg = $msg . "El archivo es mayor que 200KB, debes reduzcirlo antes de subirlo<BR>";
-                $uploadedfileload = false;
-            }
 
-            if (!($_FILES["uploadedfile"]["type"] == "image/jpeg" OR $_FILES["uploadedfile"]["type"] == "image/gif" OR $_FILES["uploadedfile"]["type"] == "image/png")) {
-                $msg = $msg . " Tu archivo tiene que ser JPG o GIF. Otros archivos no son permitidos<BR>";
-                $uploadedfileload = false;
-            }
-            $file_name = $_FILES["uploadedfile"]["name"];
-            $add = "uploads/$file_name";
-            if ($uploadedfileload) {
-                if (move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $add)) {
-                    if ($Obj_operaciones->editarImagenUsuario($idUsuario, $add)) {
-                        echo 'ÉXITO: Imagen actualizada, sin embargo la imagen será revisada para ver si cumple con las reglas de Cikapp.<br>';
+        if ($Obj_operaciones->esIgual($_SESSION['idUsuario'], $_POST['pwd1']) && $_POST['pwd1'] === $_POST['pwd2']) {
+            $idUsuario = $_SESSION['idUsuario'];
+            $nombre = $_POST['nombre'];
+            $apellido = $_POST['apellido'];
+            $apellidoM = $_POST['apellidoM'];
+            $email = $_POST['email'];
+            $skype = $_POST['skype'];
+            $COMUNA_ID = $_POST['COMUNA_ID'];
+            $pwd1 = $_POST['pwd1'];
+            $pwd1 = $_POST['pwd2'];
+            if ($_FILES["uploadedfile"]["size"] > 0) {
+                $uploadedfileload = true;
+                $uploadedfile_size = $_FILES["uploadedfile"]["size"];
+                $msg = "";
+                if ($_FILES["uploadedfile"]["size"] > 5000000) {
+                    $msg = $msg . "El archivo es mayor que 5MB, debes reduzcirlo antes de subirlo<BR>";
+                    $uploadedfileload = false;
+                }
+
+                if (!($_FILES["uploadedfile"]["type"] == "image/jpeg" OR $_FILES["uploadedfile"]["type"] == "image/gif" OR $_FILES["uploadedfile"]["type"] == "image/png")) {
+                    $msg = $msg . " Tu archivo tiene que ser JPG o GIF. Otros archivos no son permitidos<BR>";
+                    $uploadedfileload = false;
+                }
+                $file_name = $_FILES["uploadedfile"]["name"];
+                $add = "uploads/$file_name";
+                if ($uploadedfileload) {
+                    if (move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $add)) {
+                        if ($Obj_operaciones->editarImagenUsuario($idUsuario, $add)) {
+                            echo 'ÉXITO: Imagen actualizada, sin embargo la imagen será revisada para ver si cumple con las reglas de Cikapp.<br>';
+                        } else {
+                            echo 'ERROR: Intentelo más tarde.<br>';
+                        }
                     } else {
-                        echo 'ERROR: Intentelo más tarde.<br>';
+                        echo "Error al subir el archivo<br>";
                     }
                 } else {
-                    echo "Error al subir el archivo<br>";
+                    echo $msg;
                 }
-            } else {
-                echo $msg;
             }
-        }
 
 
-        $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID);
-        if ($test) {
-            echo 'ÉXITO: Los datos del usuario han sido actualizados correctamente.<br>';
+            $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID);
+            if ($test) {
+                $_SESSION['nombre'] = $nombre; //Le damos el valor del nombre de usuario a la sesion usuario.
+                $_SESSION['apellido'] = $apellido;
+
+                echo 'ÉXITO: Los datos del usuario han sido actualizados correctamente.<br>';
+            } else {
+                echo 'ERROR: Intentelo más tarde.<br>';
+            }
         } else {
-            echo 'ERROR: Intentelo más tarde.<br>';
+            echo 'INFO: Las contraseñas no coinciden';
         }
-    } else {
-        echo 'INFO: Las contraseñas no coinciden';
-    }
     }
     if (isset($_SESSION['idUsuario'])) {
+        
         $conSession = 'Si';
         include './include/conexion.php';
         $IDusuario = $_SESSION['idUsuario'];
@@ -234,7 +237,7 @@
 
     <?php
 } else {
-    echo 'sin sesion valida';
+    header('Location: ./index.php');
 }
 include 'structure/footer.php';
 ?>
