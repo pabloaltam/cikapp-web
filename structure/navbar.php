@@ -44,8 +44,8 @@
   </ul>
 </div>
 -->
-            <a class="btn btn-warning btn-round" href="registro.php" role="button"><i class="fa fa-user"></i> Registrarse</a>
-            <a class="btn btn-warning btn-round" href="login.php" role="button"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
+            <a class="btn btn-sm btn-primary btn-round" href="registro.php" role="button"><i class="fa fa-user"></i> Registrarse</a>
+            <a class="btn btn-sm btn-primary btn-round btn-fill" href="login.php" role="button"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
 
         </form>
 

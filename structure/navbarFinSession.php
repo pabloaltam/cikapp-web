@@ -34,11 +34,11 @@
   </ul>
 </div>
 -->
-<a class="btn btn-warning btn-round" title="Editar mi perfil" href="./edit-user-profile.php" role="button"><i class="fa fa-user"></i> <?php
+<a class="btn btn-sm btn-primary btn-round" title="Editar mi perfil" href="./edit-user-profile.php" role="button"><i class="fa fa-user"></i> <?php
             session_start();
             echo $_SESSION['nombre']." ".$_SESSION['apellido'];                        ;
                 ?></a>
-<a class="btn btn-warning btn-round" href="./logout.php" role="button" title="Salir"><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
+<a class="btn btn-sm btn-primary btn-round btn-fill" href="./logout.php" role="button" title="Salir"><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
 
         </form>
 
