@@ -1,6 +1,6 @@
 <?php
     function login($user, $pass) {
-    	
+
         include('ejecutar_en_db.php');
         $obj = new OperacionesMYSQL();
         $user = str_replace('.', '', $user);
@@ -15,13 +15,14 @@
                 if ($rows = $result->fetch_assoc()) {
                     if($rows['codigo'] == 1){
                         @session_start();
+                        header("location: panel-usuario.php");
                         if(sesion_iniciada()){
                             logout();
                         }
                         $_SESSION['idUsuario'] = $rows['idUsuario'];
                         $_SESSION['rut'] = $rows['rut'];
                         $_SESSION['nombre'] = $rows['nombre'];//Le damos el valor del nombre de usuario a la sesion usuario.
-                        $_SESSION['apellido'] = $rows['apellido'];       
+                        $_SESSION['apellido'] = $rows['apellido'];
                         $_SESSION['email'] = $rows['email'];
 
                         return TRUE;
@@ -32,7 +33,7 @@
                 } else {
                     echo '<p>No ha podido iniciar sesion, intente mas tarde</p>';
                     return FALSE;
-                }  
+                }
             } else {
                 echo '<p>Su usuario no se encuentra, por favor regístrese primero</p>';
                 return FALSE;
@@ -45,7 +46,7 @@
         }
     }
 
-	function sesion_iniciada () { //comprueba si la sesion esta abierta
+    function sesion_iniciada () { //comprueba si la sesion esta abierta
         @session_start(); //inicia sesion (la @ evita los mensajes de error si la session ya está iniciada)
 
         if (!isset($_SESSION['idUsuario'])){
@@ -67,14 +68,14 @@
 
     function logout() {
         @session_start(); //inicia sesion (la @ evita los mensajes de error si la session ya está iniciada)
-            
+
         unset($_SESSION['idUsuario']);
         unset($_SESSION['nombre']); //elimina la variable con los datos de usuario;
         unset($_SESSION['apellido']);
         unset($_SESSION['email']);
         unset($_SESSION['rut']);
         session_write_close(); //se guarda y cierra la sesion
-    
+
         session_destroy();
     }
 ?>
