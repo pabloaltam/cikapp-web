@@ -75,9 +75,7 @@
 
 /* Component containers
 ----------------------------------*/
-.ui-widget {
-	font-family: Verdana,Arial,sans-serif/*{ffDefault}*/;
-	font-size: 1.1em/*{fsDefault}*/;
+.ui-widget {/* font-family: Verdana,Arial,sans-serif/*{ffDefault}*/*//* font-size: 1.1em/*{fsDefault}*/*/
 }
 .ui-widget .ui-widget {
 	font-size: 1em;

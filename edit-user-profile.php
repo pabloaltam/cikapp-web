@@ -19,8 +19,27 @@
             $email = $_POST['email'];
             $skype = $_POST['skype'];
             $COMUNA_ID = $_POST['COMUNA_ID'];
+            if (isset($_POST['areasInteres'][0], $_POST['areasInteres'][1], $_POST['areasInteres'][2])) {
+                $areaInteres = $_POST['areasInteres'][0] . "," . $_POST['areasInteres'][1] . "," . $_POST['areasInteres'][2];
+            } elseif (isset($_POST['areasInteres'][0], $_POST['areasInteres'][1])) {
+                $areaInteres = $_POST['areasInteres'][0] . "," . $_POST['areasInteres'][1];
+            } elseif (isset($_POST['areasInteres'][0], $_POST['areasInteres'][2])) {
+                $areaInteres = $_POST['areasInteres'][0] . "," . $_POST['areasInteres'][2];
+            } elseif (isset($_POST['areasInteres'][1], $_POST['areasInteres'][2])) {
+                $areaInteres = $_POST['areasInteres'][1] . "," . $_POST['areasInteres'][2];
+            } elseif (isset($_POST['areasInteres'][0])) {
+                $areaInteres = $_POST['areasInteres'][0];
+            } elseif (isset($_POST['areasInteres'][1])) {
+                $areaInteres = $_POST['areasInteres'][1];
+            } elseif(isset ($_POST['areasInteres'][2])) {
+                $areaInteres = $_POST['areasInteres'][2];
+            }  else {
+            $areaInteres="";    
+            }
+
             $pwd1 = $_POST['pwd1'];
             $pwd1 = $_POST['pwd2'];
+
             if ($_FILES["uploadedfile"]["size"] > 0) {
                 $uploadedfileload = true;
                 $uploadedfile_size = $_FILES["uploadedfile"]["size"];
@@ -52,7 +71,7 @@
             }
 
 
-            $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID);
+            $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres);
             if ($test) {
                 $_SESSION['nombre'] = $nombre; //Le damos el valor del nombre de usuario a la sesion usuario.
                 $_SESSION['apellido'] = $apellido;
@@ -66,7 +85,7 @@
         }
     }
     if (isset($_SESSION['idUsuario'])) {
-        
+
         $conSession = 'Si';
         include './include/conexion.php';
         $IDusuario = $_SESSION['idUsuario'];
@@ -81,6 +100,7 @@
             $COMUNA_IDusuario = $rows['COMUNA_ID'];
             $pass = $rows['password'];
             $rutaImagen = $rows['rutaImagen'];
+            $areaInteres = $rows["areasInteres"];
         }
         ?>
         <div class="row">
@@ -204,6 +224,23 @@
                             <input class="form-control" value="<?php echo $skype ?>" type="text" name="skype">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Áreas de intéres:</label>
+                        <div class="col-md-8">
+                            <ul id="myTags">
+                                <!-- Existing list items will be pre-added to the tags -->
+                                <?php
+                                $areas = explode(",", $areaInteres);
+
+                                foreach ($areas as $area) {
+                                    print '<li >' . $area . '</li>';
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <p class="col-md-11">Para que los cambios se apliquen debes ingresar tu contraseña en los campos que se encuentran a continuación.</p>
 
@@ -234,10 +271,26 @@
     </div>
     <script src="structure/jquery/jquery-1.11.3.min.js"></script>
     <script src="structure/js/jquery-perfiles.js"></script>
-
     <?php
 } else {
     header('Location: ./index.php');
 }
 include 'structure/footer.php';
 ?>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="structure/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#myTags").tagit({
+            fieldName: "areasInteres[]",
+            availableTags: ["Tecnologia", "Agronomia", "Salud", "Finanzas", "Contabilidad", "Programación", "Proyectos", "Informática", "Redes y Telecomunicaciones", "Innovación", "Pesca"],
+            caseSensitive: true,
+            allowSpaces: true,
+            tagLimit: 3
+        });
+    });
+</script>
+</body>
+</html>

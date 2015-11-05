@@ -7,6 +7,11 @@
     <title>Cikapp - We are working!</title>
     <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="structure/css/shit.css" rel="stylesheet">
+    
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+<link href="structure/css/jquery.tagit.css" rel="stylesheet" type="text/css">
+<link href="structure/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    
     </head>
     <body>
 
