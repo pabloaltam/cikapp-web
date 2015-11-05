@@ -7,15 +7,20 @@
     <title>Cikapp - We are working!</title>
     <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="structure/css/shit.css" rel="stylesheet">
-<<<<<<< HEAD
-    
+
+
+        <!--  PANEL CSS    -->
+    <link href="structure/css/animate.min.css" rel="stylesheet"/>
+    <link href="structure/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <link href="structure/css/iconstrokes.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <link href="structure/css/jquery.tagit.css" rel="stylesheet" type="text/css">
 <link href="structure/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
-    
-=======
-
->>>>>>> origin/master
     </head>
     <body>
 

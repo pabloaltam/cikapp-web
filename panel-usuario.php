@@ -1,4 +1,4 @@
-<?php include 'structure/navbar.php'; ?>
+<?php include 'structure/navbarFinSession.php'; ?>
 
 
 <div class="wrapper">
@@ -44,12 +44,12 @@
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                    <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>
+                    </button> -->
                     <a class="navbar-brand" href="#">Usuario</a>
                 </div>
                 <div class="collapse navbar-collapse">

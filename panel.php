@@ -1,4 +1,4 @@
-<?php include 'structure/navbar.php'; 
+<?php include 'structure/navbarFinSession.php'; 
 ini_set("display_errors",1);
 include'publicacion.class.php';
 if($_GET['id']==null){$usuarioActual='11111111';}else{$usuarioActual=$_GET['id'];}  

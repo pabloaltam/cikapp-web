@@ -11,6 +11,6 @@ if(sesion_iniciada()){
     logout();
     header("Location: ./index.php");
 } else {
-    header("Location: ./indes.php");
+    header("Location: ./index.php");
 }
 
