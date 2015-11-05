@@ -7,6 +7,17 @@
     <title>Cikapp - We are working!</title>
     <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="structure/css/shit.css" rel="stylesheet">
+
+
+        <!--  PANEL CSS    -->
+    <link href="structure/css/animate.min.css" rel="stylesheet"/>
+    <link href="structure/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <link href="structure/css/iconstrokes.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
     </head>
     <body>
 
@@ -33,8 +44,8 @@
   </ul>
 </div>
 -->
-            <a class="btn btn-warning btn-round" href="registro.php" role="button"><i class="fa fa-user"></i> Registrarse</a>
-            <a class="btn btn-warning btn-round" href="login.php" role="button"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
+            <a class="btn btn-sm btn-primary btn-round" href="registro.php" role="button"><i class="fa fa-user"></i> Registrarse</a>
+            <a class="btn btn-sm btn-primary btn-round btn-fill" href="login.php" role="button"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
 
         </form>
 
@@ -50,6 +61,12 @@
                 <li class="dropdown-header">Otros</li>
                 <li><a href="#">Avisos</a></li>
                 <li><a href="#">Otros</a></li>
+                  <li>
+                    <a href="edit-user-profile.php">
+                        <i class="pe-7s-bell"></i>
+                        <p>Editar perfil</p>
+                    </a>
+                </li>
               </ul>
             </li>
         </ul>

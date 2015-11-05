@@ -7,7 +7,7 @@
                     <br>
                     <!-- Nav tabs -->
                     <div class="text-center">
-                    cikappLOGO		Iniciar Sesión   
+                    Iniciar Sesión
                     </div>
                     <br />
                             <form action="" method="POST" autocomplete="off" name="frmIdentificarme" id="frmIdentificarme">
@@ -40,34 +40,32 @@
                                 ?>
                                 <br>
                                 <fieldset>
-                                    <div class="form-group">
+                                    <div class="form-group has-success">
                                         <div class="right-inner-addon">
                                             <i class="fa fa-envelope"></i>
                                             <input class="form-control input-lg" placeholder="Rut" id="rut" name="rut" type="text">
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group has-success">
                                         <div class="right-inner-addon">
                                             <i class="fa fa-key"></i>
                                             <input class="form-control input-lg" placeholder="Contraseña" id="pass" name="pass" type="password">
                                         </div>
                                     </div>
+                                    <p class="text-muted">Olvidé mi contraseña</p>
                                 </fieldset>
                                 <br>
-                                <div class=" text-center">
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+                                <div class="text-center">
+                                    <button class="btn btn-primary btn-block btn-fill" type="submit">Ingresar</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
 
 
         <?php include 'structure/footer.php'; ?>
         <script src="structure/js/jquery.Rut.min.js"></script>
         <script src="structure/js/login.js"></script>
-    </body>
-</html>
+

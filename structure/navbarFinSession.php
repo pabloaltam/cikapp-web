@@ -7,11 +7,15 @@
     <title>Cikapp - We are working!</title>
     <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="structure/css/shit.css" rel="stylesheet">
+<<<<<<< HEAD
     
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 <link href="structure/css/jquery.tagit.css" rel="stylesheet" type="text/css">
 <link href="structure/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
     
+=======
+
+>>>>>>> origin/master
     </head>
     <body>
 
@@ -38,11 +42,11 @@
   </ul>
 </div>
 -->
-<a class="btn btn-warning btn-round" title="Editar mi perfil" href="./edit-user-profile.php" role="button"><i class="fa fa-user"></i> <?php
+<a class="btn btn-sm btn-primary btn-round" title="Editar mi perfil" href="./edit-user-profile.php" role="button"><i class="fa fa-user"></i> <?php
             session_start();
             echo $_SESSION['nombre']." ".$_SESSION['apellido'];                        ;
                 ?></a>
-<a class="btn btn-warning btn-round" href="./logout.php" role="button" title="Salir"><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
+<a class="btn btn-sm btn-primary btn-round btn-fill" href="./logout.php" role="button" title="Salir"><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
 
         </form>
 
