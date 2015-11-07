@@ -1,5 +1,5 @@
 <?php 
-ini_set("display_errors",1);
+ini_set("display_errors",0);
 require('publicacion.class.php');
 $rut = $_GET['rut'];
 $nombreCargo=$_GET["nombreCargo"];
@@ -11,13 +11,13 @@ $publicacion=$_GET["publicacion"];
 $tipoPublicacion=$_GET["tipoPublicacion"];
 $pass=$_GET["pass"];
 
-if (!isset($publicacion) || trim($publicacion)===''){ echo "Debe escribir un descripcion de la publicacion";die();} else {
+if (!isset($publicacion) || trim($publicacion)===''){ echo "Debe escribir un descripcion de la publicacion";} 
 $obj_publicacion = new publicacion();
 try{
 $obj_publicacion ->agregarPublicacion($rut,$nombreCargo,$lugarTrabajo,$tipoContrato,$tipoJornadaLaboral,$fechaInicio,$publicacion,$tipoPublicacion);} catch(Exception $e){
  echo "Se ha producido un error : ".$e->getMessage();
 }
-}
+
 ?>
 <table style="width:100%">
   <tr>
