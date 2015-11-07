@@ -1,11 +1,5 @@
-<?php include 'structure/navbarFinSession.php'; 
+<?php include 'structure/navbar.php'; 
 ini_set("display_errors",1);
-include'publicacion.class.php';
-if($_GET['id']==null){$usuarioActual='11111111';}else{$usuarioActual=$_GET['id'];}  
-$obj_publicaciones = new publicacion();
-$var_publicaciones=$obj_publicaciones->obtienePublicacionesUsuario($usuarioActual);
-$var_cantidad_publicaciones=count($var_publicaciones);
-//ANYsffgfdd
 ?>
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
   <div class="container">
@@ -199,66 +193,65 @@ $var_cantidad_publicaciones=count($var_publicaciones);
     <!-- FORMULARIO -->
 			
 			
-<form class="form form-vertical">
+<form class="form form-vertical" action="publicaciones.php" method="get">
 	<div class="control-group">
-		<label>Cargo</label>
+		<label>Nombre del Cargo</label>
 		<div class="controls">
-			<input type="text" class="form-control" placeholder="Nombre Puesto o Cargo del Trabajo">
+			<input type="text" name="nombreCargo" class="form-control" placeholder="Nombre Puesto o Cargo del Trabajo">
 		</div>
 	</div>
 	
 	<div class="control-group">
 		<label>Lugar del trabajo</label>
 		<div class="controls">
-			<input type="text" class="form-control" placeholder="Lugar del Trabajo">
+			<input type="text" name="lugarTrabajo" class="form-control" placeholder="Lugar del Trabajo">
 		</div>
 	</div>
 	
 	<div class="control-group">
 	<label>Tipo de Contrato</label>
 	<div class="controls">
-		<input type="text" class="form-control" placeholder="Tipo del Contrato del Trabajo">
+		<input type="text" name="tipoContrato" class="form-control" placeholder="Tipo del Contrato del Trabajo">
 	</div>
 	
 	<div class="control-group">
 		<label>Tipo de Jornada Laboral</label>
 		<div class="controls">
-			<input type="text" class="form-control" placeholder="Tipo de Jornada Laboral del Trabajo">
+			<input type="text" name="tipoJornadaLaboral" class="form-control" placeholder="Tipo de Jornada Laboral del Trabajo">
 		</div>
 	</div>
 		
 		<div class="control-group">
 			<label>Fecha de Inicio</label>
 			<div class="controls">
-				<input type="date" class="form-control" name="fecha_inicio" step="1" min="<?php echo date("Y-m-d");?>" max="2015-12-31" value="<?php echo date("Y-m-d");?>">
+				<input type="date" class="form-control" name="fechaInicio" step="1" min="<?php echo date("Y-m-d");?>" max="2015-12-31" value="<?php echo date("Y-m-d");?>">
 			</div>
 		</div>      
-          	
-
             <div class="control-group">
               <label>Publicación</label>
               <div class="controls">
-                <textarea class="form-control" placeholder="Descripcion breve y funciones"></textarea>
+                <textarea name="publicacion" class="form-control" placeholder="Descripcion breve y funciones"></textarea>
               </div>
             </div> 
 
             <div class="control-group">
               <label>Tipo del Plan de Publicacion</label>
               <div class="controls">
-                <select class="form-control"><option>A</option></option><option>AA</option><option>AAA</option><option>Nicho</option></select>
+                <select name="tipoPublicacion" class="form-control"><option>A</option></option><option>AA</option><option>AAA</option><option>Nicho</option></select>
               </div>
             </div>    
 
              <div class="control-group">
               <label>Confirmar Contraseña</label>
               <div class="controls">
-                <input type="password" class="form-control" placeholder="clave">
+                <input type="password" name="pass" class="form-control" placeholder="Clave">
                 
               </div>
 
             <div class="control-group">
               <label></label>
               <div class="controls">
+              <input type="hidden" name="rut" value="11111111-1"/>
                 <button type="submit" class="btn btn-primary">
                   Publicar
                 </button>
