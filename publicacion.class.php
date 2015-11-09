@@ -5,7 +5,6 @@
 		
 		function obtienePublicacionesUsuario($rut){
 		include("include/conexion.php");
-		$rut="11111111-1";
 		$consulta_publicaciones ="SELECT * FROM publicaciones WHERE rut='$rut' ORDER BY fecha_publicacion DESC";
 		$resultado = $mysqli->query($consulta_publicaciones);
 		$i=0;
@@ -21,6 +20,22 @@
 		$agrega_publicacion = "insert into publicaciones(rut,cargo,lugar_trabajo,tipo_contrato,tipo_jornada,fecha_inicio,publicacion,tipo_publicacion,fecha_publicacion)
 		values('$rut','$cargo','$lugar_trabajo','$tipo_contrato','$tipo_jornada','$fecha_inicio','$publicacion','$tipo_publicacion','$hora')";
 		$resultado = $mysqli->query($agrega_publicacion);
+		$mysqli->close();
+	}
+	
+		function eliminarPublicacion($id){	 
+		include("include/conexion.php");
+		$elimina_publicacion ="DELETE FROM publicaciones WHERE id='$id'";
+		$resultado = $mysqli->query($elimina_publicacion);
+		$mysqli->close();
+	}
+	
+	function editaPublicacion($rut,$cargo,$lugar_trabajo,$tipo_contrato,$tipo_jornada,$fecha_inicio,$publicacion,$tipo_publicacion){	 
+		include("include/conexion.php");
+		$hora= date("Y-m-d H:i:s");    
+		$edita_publicacion = "UPDATE SET publicaciones(rut,cargo,lugar_trabajo,tipo_contrato,tipo_jornada,fecha_inicio,publicacion,tipo_publicacion,fecha_publicacion)
+		values('$rut','$cargo','$lugar_trabajo','$tipo_contrato','$tipo_jornada','$fecha_inicio','$publicacion','$tipo_publicacion','$hora')";
+		$resultado = $mysqli->query($edita_publicacion );
 		$mysqli->close();
 	}
 
