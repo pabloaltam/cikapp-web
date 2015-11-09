@@ -34,7 +34,7 @@
 		include("include/conexion.php");
 		$hora= date("Y-m-d H:i:s");    
 		$edita_publicacion = "UPDATE SET publicaciones(cargo,lugar_trabajo,tipo_contrato,tipo_jornada,fecha_inicio,publicacion,tipo_publicacion,fecha_publicacion)
-		values('$rut','$cargo','$lugar_trabajo','$tipo_contrato','$tipo_jornada','$fecha_inicio','$publicacion','$tipo_publicacion','$hora') WHERE id='$id' ";
+		values($cargo','$lugar_trabajo','$tipo_contrato','$tipo_jornada','$fecha_inicio','$publicacion','$tipo_publicacion','$hora') WHERE id='$id'";
 		$resultado = $mysqli->query($edita_publicacion );
 		$mysqli->close();
 	}
