@@ -103,7 +103,7 @@
                             <div class="header">
                                 <h4 class="title">Sistema de mensajes privados</h4>
                                 <p class="category">...</p>
-                                <a href="conversaciones.php">Conversaciones</a>
+                                <a href="mensajes.php">Conversaciones</a>
                                 <a href="enviar_mensaje.php">Comenzar conversación</a>
                             </div>
                             <div class="content">
