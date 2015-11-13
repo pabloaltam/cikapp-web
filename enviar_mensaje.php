@@ -99,7 +99,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card ">
+                        <div class="card">
                             <div class="header">
                                 <h4 class="title">Sistema de mensajes privados</h4>
                                 <p class="category">...</p>
@@ -109,9 +109,37 @@
                             <div class="content">
                                 
                                 <?php
-                                    if(isset($_GET['idUsuario']) && !empty($_GET['idUsuario'])){
-                                        echo "Comenzar conversación";
-                                        
+                                    if(isset($_GET['id']) && !empty($_GET['id'])){
+                                ?>
+                                        <form method='post'>
+                                <?php
+                                            if(isset($_POST['mensaje']) && !empty($_POST['mensaje'])) {
+                                                require './include/conexion.php';
+                                                $mi_id = $_SESSION['idUsuario'];
+                                                $usuario = $_GET['id'];
+                                                $random_number = rand();
+                                                $revisar_conversacion = "SELECT `hash` FROM `grupo_mensajes` WHERE (`usuario_uno`='$mi_id' AND `usuario_dos`='$usuario') OR (`usuario_uno`='$usuario' AND `usuario_dos`='$mi_id')";
+                                                $resultado = $mysqli->query($revisar_conversacion);
+                                                $row_cnt = mysqli_num_rows($resultado);
+                                                echo "<p>$row_cnt</p>";
+                                                                                  
+                                                    if($row_cnt == 1){
+                                                    echo "<p>Conversación ya iniciada!</p>";
+                                                    
+                                                } else {
+                                                $iniciar_conversacion = "INSERT INTO `grupo_mensajes` VALUES ('$mi_id', '$usuario','$random_number')";
+                                                $resultado = $mysqli->query($iniciar_conversacion);
+                                                echo "<p>Conversación iniciada</p>";                                   
+                                                }
+                                            }
+                                                ?>
+                                            
+                                            Insertar mensaje: <br/>
+                                                <textarea name='mensaje' rows='7' cols='60'></textarea>
+                                                <br/><br/>
+                                                <input type='submit' value='Enviar mensaje' />
+                                        </form>
+                                <?php
                                     } else {
                                         echo "<b>Seleccionar usuario</b>";
                                         require './include/conexion.php';
@@ -122,17 +150,14 @@
 
                                             while ($usuarios = $resultado->fetch_assoc()) {
                                                 
-                                            $idUsuario = $usuarios['idUsuario'];
+                                            $id = $usuarios['idUsuario'];
                                             $nombre = $usuarios['nombre'];
                                             $apellido = $usuarios['apellido'];
                                             
-                                            echo "<p><a href='enviar_mensaje.php?idUsuario=$idUsuario'>$nombre $apellido</a></p>";
+                                            echo "<p><a href='enviar_mensaje.php?id=$id'>$nombre $apellido</a></p>";
                                         }
                                         
                                     }
-                        
-                                
-    
                                 ?>
                                                                 
                                     <div class="footer">
@@ -326,5 +351,3 @@
         });
     </script>
 <?php include 'structure/footer.php';?>
-
-
