@@ -1,6 +1,5 @@
 <?php include 'structure/navbarFinSession.php'; ?>
 
-
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
@@ -18,14 +17,14 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="panel-usuario.php">
                         <i class="pe-7s-home"></i>
                         <p>Escritorio</p>
                     </a>
                 </li>
-                <li>
-                    <a href="sistema_mensajes.php">
+                <li class="active">
+                    <a href="#">
                         <i class="pe-7s-mail"></i>
                         <p>Mensajes</p>
                     </a>
@@ -102,13 +101,41 @@
                     <div class="col-md-6">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">Noticias</h4>
+                                <h4 class="title">Sistema de mensajes privados</h4>
                                 <p class="category">...</p>
+                                <a href="conversaciones.php">Conversaciones</a>
+                                <a href="enviar.php">Comenzar conversación</a>
                             </div>
                             <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
+                                
+                                <?php
+                                    if(isset($_GET['idUsuario']) && !empty($_GET['idUsuario'])){
+                                        echo "Comenzar conversación";
+                                        
+                                    } else {
+                                        echo "<b>Seleccionar usuario</b>";
+                                        require './include/conexion.php';
+                                        
+                                         $query = "SELECT `idUsuario`, `nombre`, `apellido` FROM `usuario`";
 
-                                <div class="footer">
+                                            $resultado = $mysqli->query($query);
+
+                                            while ($usuarios = $resultado->fetch_assoc()) {
+                                                
+                                            $idUsuario = $usuarios['idUsuario'];
+                                            $nombre = $usuarios['nombre'];
+                                            $apellido = $usuarios['apellido'];
+                                            
+                                            echo "<p><a href='enviar_mensaje.php?idUsuario=$idUsuario'>$nombre $apellido</a></p>";
+                                        }
+                                        
+                                    }
+                        
+                                
+    
+                                ?>
+                                                                
+                                    <div class="footer">
                                     <div class="legend">
                                         <i class="fa fa-circle text-info"></i> Hoy
                                         <i class="fa fa-circle text-danger"></i> Ayer
@@ -299,3 +326,5 @@
         });
     </script>
 <?php include 'structure/footer.php';?>
+
+
