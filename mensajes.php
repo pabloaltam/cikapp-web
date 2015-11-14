@@ -1,4 +1,6 @@
-<?php include 'structure/navbarFinSession.php'; ?>
+<?php
+include 'structure/navbarFinSession.php'; 
+?>
 
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
@@ -110,17 +112,55 @@
                                 <br/>
                                 <b>Mensajes:</b>
                                 <br/>
-                                <?php $mi_id = $_SESSION['idUsuario']; ?>
-                                <?php
+<?php
+                                $mi_id = $_SESSION['idUsuario']; 
+?>
+<?php
                                 if(isset($_GET['hash']) && !empty($_GET['hash'])){
-                                    echo "Mostrar mensajes";
+                                    require './include/conexion.php';
+                                    $hash = $_GET['hash'];
+                                    $mensajes = "SELECT id_remitente, mensaje FROM mensajes WHERE grupo_hash='$hash'";
+                                    $outcome = $mysqli->query($mensajes);
+                                    while ($listar_mensajes = $outcome->fetch_assoc()) {
+                                        $id_remitente = $listar_mensajes['id_remitente'];
+                                        $mensaje = $listar_mensajes['mensaje'];
+                                        
+                                        $obtener_usuario = "SELECT `nombre`,`apellido` FROM usuario WHERE idUsuario='$id_remitente' ";
+                                        $resultado = $mysqli->query($obtener_usuario);
+                                        while ($rows = $resultado->fetch_assoc()) {
+                                        $seleccionar_nombre = $rows['nombre'];
+                                        $seleccionar_apellido = $rows['apellido'];
+                                    }
+                                        $usuario_remitente = $seleccionar_nombre ." " . $seleccionar_apellido;
+                                        echo "<p><b>$usuario_remitente</b><br/>$mensaje</p>";
+                                        
+                                }
+?>
+                                <br/>
+                                <form method="post">
+<?php
+                                    if(isset($_POST['mensaje']) && !empty($_POST['mensaje'])) {
+                                        $nuevo_mensaje = $_POST['mensaje'];
+                                        $guardar_mensaje = "INSERT INTO `mensajes` VALUES ('', '$hash', '$mi_id', '$nuevo_mensaje')";
+                                        $resultado = $mysqli->query($guardar_mensaje);
+                                        header('location: mensajes.php?hash='.$hash);
+                                    }
+?>
+                                Esribir mensaje: <br/>
+                                <textarea name="mensaje" rows="6" cols="50"></textarea>
+                                <br/><br/>
+                                <input type="submit" value="Enviar mensaje" />
+                                </form>
+                                
+<?php
+                                    
                                 } else {
                                     echo "<b>Seleccionar conversacion</b>";
                                     require './include/conexion.php';
                                     $obtener_mensajes = "SELECT `hash`, `usuario_uno`, `usuario_dos` FROM grupo_mensajes WHERE usuario_uno='$mi_id' OR usuario_dos='$mi_id' ";
-                                    $resultado = $mysqli->query($obtener_mensajes);
+                                    $mostrar_usuarios = $mysqli->query($obtener_mensajes);
 
-                                    while ($rows = $resultado->fetch_assoc()) {
+                                    while ($rows = $mostrar_usuarios->fetch_assoc()) {
                                         $hash = $rows['hash'];
                                         $usuario_uno = $rows['usuario_uno'];
                                         $usuario_dos = $rows['usuario_dos'];
@@ -140,7 +180,7 @@
                                         echo "<p><a href='mensajes.php?hash=$hash'>$seleccionar_nombre $seleccionar_apellido</a></p>";
                                     }
                                 }
-                                ?>
+?>
                                 
                                 <div class="footer">
                                     <div class="legend">
