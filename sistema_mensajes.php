@@ -99,7 +99,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card ">
+                        <div class="card">
                             <div class="header">
                                 <h4 class="title">Sistema de mensajes privados</h4>
                                 <p class="category">...</p>
