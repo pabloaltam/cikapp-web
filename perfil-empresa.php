@@ -1,4 +1,4 @@
-<?php include 'structure/navbarFinSession.php.php'; ?>
+<?php include 'structure/navbarFinSession.php'; ?>
 
 <div class="container">
   <h1 class="page-header">Mi empresa</h1>

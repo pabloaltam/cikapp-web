@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cikapp - We are working!</title>
     <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="structure/css/shit.css" rel="stylesheet">
+<!--    <link href="structure/css/shit.css" rel="stylesheet">-->
 
 
         <!--  PANEL CSS    -->
@@ -18,9 +18,9 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
-<link href="structure/css/jquery.tagit.css" rel="stylesheet" type="text/css">
-<link href="structure/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+<!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">-->
+<!--<link href="structure/css/jquery.tagit.css" rel="stylesheet" type="text/css">-->
+<!--<link href="structure/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">-->
     </head>
     <body>
 
@@ -47,10 +47,17 @@
   </ul>
 </div>
 -->
+<<<<<<< HEAD
 <a class="btn btn-sm btn-primary btn-round" title="Ver mi perfil" href="./perfil-usuario.php" role="button"><i class="fa fa-user"></i> <?php
+=======
+<a class="btn btn-sm btn-primary btn-round" title="Editar mi perfil" href="./edit-user-profile.php" role="button"><i class="fa fa-user"></i>
+<?php
+    //hola
+>>>>>>> origin/master
             session_start();
-            echo $_SESSION['nombre']." ".$_SESSION['apellido'];                        ;
-                ?></a>
+            echo $_SESSION['nombre']." ".$_SESSION['apellido'];
+?>
+</a>
 <a class="btn btn-sm btn-primary btn-round btn-fill" href="./logout.php" role="button" title="Salir"><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
 
         </form>
