@@ -275,9 +275,9 @@ class OperacionesMYSQL {
         return NULL;
     }
 
-    function editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areasInteres) {
+    function editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areasInteres,$idIngles) {
         include("./include/conexion.php");
-        $actualizaUsuario = "UPDATE usuario SET nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM',email='$email', skype='$skype', COMUNA_ID=$COMUNA_ID, areasInteres='$areasInteres' WHERE idUsuario='$idUsuario';";
+        $actualizaUsuario = "UPDATE usuario SET nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM',email='$email', skype='$skype', COMUNA_ID=$COMUNA_ID, areasInteres='$areasInteres', idIngles=$idIngles WHERE idUsuario='$idUsuario';";
         $resultado = $mysqli->query($actualizaUsuario);
         $mysqli->close();
         return $resultado;
@@ -305,6 +305,14 @@ class OperacionesMYSQL {
             }
         }
         return FALSE;
+    }
+    
+    function editarEstudios($idUsuario) {
+        include("./include/conexion.php");
+        $actualizaUsuario = "UPDATE usuario SET nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM',email='$email', skype='$skype', COMUNA_ID=$COMUNA_ID, areasInteres='$areasInteres', idIngles=$idIngles WHERE idUsuario='$idUsuario';";
+        $resultado = $mysqli->query($actualizaUsuario);
+        $mysqli->close();
+        return $resultado;
     }
 
 }

@@ -13,10 +13,8 @@ ul.tagit li.tagit-choice {
     border-radius: 6px;
     -webkit-border-radius: 6px;
     border: 1px solid #CAD8F3;
-
     background: none;
     background-color: #DEE7F8;
-
     font-weight: normal;
 }
 ul.tagit li.tagit-choice .tagit-label:not(a) {

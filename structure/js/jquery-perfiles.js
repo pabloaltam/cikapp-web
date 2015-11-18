@@ -33,7 +33,7 @@ $(document).ready(function () {
         }
     }
 
-    $("#uploadedfile").on("change", function () {
+    $('#uploadedfile').change(function () {
         mostrarImagen(this);
     });
 

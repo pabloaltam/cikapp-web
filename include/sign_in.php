@@ -23,7 +23,9 @@
                         $_SESSION['rut'] = $rows['rut'];
                         $_SESSION['nombre'] = $rows['nombre'];//Le damos el valor del nombre de usuario a la sesion usuario.
                         $_SESSION['apellido'] = $rows['apellido'];
+                        $_SESSION['apellidoM'] = $rows['apellidoM'];
                         $_SESSION['email'] = $rows['email'];
+                        $_SESSION['COMUNA_ID'] = $rows['COMUNA_ID'];
 
                         return TRUE;
                     }else{

@@ -17,9 +17,17 @@
             </div>
             <!--/col-->
             <div class="col-xs-12 col-sm-8">
-              <h2>Nombre Apellido1 Apellido2</h2>
-              <p><strong>Correo electrónico </strong> hola@hola.com</p>
-              <p><strong>Ubicación </strong> País, Región, Ciudad</p>
+              <h2><?php echo $_SESSION['nombre']." " .$_SESSION['apellido']." " .$_SESSION['apellidoM']?></h2>
+              <p><strong>Correo electrónico </strong> <?php echo $_SESSION['email'];?></p>
+              <p><strong>Ubicación </strong> 
+                  <?php
+                                    require 'include/conexion.php';
+                                    $query = "SELECT a.COMUNA_NOMBRE, c.REGION_NOMBRE, d.PAIS_NOMBRE FROM comuna a, provincia b, region c, pais d where a.COMUNA_PROVINCIA_ID=b.PROVINCIA_ID and b.PROVINCIA_REGION_ID=c.REGION_ID and c.REGION_PAIS_ID=d.PAIS_ID and a.COMUNA_ID={$_SESSION['COMUNA_ID']};";
+                                    $resultado = $mysqli->query($query);
+                                    while ($rows = $resultado->fetch_assoc()) {
+                                        print($rows['COMUNA_NOMBRE'] . ", ".$rows['REGION_NOMBRE'] . ", ".$rows['PAIS_NOMBRE']);
+                                    }
+                                    ?></p>
               <p>Skype <strong>Usuario </strong>
                 <span class="label label-info tags">campo1</span>
                 <span class="label label-info tags">campo2</span>

@@ -31,11 +31,12 @@
                 $areaInteres = $_POST['areasInteres'][0];
             } elseif (isset($_POST['areasInteres'][1])) {
                 $areaInteres = $_POST['areasInteres'][1];
-            } elseif(isset ($_POST['areasInteres'][2])) {
+            } elseif (isset($_POST['areasInteres'][2])) {
                 $areaInteres = $_POST['areasInteres'][2];
-            }  else {
-            $areaInteres="";    
+            } else {
+                $areaInteres = "";
             }
+            $idIngles = $_POST['idIngles'];
 
             $pwd1 = $_POST['pwd1'];
             $pwd1 = $_POST['pwd2'];
@@ -71,9 +72,10 @@
             }
 
 
-            $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres);
+            $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres, $idIngles);
+            test2 = ;
             if ($test) {
-                $_SESSION['nombre'] = $nombre; //Le damos el valor del nombre de usuario a la sesion usuario.
+                $_SESSION['nombre'] = $nombre;
                 $_SESSION['apellido'] = $apellido;
 
                 echo 'ÉXITO: Los datos del usuario han sido actualizados correctamente.<br>';
@@ -98,6 +100,7 @@
             $email = $rows['email'];
             $skype = $rows['skype'];
             $COMUNA_IDusuario = $rows['COMUNA_ID'];
+            $nivelIngles = $rows['idIngles'];
             $pass = $rows['password'];
             $rutaImagen = $rows['rutaImagen'];
             $areaInteres = $rows["areasInteres"];
@@ -228,13 +231,13 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Áreas de intéres:</label>
                         <div class="col-md-8">
-                            <ul id="myTags">
+                            <ul id="myTags" class="form-control">
                                 <!-- Existing list items will be pre-added to the tags -->
                                 <?php
                                 $areas = explode(",", $areaInteres);
 
                                 foreach ($areas as $area) {
-                                    print '<li >' . $area . '</li>';
+                                    print "<li class='btn btn-success'>" . $area . '</li>';
                                 }
                                 ?>
                             </ul>
@@ -242,30 +245,83 @@
                     </div>
 
                     <div class="form-group">
-                        <p class="col-md-11">Para que los cambios se apliquen debes ingresar tu contraseña en los campos que se encuentran a continuación.</p>
+                        <label class="col-md-3 control-label">Nivel de Ingles:</label>
+                        <div class="col-md-8">
+                            <select id="ingles" class="form-control" name="idIngles">
+                                <?php
+                                require 'include/conexion.php';
+                                $query = "SELECT * FROM nivel_ingles";
+                                $resultado = $mysqli->query($query);
+                                $regionID = null;
+                                while ($rows = $resultado->fetch_assoc()) {
+                                    $selected = null;
+                                    if ($rows['idIngles'] === $nivelIngles) {
+                                        $selected = "selected='selected'";
+                                        $regionID = $rows2['REGION_ID'];
+                                    }
+                                    print("<option value='" . $rows['idIngles'] . "' $selected>" . $rows['Nivel'] . "</option>");
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
 
-                    </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Contraseña:</label>
+                        <label class="col-md-3 control-label">Mi educación:</label>
                         <div class="col-md-8">
-                            <input class="form-control" value="" type="password" name="pwd1">
+                            <div class="checkbox">
+                                <label><input name="basica" value="" type="checkbox">Educación Básica</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="media">Educación Media</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="cft">Centro de formación técnica</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <label><input class="" value="" type="checkbox" name="ip" id="ip">Instituto Profesional</label>
+                            </div>
+                            
+                            <div class="checkbox">
+                                <label><input class="" value="" type="checkbox" name="univer" id="univer">Universidad</label>
+                            </div>
+                            
+                            <div class="checkbox">
+                                <label><input class="" value="" type="checkbox" name="otro" id="otro">Otro (especificar)</label>
+                            </div>
+                                <br>
+                                <input type="text" name="txtOtros"> <button type="submit" >Agregar</button>
+                                <br>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="col-md-11">Para que los cambios se apliquen debes ingresar tu contraseña en los campos que se encuentran a continuación.</p>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contraseña:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" value="" type="password" name="pwd1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Confirmar contraseña:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" value="" type="password" name="pwd2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <input class="btn btn-primary" value="Guardar cambios" type="submit">
+                                <span></span>
+                                <input class="btn btn-default" value="Cancelar" type="reset">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Confirmar contraseña:</label>
-                        <div class="col-md-8">
-                            <input class="form-control" value="" type="password" name="pwd2">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"></label>
-                        <div class="col-md-8">
-                            <input class="btn btn-primary" value="Guardar cambios" type="submit">
-                            <span></span>
-                            <input class="btn btn-default" value="Cancelar" type="reset">
-                        </div>
-                    </div>
-                </div>
             </form>
         </div>
     </div>
