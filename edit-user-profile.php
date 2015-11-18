@@ -73,7 +73,7 @@
 
 
             $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres, $idIngles);
-            test2 = ;
+           
             if ($test) {
                 $_SESSION['nombre'] = $nombre;
                 $_SESSION['apellido'] = $apellido;
