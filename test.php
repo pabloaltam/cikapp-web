@@ -7,4 +7,10 @@
  */
 include '/include/ejecutar_en_db.php';
 $obj= new OperacionesMYSQL();
-$obj->traerDatos();
+if($obj->comprobarUsuarioEducacion(9, 1))
+{
+    echo 'Existe';
+}
+else {
+    echo 'no existe';
+}

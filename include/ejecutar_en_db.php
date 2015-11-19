@@ -307,12 +307,26 @@ class OperacionesMYSQL {
         return FALSE;
     }
     
-    function editarEstudios($idUsuario) {
+    function agregarEstudios($idUsuario,$idEstudio) {
         include("./include/conexion.php");
-        $actualizaUsuario = "UPDATE usuario SET nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM',email='$email', skype='$skype', COMUNA_ID=$COMUNA_ID, areasInteres='$areasInteres', idIngles=$idIngles WHERE idUsuario='$idUsuario';";
+        $actualizaUsuario = "INSERT INTO usuario_educacion (usuario_id, educacion_id) VALUES ($idUsuario, $idEstudio);";
         $resultado = $mysqli->query($actualizaUsuario);
         $mysqli->close();
         return $resultado;
     }
+    function comprobarUsuarioEducacion($usuarioID, $educacion_id)
+    {
+        include ("./include/conexion.php");
+        $sql        =   "SELECT *FROM usuario_educacion where usuario_id={$usuarioID} and educacion_id={$educacion_id};";
+        $resultado  =   $mysqli->query($sql);
+        while ($rows       =   $resultado -> fetch_assoc()){
+            if($rows['usuario_id']==$usuarioID and $rows['educacion_id']==$educacion_id){
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
+    
+    
 
 }

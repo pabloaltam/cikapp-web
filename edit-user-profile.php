@@ -19,6 +19,46 @@
             $email = $_POST['email'];
             $skype = $_POST['skype'];
             $COMUNA_ID = $_POST['COMUNA_ID'];
+
+            if (isset($_POST['chkBasica'])) {
+                $chkBasica = $_POST['chkBasica'];
+            if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkBasica)){
+                $Obj_operaciones->agregarEstudios($idUsuario, $chkBasica);
+            }
+                
+            }
+            if (isset($_POST['chkMedia'])) {
+                $chkMedia = $_POST['chkMedia'];
+                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkMedia)){
+                $Obj_operaciones->agregarEstudios($idUsuario, $chkMedia);
+            }
+            }
+            if (isset($_POST['chkcft'])) {
+                $chkcft = $_POST['chkcft'];
+                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkcft)){
+                $Obj_operaciones->agregarEstudios($idUsuario, $chkcft);
+            }
+            }
+            if (isset($_POST['chkIp'])) {
+                $chkIp = $_POST['chkIp'];
+                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkIp)){
+                $Obj_operaciones->agregarEstudios($idUsuario, $chkIp);
+            }
+            }
+            if (isset($_POST['chkUniversidad'])) {
+                $chkUniversidad = $_POST['chkUniversidad'];
+                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkUniversidad)){
+                $Obj_operaciones->agregarEstudios($idUsuario, $chkUniversidad);
+            }
+            }
+            if (isset($_POST['chkOtro'])) {
+                $chkOtro = $_POST['chkOtro'];
+                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkOtro)){
+                $Obj_operaciones->agregarEstudios($idUsuario, $chkOtro);
+            }
+            }
+
+
             if (isset($_POST['areasInteres'][0], $_POST['areasInteres'][1], $_POST['areasInteres'][2])) {
                 $areaInteres = $_POST['areasInteres'][0] . "," . $_POST['areasInteres'][1] . "," . $_POST['areasInteres'][2];
             } elseif (isset($_POST['areasInteres'][0], $_POST['areasInteres'][1])) {
@@ -73,7 +113,7 @@
 
 
             $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres, $idIngles);
-           
+            $Obj_operaciones->agregarEstudios($idUsuario, $chkBasica);
             if ($test) {
                 $_SESSION['nombre'] = $nombre;
                 $_SESSION['apellido'] = $apellido;
@@ -270,58 +310,58 @@
                         <label class="col-md-3 control-label">Mi educación:</label>
                         <div class="col-md-8">
                             <div class="checkbox">
-                                <label><input name="basica" value="" type="checkbox">Educación Básica</label>
+                                <label><input name="chkBasica" value="1" type="checkbox">Educación Básica</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="media">Educación Media</label>
+                                <label><input type="checkbox" value="2" name="chkMedia">Educación Media</label>
                             </div>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="cft">Centro de formación técnica</label>
+                                <label><input type="checkbox" name="chkcft" value="3">Centro de formación técnica</label>
                             </div>
 
                             <div class="checkbox">
-                                <label><input class="" value="" type="checkbox" name="ip" id="ip">Instituto Profesional</label>
+                                <label><input class=""  type="checkbox" name="chkIp" id="ip" value="4">Instituto Profesional</label>
                             </div>
-                            
+
                             <div class="checkbox">
-                                <label><input class="" value="" type="checkbox" name="univer" id="univer">Universidad</label>
+                                <label><input class="" type="checkbox" name="chkUniversidad" id="univer" value="5">Universidad</label>
                             </div>
-                            
+
                             <div class="checkbox">
-                                <label><input class="" value="" type="checkbox" name="otro" id="otro">Otro (especificar)</label>
+                                <label><input class="" type="checkbox" name="chkOtro" id="otro" value="6">Otro (especificar)</label>
                             </div>
-                                <br>
-                                <input type="text" name="txtOtros"> <button type="submit" >Agregar</button>
-                                <br>
+                            <br>
+                            <input type="text" name="txtOtros"> <button type="submit" >Agregar</button>
+                            <br>
 
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <p class="col-md-11">Para que los cambios se apliquen debes ingresar tu contraseña en los campos que se encuentran a continuación.</p>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Contraseña:</label>
-                            <div class="col-md-8">
-                                <input class="form-control" value="" type="password" name="pwd1">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Confirmar contraseña:</label>
-                            <div class="col-md-8">
-                                <input class="form-control" value="" type="password" name="pwd2">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"></label>
-                            <div class="col-md-8">
-                                <input class="btn btn-primary" value="Guardar cambios" type="submit">
-                                <span></span>
-                                <input class="btn btn-default" value="Cancelar" type="reset">
-                            </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <p class="col-md-11">Para que los cambios se apliquen debes ingresar tu contraseña en los campos que se encuentran a continuación.</p>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Contraseña:</label>
+                        <div class="col-md-8">
+                            <input class="form-control" value="" type="password" name="pwd1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Confirmar contraseña:</label>
+                        <div class="col-md-8">
+                            <input class="form-control" value="" type="password" name="pwd2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-8">
+                            <input class="btn btn-primary" value="Guardar cambios" type="submit">
+                            <span></span>
+                            <input class="btn btn-default" value="Cancelar" type="reset">
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
