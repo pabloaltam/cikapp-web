@@ -22,40 +22,39 @@
 
             if (isset($_POST['chkBasica'])) {
                 $chkBasica = $_POST['chkBasica'];
-            if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkBasica)){
-                $Obj_operaciones->agregarEstudios($idUsuario, $chkBasica);
-            }
-                
+                if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkBasica)) {
+                    $Obj_operaciones->agregarEstudios($idUsuario, $chkBasica);
+                }
             }
             if (isset($_POST['chkMedia'])) {
                 $chkMedia = $_POST['chkMedia'];
-                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkMedia)){
-                $Obj_operaciones->agregarEstudios($idUsuario, $chkMedia);
-            }
+                if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkMedia)) {
+                    $Obj_operaciones->agregarEstudios($idUsuario, $chkMedia);
+                }
             }
             if (isset($_POST['chkcft'])) {
                 $chkcft = $_POST['chkcft'];
-                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkcft)){
-                $Obj_operaciones->agregarEstudios($idUsuario, $chkcft);
-            }
+                if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkcft)) {
+                    $Obj_operaciones->agregarEstudios($idUsuario, $chkcft);
+                }
             }
             if (isset($_POST['chkIp'])) {
                 $chkIp = $_POST['chkIp'];
-                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkIp)){
-                $Obj_operaciones->agregarEstudios($idUsuario, $chkIp);
-            }
+                if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkIp)) {
+                    $Obj_operaciones->agregarEstudios($idUsuario, $chkIp);
+                }
             }
             if (isset($_POST['chkUniversidad'])) {
                 $chkUniversidad = $_POST['chkUniversidad'];
-                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkUniversidad)){
-                $Obj_operaciones->agregarEstudios($idUsuario, $chkUniversidad);
-            }
+                if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkUniversidad)) {
+                    $Obj_operaciones->agregarEstudios($idUsuario, $chkUniversidad);
+                }
             }
             if (isset($_POST['chkOtro'])) {
                 $chkOtro = $_POST['chkOtro'];
-                if($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkOtro)){
-                $Obj_operaciones->agregarEstudios($idUsuario, $chkOtro);
-            }
+                if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkOtro)) {
+                    $Obj_operaciones->agregarEstudios($idUsuario, $chkOtro);
+                }
             }
 
 
@@ -246,14 +245,17 @@
                                     <?php
                                     require 'include/conexion.php';
                                     $query = "SELECT COMUNA_ID, COMUNA_NOMBRE FROM comuna, provincia, region where COMUNA_PROVINCIA_ID=provincia.PROVINCIA_ID and provincia.PROVINCIA_REGION_ID=region.REGION_ID and region.REGION_ID=$regionID;";
-                                    $resultado = $mysqli->query($query);
-                                    while ($rows = $resultado->fetch_assoc()) {
-                                        $selected = "";
-                                        if ($rows['COMUNA_ID'] === $COMUNA_IDusuario) {
-                                            $selected = "selected='selected'";
-                                        }
+                                    if ($resultado = $mysqli->query($query)) {
+                                        while ($rows = $resultado->fetch_assoc()) {
+                                            $selected = "";
+                                            if ($rows['COMUNA_ID'] === $COMUNA_IDusuario) {
+                                                $selected = "selected='selected'";
+                                            }
 
-                                        print("<option value='" . $rows['COMUNA_ID'] . "' $selected>" . $rows['COMUNA_NOMBRE'] . "</option>");
+                                            print("<option value='" . $rows['COMUNA_ID'] . "' $selected>" . $rows['COMUNA_NOMBRE'] . "</option>");
+                                        }
+                                    } else {
+                                        print("<option>Seleccione una ciudad</option>");
                                     }
                                     ?>
                                 </select>
@@ -273,13 +275,13 @@
                         <div class="col-md-8">
                             <ul id="myTags" class="form-control">
                                 <!-- Existing list items will be pre-added to the tags -->
-                                <?php
-                                $areas = explode(",", $areaInteres);
+    <?php
+    $areas = explode(",", $areaInteres);
 
-                                foreach ($areas as $area) {
-                                    print "<li class='btn btn-success'>" . $area . '</li>';
-                                }
-                                ?>
+    foreach ($areas as $area) {
+        print "<li class='btn btn-success'>" . $area . '</li>';
+    }
+    ?>
                             </ul>
                         </div>
                     </div>
@@ -288,20 +290,20 @@
                         <label class="col-md-3 control-label">Nivel de Ingles:</label>
                         <div class="col-md-8">
                             <select id="ingles" class="form-control" name="idIngles">
-                                <?php
-                                require 'include/conexion.php';
-                                $query = "SELECT * FROM nivel_ingles";
-                                $resultado = $mysqli->query($query);
-                                $regionID = null;
-                                while ($rows = $resultado->fetch_assoc()) {
-                                    $selected = null;
-                                    if ($rows['idIngles'] === $nivelIngles) {
-                                        $selected = "selected='selected'";
-                                        $regionID = $rows2['REGION_ID'];
-                                    }
-                                    print("<option value='" . $rows['idIngles'] . "' $selected>" . $rows['Nivel'] . "</option>");
-                                }
-                                ?>
+    <?php
+    require 'include/conexion.php';
+    $query = "SELECT * FROM nivel_ingles";
+    $resultado = $mysqli->query($query);
+    $regionID = null;
+    while ($rows = $resultado->fetch_assoc()) {
+        $selected = null;
+        if ($rows['idIngles'] === $nivelIngles) {
+            $selected = "selected='selected'";
+            $regionID = $rows2['REGION_ID'];
+        }
+        print("<option value='" . $rows['idIngles'] . "' $selected>" . $rows['Nivel'] . "</option>");
+    }
+    ?>
                             </select>
                         </div>
                     </div>

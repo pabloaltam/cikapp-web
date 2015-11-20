@@ -40,10 +40,27 @@ $('#ciudad').click(function () {
     }
 });
 
-$("#txtConocimientos").keypress(function () {
-    if ($(this).val().length !== 0) {
+$("input[type=text]").keypress(function () {
+    if ($('#txtConocimientos').val().length !== 0) {
         var conocimientos = $(this).val();
         var dataString = 'con=' + conocimientos;
+    }
+    if ($('#txtEstudios').val().length !== 0) {
+        var estudio = $(this).val();
+        var dataString = 'est=' + estudio;
+    }
+    if ($('#nivIngles').val().length !== 0) {
+        var nivIngles = $(this).val();
+        var dataString = 'nvi=' + nivIngles;
+    }
+    if ($('#region').val().length !== 0) {
+        var region = $(this).val();
+        var dataString = 'reg=' + region;
+    }
+    if ($('#ciudad').val().length !== 0) {
+        var ciudad = $(this).val();
+        var dataString = 'ciu=' + ciudad;
+    }
         $.ajax({
             type: "POST",
             url: "include/resultado-ajax.php",
@@ -54,5 +71,4 @@ $("#txtConocimientos").keypress(function () {
                 $("#scroll").html(html);
             }
         });
-    }
-});
+    })

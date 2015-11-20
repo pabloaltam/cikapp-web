@@ -74,7 +74,7 @@ if (isset($_POST['txtRut'])) {
                             <div id=\"SkypeButton_Call_{$skype}_1\">
                              <script type=\"text/javascript\">
                              Skype.ui({
-                             \"name\": \"dropdown\",
+                             \"name\": \"call\",
                              \"element\": \"SkypeButton_Call_{$skype}_1\",
                              \"participants\": [\"$skype\"],
                              \"imageSize\": 24
