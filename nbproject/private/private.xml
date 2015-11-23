@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/cikapp-web/include/resultado-ajax.php</file>
-            <file>file:/C:/xampp/htdocs/cikapp-web/include/conexion.php</file>
-            <file>file:/C:/xampp/htdocs/cikapp-web/structure/js/filtro.js</file>
-            <file>file:/C:/xampp/htdocs/cikapp-web/include/ajax.class.php</file>
-            <file>file:/C:/xampp/htdocs/cikapp-web/structure/footer.php</file>
-            <file>file:/C:/xampp/htdocs/cikapp-web/filtro-usuarios.php</file>
-            <file>file:/C:/xampp/htdocs/cikapp-web/edit-user-profile.php</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/panel-empresa.php</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/login.php</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/obtener-clave.php</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/include/sign_in.php</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/structure/navbar.php</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/index.php</file>
         </group>
     </open-files>
 </project-private>
