@@ -16,7 +16,7 @@ ini_set("display_errors",1);
           <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
             <i class="glyphicon glyphicon-user"></i> Mi Empresa <span class="caret"></span></a>
           <ul id="g-account-menu" class="dropdown-menu" role="menu">
-            <li><a href="perfil-empresa.php">Mi Perfil</a></li>
+              <li><a href="edit-enterprise-profile.php">Mi Perfil</a></li>
             <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Cerrar Sesion</a></li>
           </ul>
         </li>

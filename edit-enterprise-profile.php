@@ -1,7 +1,7 @@
 --<?php include 'structure/navbarFinSession.php'; ?>
 
 <div class="container">
-    <h1 class="page-header">Edite su perfil</h1>
+    <h1 class="page-header">Edite el perfil de su empresa</h1>
     <?php
     if (isset($_POST['nombre'])) {
 
@@ -63,8 +63,8 @@
 
             $test = $Obj_operaciones->editarEmpresa($idEmpresa, $email, $cargo, $razonSocial, $faxEmpresa, $fonoEmpresa, $websiteEmpresa, $emailEmpresa, $nombre, $apellido, $apellidoM, $idTipoEmpresa, $COMUNA_ID, $direccionEmpresa);
             if ($test) {
-                $_SESSION['nombre'] = $nombre;
-                $_SESSION['apellido'] = $apellido;
+                $_SESSION['nombreEmpleado'] = $nombre;
+                $_SESSION['apellidoEmpleado'] = $apellido;
 
                 echo 'ÉXITO: Los datos de la empresa han sido actualizados correctamente.<br>';
             } else {

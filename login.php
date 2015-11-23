@@ -19,18 +19,21 @@
                                     $pass = filter_input(INPUT_POST, "pass");
 
                                     if (!($user == '') and ! ($pass == '')) {
-                                        //$res = login($user, $pass);
-                                        if (login($user, $pass) == TRUE) {
-                                            // Login success
-                                            //echo "<p> Bienvenido! </p>";//. $_SESSION['usuario'];
-                                            //header('Location: edit-user-profile.php');
-                                            echo "<meta http-equiv='Refresh' content='2;url= edit-user-profile.php'>";
-                                        } else {
-                                            // Login failed
-                                            echo '<p>Datos incorrectos, intente nuevamente por favor.</p>';
-                                            //header('Location: ../index.php?error=1');
-                                            //echo "<meta http-equiv='Refresh' content='2;url= index.php'>";
-                                        }
+                                        if(esEmpresa($user)=TRUE){
+                                            if (loginEmpresa($user, $pass) == TRUE) {
+                                                echo "<meta http-equiv='Refresh' content='2;url= edit-user-profile.php'>";
+                                            } else {
+                                                // Login failed
+                                                echo '<p>Sus datos son incorrectos, intente nuevamente por favor.</p>';
+                                            }
+                                        }else{
+                                            if (loginUsuario($user, $pass) == TRUE) {
+                                                echo "<meta http-equiv='Refresh' content='2;url= edit-enterprise-profile.php'>";
+                                            } else {
+                                                // Login failed
+                                                echo '<p>Datos incorrectos, intente nuevamente por favor.</p>';
+                                            }
+                                        } 
                                     } else {
                                         echo '<p>Es necesario que ingrese sus datos primero</p>';
                                     }
