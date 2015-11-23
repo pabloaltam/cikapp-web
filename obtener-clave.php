@@ -14,31 +14,32 @@
                                 <?php
                                 include_once 'include/sign_in.php';
 
-                                if (isset($_POST['rut'], $_POST['pass'])) {
+                                if (isset($_POST['rut'], $_POST['email'])) {
                                     $user = filter_input(INPUT_POST, "rut");
-                                    $pass = filter_input(INPUT_POST, "pass");
+                                    $email = filter_input(INPUT_POST, "email");
 
-                                    if (!($user == '') and ! ($pass == '')) {
+                                    if (!($user == '') and ! ($email == '')) {
                                         if(esEmpresa($user)== TRUE){
-                                            if (loginEmpresa($user, $pass) == TRUE) {
-                                                echo "<meta http-equiv='Refresh' content='2;url= edit-user-profile.php'>";
+                                            if (recuperar_claveEmpresa($email, $user) == TRUE) {
+                                                echo '<p>Revise en su correo el email con asunto: "Nueva contraseña para acceder a su cuenta de cikapp."</p>';
                                             } else {
                                                 // Login failed
-                                                echo '<p>Sus datos son incorrectos, intente nuevamente por favor.</p>';
+                                                echo '<p>No se ha podido realizar la operacion requerida, inténtelo más tarde por favor.</p>';
                                             }
                                         }else{
-                                            if (loginUsuario($user, $pass) == TRUE) {
-                                                echo "<meta http-equiv='Refresh' content='2;url= edit-enterprise-profile.php'>";
+                                            if (recuperar_claveUsuario($email, $user) == TRUE) {
+                                                echo '<p>Revise en su correo el email con asunto: "Nueva contraseña para acceder a su cuenta de cikapp."</p>';
                                             } else {
                                                 // Login failed
-                                                echo '<p>Datos incorrectos, intente nuevamente por favor.</p>';
+                                                echo '<p>No se ha podido realizar la operacion requerida, inténtelo más tarde por favor.</p>';
                                             }
                                         } 
                                     } else {
-                                        echo '<p>Es necesario que ingrese sus datos primero</p>';
+                                        echo '<p>Es necesario que llene todos los campos requeridos.</p>';
                                     }
                                 } else {
-                                    echo '<p>Si cuenta con un registro previo a continuación ingrese sus datos.</p>';
+                                    echo '<p>Ingrese su rut y su email para poder enviarle una nueva contraseña con la cual podra volver a ingresar a su cuenta.</p>';
+                                    echo '<p><b>Si su cuenta es empresa, ingrese rut e email correspondiente a la empresa.</b></p>';
                                 }
                                 ?>
                                 <br>
@@ -52,14 +53,13 @@
                                     <div class="form-group has-success">
                                         <div class="right-inner-addon">
                                             <i class="fa fa-key"></i>
-                                            <input class="form-control input-lg" placeholder="Contraseña" id="pass" name="pass" type="password">
+                                            <input class="form-control input-lg" placeholder="Email" id="email" name="email" type="text">
                                         </div>
                                     </div>
                                 </fieldset>
                                 <br>
                                 <div class="text-center">
-                                    <button class="btn btn-primary btn-block btn-fill" type="submit">Ingresar</button>
-                                    <a href="obtener-clave.php" role="button" class="btn btn-primary btn-block btn-fill">Olvidé mi contraseña</a>
+                                    <button class="btn btn-primary btn-block btn-fill" type="submit">Solicitar nueva clave</button>
                                 </div>
                             </form>
                         </div>
