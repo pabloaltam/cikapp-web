@@ -1,7 +1,5 @@
 <?php include 'structure/navbarFinSession.php'; ?>
-
-
-<div class="container sign-in-up">
+<div class="container ">
     <div class="row">
         <div class="col-md-4">
             <br>
@@ -24,6 +22,7 @@
 
                         <div class="ui-select">
                             <select id="txtEstudios" class="form-control input-ajax" disabled>
+                                <option value="-1">Seleccione...</option>
                                 <?php
                                 require 'include/conexion.php';
                                 $query = "SELECT * FROM educacion;";
@@ -41,6 +40,7 @@
 
                         <div class="ui-select">
                             <select id="txtNivIngles" class="form-control input-ajax" disabled>
+                                <option value="-1">Seleccione...</option>
                                 <?php
                                 require 'include/conexion.php';
                                 $query = "SELECT * FROM nivel_ingles;";
@@ -57,6 +57,7 @@
                         <br>
                         <div class="ui-select">
                             <select id="txtRegion" class="form-control input-ajax" disabled>
+                                <option value="-1">Seleccione...</option>
                                 <?php
                                 require 'include/conexion.php';
                                 $query = "SELECT * FROM region";
@@ -74,6 +75,7 @@
 
                         <div class="ui-select">
                             <select id="txtCiudad" class="form-control input-ajax" disabled>
+                                <option value="-1">Seleccione...</option>
                                 <?php
                                 require 'include/conexion.php';
                                 $query = "SELECT * FROM comuna ORDER BY COMUNA_NOMBRE";
@@ -91,6 +93,7 @@
         </div>
         <div class="col-md-7 col-md-offset-1">
             <div class="scroll" id="scroll">
+                <p>Seleccione al menos una opción y escriba o elija segun corresponda...</p>
             </div>
         </div>
     </div>
@@ -100,9 +103,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="structure/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
-
-<?php include 'structure/footer.php'; ?>
 <script src="structure/js/jquery.Rut.min.js"></script>
 <script src="structure/js/filtro.js"></script>
-<script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
+<?php include 'structure/footer.php'; ?>
+
 

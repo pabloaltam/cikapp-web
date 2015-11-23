@@ -4,77 +4,120 @@
  * and open the template in the editor.
  */
 
-$('#conocimientos').click(function () {
-    if ($(this).is(':checked')) {
-        $('#txtConocimientos').removeProp('disabled');
-    } else {
-        $('#txtConocimientos').prop('disabled', true)
-    }
-});
-$('#estudios').click(function () {
-    if ($(this).is(':checked')) {
-        $('#txtEstudios').removeProp('disabled');
-    } else {
-        $('#txtEstudios').prop('disabled', true)
-    }
-});
-$('#nivIngles').click(function () {
-    if ($(this).is(':checked')) {
-        $('#txtNivIngles').removeProp('disabled');
-    } else {
-        $('#txtNivIngles').prop('disabled', true)
-    }
-});
-$('#region').click(function () {
-    if ($(this).is(':checked')) {
-        $('#txtRegion').removeProp('disabled');
-    } else {
-        $('#txtRegion').prop('disabled', true)
-    }
-});
-$('#ciudad').click(function () {
-    if ($(this).is(':checked')) {
-        $('#txtCiudad').removeProp('disabled');
-    } else {
-        $('#txtCiudad').prop('disabled', true)
-    }
-});
+$(document).ready(function () {
+    $('#conocimientos').click(function () {
+  
+        if ($(this).is(':checked')) {
+            $('#txtConocimientos').removeProp('disabled');
+        } else {
+            $('#txtConocimientos').prop('disabled', true);
+            $('#txtConocimientos').val("");
+            ajax();
+        }
+    });
+    $('#estudios').click(function () {
+   
+        if ($(this).is(':checked')) {
+            $('#txtEstudios').removeProp('disabled');
+        } else {
+            $('#txtEstudios').prop('disabled', true);
+            $('#txtEstudios').val("-1");
+            ajax();
+        }
+    });
+    $('#nivIngles').click(function () {
+ 
+        if ($(this).is(':checked')) {
+            $('#txtNivIngles').removeProp('disabled');
+        } else {
+            $('#txtNivIngles').prop('disabled', true);
+            $('#txtNivIngles').val("-1");
+        ajax();
+        }
+    });
+    $('#region').click(function () {
+ 
+        if ($(this).is(':checked')) {
+            $('#txtRegion').removeProp('disabled');
+        } else {
+            $('#txtRegion').prop('disabled', true);
+            $('#txtRegion').val("-1");
+            ajax();
+        }
+    });
+    $('#ciudad').click(function () {
 
-$(".input-ajax").change(function () {
-    var dataString="";
-    
-    if ($('#conocimientos').is(':checked')) {
-         var conocimientos = $('#txtConocimientos').val();
-        dataString += 'Con=' + conocimientos+"&";
+        if ($(this).is(':checked')) {
+            $('#txtCiudad').removeProp('disabled');
+        } else {
+            $('#txtCiudad').prop('disabled', true);
+            $('#txtCiudad').val("-1");
+            ajax();
+        }
+    });
+
+    $('#txtConocimientos').on("keyup", function () {
+        ajax();
+    });
+    $('#txtEstudios').change(function () {
+        ajax();
+    });
+    $('#txtNivIngles').change(function () {
+        ajax();
+    });
+    $('#txtRegion').change(function () {
+        ajax();
+    });
+    $('#txtCiudad').change(function () {
+        ajax();
+    });
+
+    function ajax() {
+        var dataString = "";
+
+        if ($('#conocimientos').is(':checked')) {
+            
+            var conocimientos = $('#txtConocimientos').val();
+            if(conocimientos != "" )
+            dataString += 'Con=' + conocimientos + "&";
+        }
+        if ($('#estudios').is(':checked')) {
+            var estudio = $('#txtEstudios').val();
+            if(estudio != "-1" )
+            dataString += 'Est=' + estudio + "&";
+        }
+        if ($('#nivIngles').is(':checked')) {
+            var nivIngles = $('#txtNivIngles').val();
+            if(nivIngles != "-1" )
+            dataString += 'Nvi=' + nivIngles + "&";
+        }
+        if ($('#region').is(':checked')) {
+            var region = $('#txtRegion').val();
+            if(region != "-1" )
+            dataString += 'Reg=' + region + "&";
+        }
+        if ($('#ciudad').is(':checked')) {
+            var ciudad = $('#txtCiudad').val();
+            if(ciudad != "-1" )
+            dataString += 'Ciu=' + ciudad;
+        }
+        if (dataString !== "") {
+            $.ajax({
+                type: "GET",
+                url: "include/resultado-ajax.php?",
+                data: dataString,
+                cache: false,
+                success: function (html)
+                {
+                    $("#scroll").html(html);
+                }
+            });
+        } else {
+            $("#scroll").html("<p>Seleccione al menos una opción y escriba o elija segun corresponda...</p>");
+        }
     }
-    if ($('#estudios').is(':checked')) {
-        var estudio = $('#txtEstudios').val();
-        dataString += 'Est=' + estudio+"&";
-    }
-    if ($('#nivIngles').is(':checked')) {
-        var nivIngles = $('#txtNivIngles').val();
-        dataString += 'Nvi=' + nivIngles+"&";
-    }
-    if ($('#region').is(':checked')) {
-        var region = $('#txtRegion').val();
-        dataString += 'Reg=' + region+"&";
-    }
-    if ($('#ciudad').is(':checked')) {
-        var ciudad = $('#txtCiudad').val();
-        dataString += 'Ciu=' + ciudad;
-    }
-    if(dataString!==""){
-        $.ajax({
-            type: "GET",
-            url: "include/resultado-ajax.php?",
-            data: dataString,
-            cache: false,
-            success: function (html)
-            {
-                $("#scroll").html(html);
-            }
-        });
-    } else {
-        $("#scroll").html("<h1>Lo sentimos: </h1>" + dataString);
-    }
+    $(document).ajaxSend(function(){
+        $("#scroll").html("<p>Seleccione al menos una opción y escriba o elija segun corresponda...</p>");
+    $("#scroll").html("<p>Buscando a los mejores postulantes...</p>");
+});
 })
