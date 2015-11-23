@@ -90,7 +90,7 @@
             $result = $stmt->get_result();
             if ($rows = $result->fetch_assoc()) {
                 if($rows['codigo'] == 1){ //revisar otra vez
-                    $clave_nueva = clave_aleatoria(10);
+                    $clave_nueva = clave_aleatoria(5);
                     $clave_nueva_encriptada = sha1(md5($clave_nueva));
                     $sql2="UPDATE usuario SET password = '$clave_nueva_encriptada' WHERE rut = '$rut' and email = '$email'";
                     $stmt->execute();

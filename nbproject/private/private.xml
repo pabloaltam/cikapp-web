@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/cikapp-web/structure/js/filtro.js</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/perfil-empresa.php</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/edit-enterprise-profile.php</file>
             <file>file:/C:/xampp/htdocs/cikapp-web/include/ejecutar_en_db.php</file>
-            <file>file:/C:/xampp/htdocs/cikapp-web/filtro-usuarios.php</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/include/sign_in.php</file>
             <file>file:/C:/xampp/htdocs/cikapp-web/edit-user-profile.php</file>
-            <file>file:/C:/xampp/htdocs/cikapp-web/test.php</file>
+            <file>file:/C:/xampp/htdocs/cikapp-web/perfil-usuario.php</file>
         </group>
     </open-files>
 </project-private>
