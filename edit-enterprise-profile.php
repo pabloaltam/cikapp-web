@@ -74,7 +74,7 @@
             echo 'INFO: Las contraseñas no coinciden';
         }
     }
-    if (isset($_SESSION['idUsuario'])) {
+    if (isset($_SESSION['idEmpresa'])) {
 
         $conSession = 'Si';
         include './include/conexion.php';
