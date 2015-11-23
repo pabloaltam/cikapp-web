@@ -1,6 +1,5 @@
 <?php
     function login($user, $pass) {
-
         include('ejecutar_en_db.php');
         $obj = new OperacionesMYSQL();
         $user = str_replace('.', '', $user);
@@ -15,7 +14,7 @@
                 if ($rows = $result->fetch_assoc()) {
                     if($rows['codigo'] == 1){
                         @session_start();
-                        header("location: panel-usuario.php");
+                        header("Location: panel-usuario.php");
                         if(sesion_iniciada()){
                             logout();
                         }

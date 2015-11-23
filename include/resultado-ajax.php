@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 include 'conexion.php';
+require './ajax.class.php';
 
 if (isset($_POST['txtRut'])) {
     $rut = filter_input(INPUT_POST, "txtRut");
@@ -28,49 +29,116 @@ if (isset($_POST['txtRut'])) {
 
         echo '<option value="' . $id . '">' . $data . '</option>';
     }
-} elseif (isset($_POST['con'])) {
+} elseif (isset($_GET['Con']) || isset($_GET['Est']) || isset($_GET['Nvi']) || isset($_GET['Reg']) || isset($_GET['Ciu'])) {
 
-    $conocimientos = $_POST['con'];
-    $query = "SELECT * FROM usuario WHERE areasInteres LIKE '%{$conocimientos}%';";
-    if ($resultado = $mysqli->query($query)) {
-        $row_cnt = $resultado->num_rows;
+    $cadAux;
+    $row_cnt = 0;
+    $cadFin;
+    $idUsuarioRep;
 
-        echo "<h3>Hemos encontrado <span class='badge'>{$row_cnt}</span> resultados.</h3>
-            <dl>";
-        while ($rows = $resultado->fetch_assoc()) {
-            $educacion = "";
-            $idUsuario = $rows['idUsuario'];
-            $nombre = $rows['nombre'];
-            $apellido = $rows['apellido'];
-            $apellidoM = $rows['apellidoM'];
-            $email = $rows['email'];
-            $skype = $rows['skype'];
-            $COMUNA_IDusuario = $rows['COMUNA_ID'];
-            $nivelIngles = $rows['idIngles'];
-            $pass = $rows['password'];
-            $rutaImagen = $rows['rutaImagen'];
-            $areaInteres = $rows["areasInteres"];
+    if (isset($_GET['Con'])) {
+        $ajax = new SelectFiltro();
 
-            $query2 = "SELECT b.educacion_nombre FROM usuario_educacion a, educacion b where a.educacion_id=b.educacion_id and usuario_id={$idUsuario};";
+        $explode = $ajax->traerPorConocimientos($_GET['Con']);
+        $usuarios = explode(" ", $explode);
+        foreach ($usuarios as $usuario) {
 
-            if ($result2 = $mysqli->query($query2)) {
-                $row_cnt2 = $result2->num_rows;
-                if ($row_cnt2 === 0) {
-                    $educacion = "No registrado";
-                }
-                while ($rows2 = $result2->fetch_assoc()) {
-                    $educacion .= $rows2['educacion_nombre'] . ", ";
+            $sql = "SELECT * FROM usuario WHERE idUsuario={$usuario}";
+            if ($result = $mysqli->query($sql)) {
+                while ($rows = $result->fetch_assoc()) {
+                    $idUsuarioRep[] = $rows['idUsuario'];
                 }
             }
-            echo "
+        }
+    }
+    if (isset($_GET['Est'])) {
+        $ajax = new SelectFiltro();
+
+        $explode = $ajax->traerPorEstudios($_GET['Est']);
+        $usuarios = explode(" ", $explode);
+        foreach ($usuarios as $usuario) {
+
+            $sql = "SELECT * FROM usuario WHERE idUsuario={$usuario}";
+            if ($result = $mysqli->query($sql)) {
+                while ($rows = $result->fetch_assoc()) {
+                    $idUsuarioRep[] = $rows['idUsuario'];
+                }
+            }
+        }
+    }
+    if (isset($_GET['Nvi'])) {
+        $ajax = new SelectFiltro();
+
+        $explode = $ajax->traerPorNivelDeIngles($_GET['Nvi']);
+        $usuarios = explode(" ", $explode);
+        foreach ($usuarios as $usuario) {
+
+            $sql = "SELECT * FROM usuario WHERE idUsuario={$usuario}";
+            if ($result = $mysqli->query($sql)) {
+                while ($rows = $result->fetch_assoc()) {
+                    $idUsuarioRep[] = $rows['idUsuario'];
+                }
+            }
+        }
+    }
+    if (isset($_GET['Reg'])) {
+        $ajax = new SelectFiltro();
+
+        $explode = $ajax->traerPorRegion($_GET['Reg']);
+        $usuarios = explode(" ", $explode);
+        foreach ($usuarios as $usuario) {
+
+            $sql = "SELECT * FROM usuario WHERE idUsuario={$usuario}";
+            if ($result = $mysqli->query($sql)) {
+                while ($rows = $result->fetch_assoc()) {
+                    $idUsuarioRep[] = $rows['idUsuario'];
+                }
+            }
+        }
+    }
+    if (isset($_GET['Ciu'])) {
+        $ajax = new SelectFiltro();
+
+        $explode = $ajax->traerPorCiudad($_GET['Ciu']);
+        $usuarios = explode(" ", $explode);
+        foreach ($usuarios as $usuario) {
+
+            $sql = "SELECT * FROM usuario WHERE idUsuario={$usuario}";
+            if ($result = $mysqli->query($sql)) {
+                while ($rows = $result->fetch_assoc()) {
+                    $idUsuarioRep[] = $rows['idUsuario'];
+                }
+            }
+        }
+    }
+
+    $longitud = count($idUsuarioRep);
+    $repetidos =0;
+    for ($i = 0; $i < $longitud; $i++) {
+        $counter = 0;
+        for ($j = 0; $j < $i; $j++) {
+            if ($idUsuarioRep[$j] === $idUsuarioRep[$i]) {
+                $counter++;
+            }
+        }
+        if ($counter == 1) {
+                $repetidos++;
+            $sql = "SELECT * FROM usuario WHERE idUsuario={$idUsuarioRep[$i]}";
+            if ($result = $mysqli->query($sql)) {
+                while ($rows = $result->fetch_assoc()) {
+                    $idUsuario = $rows['idUsuario'];
+                    $nombre = $rows['nombre'];
+                    $apellido = $rows['apellido'];
+                    $apellidoM = $rows['apellidoM'];
+                    $email = $rows['email'];
+                    $skype = $rows['skype'];
+
+
+                    echo "
                 <dt >
                     <div class=''>
                         <h4>{$nombre} {$apellido} {$apellidoM}</h4>
-                        <h5>
-                        Estudios
-                    </h5>
-                        <label>{$educacion}</label>
-                        <p><a class='btn btn-primary btn-lg' href='#' role='button'>Enviar inbox</a><a class='btn btn-primary btn-lg' href='#' role='button'>Enviar Correo</a>
+                            <p><a class='btn btn-primary btn-lg' href='#' role='button'>Enviar inbox</a><a class='btn btn-primary btn-lg' href='#' role='button'>Enviar Correo</a>
                             <div id=\"SkypeButton_Call_{$skype}_1\">
                              <script type=\"text/javascript\">
                              Skype.ui({
@@ -83,10 +151,14 @@ if (isset($_POST['txtRut'])) {
                             </div>                        
                         </p>
                     </div>
-                </dt>";
+                </dt></dl>";
+                }
+            }
         }
-        echo '</dl>';
-    } else {
-        echo "<h3>Hemos encontrado <span class='badge'>0</span> resultados.</h3>";
     }
+    echo "<h3>Hemos encontrado <span class='badge'>{$repetidos}</span> resultados.</h3>";
+    if($longitud === 0){
+        echo "<h3>Hemos encontrado <span class='badge'>0</span> resultados.</h3>";
+    }else {
+}
 }

@@ -275,13 +275,13 @@
                         <div class="col-md-8">
                             <ul id="myTags" class="form-control">
                                 <!-- Existing list items will be pre-added to the tags -->
-    <?php
-    $areas = explode(",", $areaInteres);
+                                <?php
+                                $areas = explode(",", $areaInteres);
 
-    foreach ($areas as $area) {
-        print "<li class='btn btn-success'>" . $area . '</li>';
-    }
-    ?>
+                                foreach ($areas as $area) {
+                                    print "<li class='btn btn-success'>" . $area . '</li>';
+                                }
+                                ?>
                             </ul>
                         </div>
                     </div>
@@ -290,20 +290,20 @@
                         <label class="col-md-3 control-label">Nivel de Ingles:</label>
                         <div class="col-md-8">
                             <select id="ingles" class="form-control" name="idIngles">
-    <?php
-    require 'include/conexion.php';
-    $query = "SELECT * FROM nivel_ingles";
-    $resultado = $mysqli->query($query);
-    $regionID = null;
-    while ($rows = $resultado->fetch_assoc()) {
-        $selected = null;
-        if ($rows['idIngles'] === $nivelIngles) {
-            $selected = "selected='selected'";
-            $regionID = $rows2['REGION_ID'];
-        }
-        print("<option value='" . $rows['idIngles'] . "' $selected>" . $rows['Nivel'] . "</option>");
-    }
-    ?>
+                                <?php
+                                require 'include/conexion.php';
+                                $query = "SELECT * FROM nivel_ingles";
+                                $resultado = $mysqli->query($query);
+                                $regionID = null;
+                                while ($rows = $resultado->fetch_assoc()) {
+                                    $selected = null;
+                                    if ($rows['idIngles'] === $nivelIngles) {
+                                        $selected = "selected='selected'";
+                                        $regionID = $rows2['REGION_ID'];
+                                    }
+                                    print("<option value='" . $rows['idIngles'] . "' $selected>" . $rows['Nivel'] . "</option>");
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>

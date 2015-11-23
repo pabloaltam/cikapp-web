@@ -40,30 +40,33 @@ $('#ciudad').click(function () {
     }
 });
 
-$("input[type=text]").keypress(function () {
-    if ($('#txtConocimientos').val().length !== 0) {
-        var conocimientos = $(this).val();
-        var dataString = 'con=' + conocimientos;
+$(".input-ajax").change(function () {
+    var dataString="";
+    
+    if ($('#conocimientos').is(':checked')) {
+         var conocimientos = $('#txtConocimientos').val();
+        dataString += 'Con=' + conocimientos+"&";
     }
-    if ($('#txtEstudios').val().length !== 0) {
-        var estudio = $(this).val();
-        var dataString = 'est=' + estudio;
+    if ($('#estudios').is(':checked')) {
+        var estudio = $('#txtEstudios').val();
+        dataString += 'Est=' + estudio+"&";
     }
-    if ($('#nivIngles').val().length !== 0) {
-        var nivIngles = $(this).val();
-        var dataString = 'nvi=' + nivIngles;
+    if ($('#nivIngles').is(':checked')) {
+        var nivIngles = $('#txtNivIngles').val();
+        dataString += 'Nvi=' + nivIngles+"&";
     }
-    if ($('#region').val().length !== 0) {
-        var region = $(this).val();
-        var dataString = 'reg=' + region;
+    if ($('#region').is(':checked')) {
+        var region = $('#txtRegion').val();
+        dataString += 'Reg=' + region+"&";
     }
-    if ($('#ciudad').val().length !== 0) {
-        var ciudad = $(this).val();
-        var dataString = 'ciu=' + ciudad;
+    if ($('#ciudad').is(':checked')) {
+        var ciudad = $('#txtCiudad').val();
+        dataString += 'Ciu=' + ciudad;
     }
+    if(dataString!==""){
         $.ajax({
-            type: "POST",
-            url: "include/resultado-ajax.php",
+            type: "GET",
+            url: "include/resultado-ajax.php?",
             data: dataString,
             cache: false,
             success: function (html)
@@ -71,4 +74,7 @@ $("input[type=text]").keypress(function () {
                 $("#scroll").html(html);
             }
         });
-    })
+    } else {
+        $("#scroll").html("<h1>Lo sentimos: </h1>" + dataString);
+    }
+})
