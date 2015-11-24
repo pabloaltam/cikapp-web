@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="edit-user-profile.php">
+                    <a href="editar-perfil.php">
                         <i class="pe-7s-magic-wand"></i>
                         <p>Editar perfil</p>
                     </a>
