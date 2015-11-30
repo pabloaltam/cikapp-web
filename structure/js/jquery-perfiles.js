@@ -41,5 +41,15 @@ $(document).ready(function () {
     $('#chkBasica').change(function (){
             $('.chkMedia').removeClass('disabled'); 
     });
+    
+    $('#video').change(function (){
+        var ifrmVideo =  $('#video').val();
+        var urlVideo = "https://www.youtube.com/embed/" + ifrmVideo.substring(32);
+        $('#ifrmVideo').attr('src', urlVideo)
+        $('#ifrmVideo').addClass("full-video")
+    });
 
 });
+ $( window ).load(function() {
+        console.log( "window loaded" );
+    });

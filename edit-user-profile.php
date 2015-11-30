@@ -110,6 +110,7 @@
                                     $email = $_POST['email'];
                                     $skype = $_POST['skype'];
                                     $COMUNA_ID = $_POST['COMUNA_ID'];
+                                    $video = $_POST['video'];
 
                                     if (isset($_POST['chkBasica'])) {
                                         $chkBasica = $_POST['chkBasica'];
@@ -202,8 +203,8 @@
                                     }
 
 
-                                    $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres, $idIngles);
-                                    $Obj_operaciones->agregarEstudios($idUsuario, $chkBasica);
+                                    $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres, $idIngles,$video);
+                                    
                                     if ($test) {
                                         $_SESSION['nombre'] = $nombre;
                                         $_SESSION['apellido'] = $apellido;
@@ -234,6 +235,7 @@
                                     $pass = $rows['password'];
                                     $rutaImagen = $rows['rutaImagen'];
                                     $areaInteres = $rows["areasInteres"];
+                                    $video1= $rows['video'];
                                 }
                                 ?>
                                 <div class="row">
@@ -436,6 +438,7 @@
                                                 </div>
                                             </div>
                                             <fieldset>
+                                                
                                                 <legend>Opcionales</legend>
 
                                                 <div class="form-group">
@@ -447,15 +450,24 @@
                                                 <div class="form-group">
                                                     <label class="col-lg-3 control-label">Video de presentación: (URL de youtube) <a href="#" title="Info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Actualmente solo aceptamos videos provenientes de youtube">Más info</a></label>
                                                     <div class="col-lg-8">
-                                                        <input class="form-control" value="" type="text" name="video">
+                                                        <input class="form-control" value="<?php print "https://www.youtube.com/embed/$video1";?>" type="text" name="video" id="video">
                                                         <br/>
-                                                        <label>Ej: https://www.youtube.com/watch?v=0vrdgDdPApQ</label>
+                                                        <label class="lblVideo">Ej: https://www.youtube.com/watch?v=0vrdgDdPApQ</label>
+                              
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <embed 
-                                                           src="http://www.youtube.com/watch?v=0vrdgDdPApQ">
-                                                </div>
+                                                    <?php 
+                                                        if($video1=== NULL) {
+                                                            echo '<iframe id="ifrmVideo" class="" src="" frameborder="0" ></iframe>';
+                                                        }
+                                                        else {
+                                                            echo "<iframe id='ifrmVideo' class='full-video' src='https://www.youtube.com/embed/$video1' frameborder='0' ></iframe>";
+                                                        }
+                                                    ?>
+                                                        
+                                                
+                                                            </div>
                                             </fieldset>
 
                                             <div class="form-group">

@@ -10,8 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 
     <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
-<!--    <link href="structure/css/shit.css" rel="stylesheet">-->
-
+    <link href="structure/css/estiloVictor.css" rel="stylesheet">
 
         <!--  PANEL CSS    -->
     <link href="structure/css/animate.min.css" rel="stylesheet"/>
@@ -26,7 +25,6 @@
 <link href="structure/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
     <div class="navbar-header">
@@ -40,7 +38,6 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
         <form class="nav navbar-nav navbar-right">
-
 <!--
 <div class="btn-group">
   <a class="btn btn-warning btn-round dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-fw"></i>Cuenta <span class="fa fa-caret-down"></span></a>
@@ -48,8 +45,7 @@
     <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Persona</a></li>
     <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Empresa</a></li>
   </ul>
-</div>
--->
+</div> -->
 <a class="btn btn-sm btn-primary btn-round" title="Ver mi perfil" href="./perfil-usuario.php" role="button"><i class="fa fa-user"></i>
 <a class="btn btn-sm btn-primary btn-round" title="Editar mi perfil" href="./edit-user-profile.php" role="button"><i class="fa fa-user"></i>
 <?php
@@ -59,9 +55,7 @@
 ?>
 </a>
 <a class="btn btn-sm btn-primary btn-round btn-fill" href="./logout.php" role="button" title="Salir"><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
-
         </form>
-
         <ul class="nav navbar-nav">
             <li><a href="index.php">Inicio</a></li>
             <li><a href="#">Nosotros</a></li>
