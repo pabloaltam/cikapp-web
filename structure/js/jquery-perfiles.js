@@ -36,5 +36,10 @@ $(document).ready(function () {
     $('#uploadedfile').change(function () {
         mostrarImagen(this);
     });
+    $('[data-toggle="popover"]').popover();
+    
+    $('#chkBasica').change(function (){
+            $('.chkMedia').removeClass('disabled'); 
+    });
 
 });

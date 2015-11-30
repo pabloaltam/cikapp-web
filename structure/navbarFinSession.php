@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cikapp - We are working!</title>
+    <script src="structure/jquery/jquery-1.11.3.min.js"></script>
+<script src="structure/bstrap/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+
     <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
 <!--    <link href="structure/css/shit.css" rel="stylesheet">-->
 
