@@ -5,16 +5,12 @@
         $user = str_replace('.', '', $user);
         if($obj->RutValidateLoginUser($user)) {
             require('conexion.php'); //Incluimos la conexion a la base de datos.
-            $sql = "SELECT * FROM usuario WHERE rut=? and password=?";
-            if($stmt = $mysqli->prepare($sql)){
                 $pass_encriptada = sha1(md5($pass));
-                $stmt->bind_param('ss',$user, $pass_encriptada);
-                $stmt->execute();
-                $result = $stmt->get_result();
+            $sql = "SELECT * FROM usuario WHERE rut='$user' and password='$pass_encriptada'";
+            if($result = $mysqli->query($sql)){
                 if ($rows = $result->fetch_assoc()) {
                     if($rows['codigo'] == 1){
                         @session_start();
-                        header("Location: panel-usuario.php");
                         if(sesion_iniciada()){
                             logout();
                         }
@@ -25,7 +21,7 @@
                         $_SESSION['apellidoM'] = $rows['apellidoM'];
                         $_SESSION['email'] = $rows['email'];
                         $_SESSION['COMUNA_ID'] = $rows['COMUNA_ID'];
-
+                        header("Location: panel-usuario.php");
                         return TRUE;
                     }else{
                         echo '<p>Antes de acceder debe confirmar el registro en su email</p>';
@@ -172,7 +168,6 @@
         unset($_SESSION['websiteEmpresa']);
         unset($_SESSION['emailEmpresa']);
         unset($_SESSION['direccionEmpresa']);
-        session_write_close(); //se guarda y cierra la sesion
 
         session_destroy();
     }

@@ -98,13 +98,6 @@
         </div>
     </div>
 </div>
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="structure/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
-<script src="structure/js/jquery.Rut.min.js"></script>
-<script src="structure/js/filtro.js"></script>
 <?php include 'structure/footer.php'; ?>
 
 

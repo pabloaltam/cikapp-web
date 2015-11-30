@@ -266,7 +266,8 @@
                                                 <i class="fa fa-photo"></i>
                                                 Tu foto debe ser tipo <strong>cédula de identidad</strong>, de lo contrario será eliminada.
                                             </div>
-                                            <h3>Información personal</h3>
+                                            <fieldset>
+                                                <legend>Información personal</legend>
 
                                             <div class="form-group">
                                                 <label class="col-lg-3 control-label">Nombre:</label>
@@ -292,6 +293,7 @@
                                                     <input class="form-control" value="<?php echo $email ?>" type="text" name="email">
                                                 </div>
                                             </div>
+                                            
                                             <div class="form-group">
                                                 <label class="col-lg-3 control-label">Pais:</label>
                                                 <div class="col-lg-3">
@@ -356,7 +358,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            </fieldset>
+                                            <fieldset>
+                                                <legend>Información Academica</legend>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">Áreas de intéres:</label>
                                                 <div class="col-md-8">
@@ -437,9 +441,10 @@
 
                                                 </div>
                                             </div>
+                                            </fieldset>
                                             <fieldset>
                                                 
-                                                <legend>Opcionales</legend>
+                                                <legend>Información opcionales</legend>
 
                                                 <div class="form-group">
                                                     <label class="col-md-3 control-label">Skype name:</label>
