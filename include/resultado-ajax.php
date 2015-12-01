@@ -153,19 +153,57 @@ if (isset($_POST['txtRut'])) {
                         if ($result = $mysqli->query($sql)) {
                             while ($rows = $result->fetch_assoc()) {
                                 $idUsuario = $rows['idUsuario'];
+                                $intereses = $rows['areasInteres'];
                                 $nombre = $rows['nombre'];
                                 $apellido = $rows['apellido'];
                                 $apellidoM = $rows['apellidoM'];
                                 $email = $rows['email'];
                                 $skype = $rows['skype'];
+                                $image = $rows['rutaImagen'];
+                                $comuna_ID = $rows['COMUNA_ID'];
+                                $locacion ="";
+                            $query = "SELECT a.COMUNA_NOMBRE, c.REGION_NOMBRE, d.PAIS_NOMBRE FROM comuna a, provincia b, region c, pais d where a.COMUNA_PROVINCIA_ID=b.PROVINCIA_ID and b.PROVINCIA_REGION_ID=c.REGION_ID and c.REGION_PAIS_ID=d.PAIS_ID and a.COMUNA_ID={$comuna_ID};";
+                            $resultado = $mysqli->query($query);
+                            while ($rows = $resultado->fetch_assoc()) {
+                                $locacion = $rows['COMUNA_NOMBRE'] . ", " . $rows['REGION_NOMBRE'] . ", " . $rows['PAIS_NOMBRE'];
+                            }
+                                
                                 echo "
-                <dt >
-                    <div class=''>
-                        <h4>{$nombre} {$apellido} {$apellidoM}</h4>
-                            <p><a class='btn btn-primary btn-lg' href='#' role='button'>Enviar inbox</a><a class='btn btn-primary btn-lg' href='#' role='button'>Enviar Correo</a>                        
-                        </p>
+                <dt ><div class='card card-filtro'>
+
+                    <h4>{$nombre} {$apellido} {$apellidoM}</h4>
+                    <div class='row'>
+                        <div class='col-sm-9'>
+                            <div class='row'>
+                                <div class='col-sm-2'><label>Interes</label></div>
+                                <div class='col-sm-10'><p>{$intereses}</p></div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-sm-2'><label>Ubicación</label></div>
+                                <div class='col-sm-10'><p>{$locacion}</p></div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-sm-2'><label>SKYPE Name</label></div>
+                                <div class='col-sm-10'><p>{$skype}</p></div>
+                            </div>
+                        </div>
+                        <div class='col-sm-3'>
+                            <img src='{$image}' class='img-responsive center-block img-circle' height='150' width='150'>
+                            <br>
+                            <a class='btn btn-primary btn-lg' href='perfil-usuario.php?user={$idUsuario}' role='button'>
+                                Ver Perfil
+                            </a>
+                        </div>
                     </div>
-                </dt></dl>";
+                    <p>
+                        <a class='btn btn-primary btn-lg' href='#' role='button'>
+                            Enviar inbox
+                        </a>
+                        <a class='btn btn-primary btn-lg' href='mailto:{$email}' target='_top' role='button'>
+                            Enviar Correo
+                        </a>                        
+                    </p>
+                </div>                </dt></dl>";
                             }
                         }
                     } else {
@@ -185,21 +223,58 @@ if (isset($_POST['txtRut'])) {
                     if ($result = $mysqli->query($sql)) {
                         while ($rows = $result->fetch_assoc()) {
                             $idUsuario = $rows['idUsuario'];
+                            $intereses = $rows['areasInteres'];
                             $nombre = $rows['nombre'];
                             $apellido = $rows['apellido'];
                             $apellidoM = $rows['apellidoM'];
                             $email = $rows['email'];
                             $skype = $rows['skype'];
+                            $image = $rows['rutaImagen'];
+                            $locacion ="";
+                            $comuna_ID = $rows['COMUNA_ID'];
+                            $query = "SELECT a.COMUNA_NOMBRE, c.REGION_NOMBRE, d.PAIS_NOMBRE FROM comuna a, provincia b, region c, pais d where a.COMUNA_PROVINCIA_ID=b.PROVINCIA_ID and b.PROVINCIA_REGION_ID=c.REGION_ID and c.REGION_PAIS_ID=d.PAIS_ID and a.COMUNA_ID={$comuna_ID};";
+                            $resultado = $mysqli->query($query);
+                            while ($rows = $resultado->fetch_assoc()) {
+                                $locacion = $rows['COMUNA_NOMBRE'] . ", " . $rows['REGION_NOMBRE'] . ", " . $rows['PAIS_NOMBRE'];
+                            }
 
 
                             echo "
-                <dt >
-                    <div class=''>
-                        <h4>{$nombre} {$apellido} {$apellidoM}</h4>
-                            <p><a class='btn btn-primary btn-lg' href='#' role='button'>Enviar inbox</a><a class='btn btn-primary btn-lg' href='#' role='button'>Enviar Correo</a>
-                        </p>
+                <dt ><div class='card card-filtro'>
+
+                    <h4>{$nombre} {$apellido} {$apellidoM}</h4>
+                    <div class='row'>
+                        <div class='col-sm-9'>
+                            <div class='row'>
+                                <div class='col-sm-2'><label>Interes</label></div>
+                                <div class='col-sm-10'><p>{$intereses}</p></div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-sm-2'><label>Ubicación</label></div>
+                                <div class='col-sm-10'><p>{$locacion}</p></div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-sm-2'><label>SKYPE Name</label></div>
+                                <div class='col-sm-10'><p>{$skype}</p></div>
+                            </div>
+                        </div>
+                        <div class='col-sm-3'>
+                            <img src='{$image}' class='img-responsive center-block img-circle' height='150' width='150'>
+                            <br>
+                            <a class='btn btn-primary btn-lg' href='perfil-usuario.php?user={$idUsuario}' role='button'>
+                                Ver Perfil
+                            </a>
+                        </div>
                     </div>
-                </dt></dl>";
+                    <p>
+                        <a class='btn btn-primary btn-lg' href='#' role='button'>
+                            Enviar inbox
+                        </a>
+                        <a class='btn btn-primary btn-lg' href='mailto:{$email}' target='_top' role='button'>
+                            Enviar Correo
+                        </a>                        
+                    </p>
+                </div>                </dt></dl>";
                         }
                     }
                 }

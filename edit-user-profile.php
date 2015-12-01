@@ -245,9 +245,9 @@
                                             <div class="text-center">
                                                 <?php
                                                 if ($rutaImagen === "") {
-                                                    echo '<img src="structure/img/avatar.jpg" class="avatar img-circle img-thumbnail" alt="Foto" id="fotoUsuario">';
+                                                    echo '<img src="structure/img/avatar.jpg" width="200" height="200" class="avatar img-circle img-thumbnail" alt="Foto" id="fotoUsuario" >';
                                                 } else {
-                                                    echo "<img src='$rutaImagen' class='img-circle img-responsive img-thumbnail' alt='Foto' id='fotoUsuario'>";
+                                                    echo "<img src='$rutaImagen' width='200' height='200' class='img-circle img-responsive img-thumbnail' alt='Foto' id='fotoUsuario'>";
                                                 }
                                                 ?>
 

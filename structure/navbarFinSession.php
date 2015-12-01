@@ -11,7 +11,6 @@
         <script src="structure/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
         <script src="structure/js/jquery.Rut.min.js"></script>
         <script src="structure/js/filtro.js"></script>
-
         <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="structure/css/estiloVictor.css" rel="stylesheet">
 
@@ -26,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
         <link href="structure/css/jquery.tagit.css" rel="stylesheet" type="text/css">
         <link href="structure/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+       
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">

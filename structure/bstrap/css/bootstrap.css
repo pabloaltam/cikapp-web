@@ -6798,9 +6798,3 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-
-.scroll{
-    min-height: 100px !important;
-    height: 100px !important;
-    max-height: 100px !important;   
-}

@@ -91,12 +91,23 @@
                 </fieldset>
             </form>
         </div>
+        <br>
+        <br/>
+        <br />
+
         <div class="col-md-7 col-md-offset-1">
             <div class="scroll" id="scroll">
                 <p>Seleccione al menos una opción y escriba o elija segun corresponda...</p>
+                <!---->
+                
+                <!---->
             </div>
+
         </div>
     </div>
+
+
+
 </div>
 <?php include 'structure/footer.php'; ?>
 
