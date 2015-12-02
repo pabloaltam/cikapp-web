@@ -203,8 +203,8 @@
                                     }
 
 
-                                    $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres, $idIngles,$video);
-                                    
+                                    $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres, $idIngles, $video);
+
                                     if ($test) {
                                         $_SESSION['nombre'] = $nombre;
                                         $_SESSION['apellido'] = $apellido;
@@ -235,7 +235,7 @@
                                     $pass = $rows['password'];
                                     $rutaImagen = $rows['rutaImagen'];
                                     $areaInteres = $rows["areasInteres"];
-                                    $video1= $rows['video'];
+                                    $video1 = $rows['video'];
                                 }
                                 ?>
                                 <div class="row">
@@ -269,181 +269,184 @@
                                             <fieldset>
                                                 <legend>Información personal</legend>
 
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label">Nombre:</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="<?php echo $nombre ?>" type="text" name="nombre">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label">Apellido paterno:</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="<?php echo $apellido ?>" type="text" name="apellido">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label">Apellido materno:</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="<?php echo $apellidoM ?>" type="text" name="apellidoM">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label">Correo electrónico:</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" value="<?php echo $email ?>" type="text" name="email">
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label">Pais:</label>
-                                                <div class="col-lg-3">
-                                                    <div class="ui-select">
-                                                        <select id="pais" class="form-control">
-                                                            <option value="Chile">Chile</option>
-                                                        </select>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Nombre:</label>
+                                                    <div class="col-lg-8">
+                                                        <input class="form-control" value="<?php echo $nombre ?>" type="text" name="nombre">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label">Región:</label>
-                                                <div class="col-lg-3">
-                                                    <div class="ui-select">
-                                                        <select id="region" class="form-control">
-                                                            <?php
-                                                            require 'include/conexion.php';
-                                                            $query = "SELECT * FROM region";
-                                                            $resultado = $mysqli->query($query);
-                                                            $regionID = null;
-                                                            while ($rows = $resultado->fetch_assoc()) {
-                                                                $sql = "select REGION_ID from comuna a, provincia b, region c where COMUNA_PROVINCIA_ID = PROVINCIA_ID and PROVINCIA_REGION_ID = REGION_ID and COMUNA_ID=$COMUNA_IDusuario;";
-                                                                $resultado2 = $mysqli->query($sql);
-                                                                $selected = null;
-                                                                while ($rows2 = $resultado2->fetch_assoc()) {
-                                                                    if ($rows['REGION_ID'] === $rows2['REGION_ID']) {
-                                                                        $selected = "selected='selected'";
-                                                                        $regionID = $rows2['REGION_ID'];
-                                                                    }
-                                                                }
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Apellido paterno:</label>
+                                                    <div class="col-lg-8">
+                                                        <input class="form-control" value="<?php echo $apellido ?>" type="text" name="apellido">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Apellido materno:</label>
+                                                    <div class="col-lg-8">
+                                                        <input class="form-control" value="<?php echo $apellidoM ?>" type="text" name="apellidoM">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Correo electrónico:</label>
+                                                    <div class="col-lg-8">
+                                                        <input class="form-control" value="<?php echo $email ?>" type="text" name="email">
+                                                    </div>
+                                                </div>
 
-                                                                print("<option value='" . $rows['REGION_ID'] . "' $selected>" . $rows['REGION_NOMBRE'] . "</option>");
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Pais:</label>
+                                                    <div class="col-lg-3">
+                                                        <div class="ui-select">
+                                                            <select id="pais" class="form-control">
+                                                                <option value="Chile">Chile</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-3 control-label">Ciudad:</label>
-                                                <div class="col-lg-3">
-                                                    <div class="ui-select">
-                                                        <select id="ciudad" class="form-control" name="COMUNA_ID">
-                                                            <?php
-                                                            require 'include/conexion.php';
-                                                            $query = "SELECT COMUNA_ID, COMUNA_NOMBRE FROM comuna, provincia, region where COMUNA_PROVINCIA_ID=provincia.PROVINCIA_ID and provincia.PROVINCIA_REGION_ID=region.REGION_ID and region.REGION_ID=$regionID;";
-                                                            if ($resultado = $mysqli->query($query)) {
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Región:</label>
+                                                    <div class="col-lg-3">
+                                                        <div class="ui-select">
+                                                            <select id="region" class="form-control">
+                                                                <?php
+                                                                include './include/conexion.php';
+                                                                $query = "SELECT * FROM region";
+                                                                $resultado = $mysqli->query($query);
+                                                                $regionID = null;
+                                                                 $selected = null;
                                                                 while ($rows = $resultado->fetch_assoc()) {
-                                                                    $selected = "";
-                                                                    if ($rows['COMUNA_ID'] === $COMUNA_IDusuario) {
-                                                                        $selected = "selected='selected'";
+                                                                   
+                                                                    $sql = "select REGION_ID from comuna a, provincia b, region c where COMUNA_PROVINCIA_ID = PROVINCIA_ID and PROVINCIA_REGION_ID = REGION_ID and COMUNA_ID=$COMUNA_IDusuario;";
+                                                                    if ($resultado2 = $mysqli->query($sql)){
+                                                                   
+                                                                    while ($rows2 = $resultado2->fetch_assoc()) {
+                                                                        
+                                                                        if ($rows['REGION_ID'] === $rows2['REGION_ID']) {
+                                                                            $selected = "selected='selected'";
+                                                                            $regionID = $rows2['REGION_ID'];
+                                                                        }
                                                                     }
-
-                                                                    print("<option value='" . $rows['COMUNA_ID'] . "' $selected>" . $rows['COMUNA_NOMBRE'] . "</option>");
+                                                                    } 
+                                                                    print("<option value='" . $rows['REGION_ID'] . "' $selected>" . $rows['REGION_NOMBRE'] . "</option>");
                                                                 }
-                                                            } else {
-                                                                print("<option>Seleccione una ciudad</option>");
-                                                            }
-                                                            ?>
-                                                        </select>
-
+                                                                ?>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Ciudad:</label>
+                                                    <div class="col-lg-3">
+                                                        <div class="ui-select">
+                                                            <select id="ciudad" class="form-control" name="COMUNA_ID">
+                                                                <?php
+                                                                require 'include/conexion.php';
+                                                                $query = "SELECT COMUNA_ID, COMUNA_NOMBRE FROM comuna, provincia, region where COMUNA_PROVINCIA_ID=provincia.PROVINCIA_ID and provincia.PROVINCIA_REGION_ID=region.REGION_ID and region.REGION_ID=$regionID;";
+                                                                if ($resultado = $mysqli->query($query)) {
+                                                                    while ($rows = $resultado->fetch_assoc()) {
+                                                                        $selected = "";
+                                                                        if ($rows['COMUNA_ID'] === $COMUNA_IDusuario) {
+                                                                            $selected = "selected='selected'";
+                                                                        }
+
+                                                                        print("<option value='" . $rows['COMUNA_ID'] . "' $selected>" . $rows['COMUNA_NOMBRE'] . "</option>");
+                                                                    }
+                                                                } else {
+                                                                    print("<option>Seleccione una ciudad</option>");
+                                                                }
+                                                                ?>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </fieldset>
                                             <fieldset>
                                                 <legend>Información Academica</legend>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Áreas de intéres:</label>
-                                                <div class="col-md-8">
-                                                    <ul id="myTags" class="form-control">
-                                                        <!-- Existing list items will be pre-added to the tags -->
-                                                        <?php
-                                                        $areas = explode(",", $areaInteres);
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Áreas de intéres:</label>
+                                                    <div class="col-md-8">
+                                                        <ul id="myTags" class="form-control">
+                                                            <!-- Existing list items will be pre-added to the tags -->
+                                                            <?php
+                                                            $areas = explode(",", $areaInteres);
 
-                                                        foreach ($areas as $area) {
-                                                            print "<li class='btn btn-success'>" . $area . '</li>';
-                                                        }
-                                                        ?>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Nivel de Ingles:</label>
-                                                <div class="col-md-8">
-                                                    <select id="ingles" class="form-control" name="idIngles">
-                                                        <?php
-                                                        require 'include/conexion.php';
-                                                        $query = "SELECT * FROM nivel_ingles";
-                                                        $resultado = $mysqli->query($query);
-                                                        $regionID = null;
-                                                        while ($rows = $resultado->fetch_assoc()) {
-                                                            $selected = null;
-                                                            if ($rows['idIngles'] === $nivelIngles) {
-                                                                $selected = "selected='selected'";
-                                                                $regionID = $rows2['REGION_ID'];
+                                                            foreach ($areas as $area) {
+                                                                print "<li class='btn btn-success'>" . $area . '</li>';
                                                             }
-                                                            print("<option value='" . $rows['idIngles'] . "' $selected>" . $rows['Nivel'] . "</option>");
-                                                        }
-                                                        ?>
-                                                    </select>
+                                                            ?>
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Mi educación:</label>
-                                                <div class="col-md-8">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <span class="icons"><span class="first-icon fa fa-square-o"></span><span class="second-icon fa fa-check-square-o"></span></span>
-                                                            <input name="chkBasica" value="1" type="checkbox" id="chkBasica">Educación Básica</label>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Nivel de Ingles:</label>
+                                                    <div class="col-md-8">
+                                                        <select id="ingles" class="form-control" name="idIngles">
+                                                            <?php
+                                                            require 'include/conexion.php';
+                                                            $query = "SELECT * FROM nivel_ingles";
+                                                            $resultado = $mysqli->query($query);
+                                                            $regionID = null;
+                                                            while ($rows = $resultado->fetch_assoc()) {
+                                                                $selected = null;
+                                                                if ($rows['idIngles'] === $nivelIngles) {
+                                                                    $selected = "selected='selected'";
+                                                                    $regionID = $rows2['REGION_ID'];
+                                                                }
+                                                                print("<option value='" . $rows['idIngles'] . "' $selected>" . $rows['Nivel'] . "</option>");
+                                                            }
+                                                            ?>
+                                                        </select>
                                                     </div>
-                                                    <div class="checkbox">
-                                                        <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
-                                                                <span class="second-icon fa fa-check-square-o"></span></span>
-                                                            <input class="chkMedia disabled" type="checkbox" value="2" name="chkMedia" id="chkMedia">Educación Media</label>
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
-                                                                <span class="second-icon fa fa-check-square-o"></span></span>
-                                                            <input type="checkbox" name="chkcft" value="3" id="chkCft">
-                                                            Centro de formación técnica</label>
-                                                    </div>
-
-                                                    <div class="checkbox">
-                                                        <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
-                                                                <span class="second-icon fa fa-check-square-o"></span></span>
-                                                            <input class=""  type="checkbox" name="chkIp" id="chkIp" value="4">Instituto Profesional</label>
-                                                    </div>
-
-                                                    <div class="checkbox">
-                                                        <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
-                                                                <span class="second-icon fa fa-check-square-o"></span>                                                
-                                                            </span><input class="" type="checkbox" name="chkUniversidad" id="chkUniver" value="5">Universidad</label>
-                                                    </div>
-
-                                                    <div class="checkbox">
-                                                        <label><span class="icons"><span class="first-icon fa fa-square-o"></span><span class="second-icon fa fa-check-square-o"></span></span>
-                                                            <input class="" type="checkbox" name="chkOtro" id="chkOtro" value="6">Otro (especificar)</label>
-                                                    </div>
-                                                    <br>
-                                                    <input type="text" name="txtOtros" id="txtOtro"> <button type="submit" id="btnAgregarCurso">Agregar</button>
-                                                    <br>
-
                                                 </div>
-                                            </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Mi educación:</label>
+                                                    <div class="col-md-8">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <span class="icons"><span class="first-icon fa fa-square-o"></span><span class="second-icon fa fa-check-square-o"></span></span>
+                                                                <input name="chkBasica" value="1" type="checkbox" id="chkBasica">Educación Básica</label>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
+                                                                    <span class="second-icon fa fa-check-square-o"></span></span>
+                                                                <input class="chkMedia disabled" type="checkbox" value="2" name="chkMedia" id="chkMedia">Educación Media</label>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
+                                                                    <span class="second-icon fa fa-check-square-o"></span></span>
+                                                                <input type="checkbox" name="chkcft" value="3" id="chkCft">
+                                                                Centro de formación técnica</label>
+                                                        </div>
+
+                                                        <div class="checkbox">
+                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
+                                                                    <span class="second-icon fa fa-check-square-o"></span></span>
+                                                                <input class=""  type="checkbox" name="chkIp" id="chkIp" value="4">Instituto Profesional</label>
+                                                        </div>
+
+                                                        <div class="checkbox">
+                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
+                                                                    <span class="second-icon fa fa-check-square-o"></span>                                                
+                                                                </span><input class="" type="checkbox" name="chkUniversidad" id="chkUniver" value="5">Universidad</label>
+                                                        </div>
+
+                                                        <div class="checkbox">
+                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span><span class="second-icon fa fa-check-square-o"></span></span>
+                                                                <input class="" type="checkbox" name="chkOtro" id="chkOtro" value="6">Otro (especificar)</label>
+                                                        </div>
+                                                        <br>
+                                                        <input type="text" name="txtOtros" id="txtOtro"> <button type="submit" id="btnAgregarCurso">Agregar</button>
+                                                        <br>
+
+                                                    </div>
+                                                </div>
                                             </fieldset>
                                             <fieldset>
-                                                
+
                                                 <legend>Información opcionales</legend>
 
                                                 <div class="form-group">
@@ -455,24 +458,23 @@
                                                 <div class="form-group">
                                                     <label class="col-lg-3 control-label">Video de presentación: (URL de youtube) <a href="#" title="Info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Actualmente solo aceptamos videos provenientes de youtube">Más info</a></label>
                                                     <div class="col-lg-8">
-                                                        <input class="form-control" value="<?php print "https://www.youtube.com/embed/$video1";?>" type="text" name="video" id="video">
+                                                        <input class="form-control" value="<?php print "https://www.youtube.com/embed/$video1"; ?>" type="text" name="video" id="video">
                                                         <br/>
                                                         <label class="lblVideo">Ej: https://www.youtube.com/watch?v=0vrdgDdPApQ</label>
-                              
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <?php 
-                                                        if($video1=== NULL) {
-                                                            echo '<iframe id="ifrmVideo" class="" src="" frameborder="0" ></iframe>';
-                                                        }
-                                                        else {
-                                                            echo "<iframe id='ifrmVideo' class='full-video' src='https://www.youtube.com/embed/$video1' frameborder='0' ></iframe>";
-                                                        }
+                                                    <?php
+                                                    if ($video1 === NULL) {
+                                                        echo '<iframe id="ifrmVideo" class="" src="" frameborder="0" ></iframe>';
+                                                    } else {
+                                                        echo "<iframe id='ifrmVideo' class='full-video' src='https://www.youtube.com/embed/$video1' frameborder='0' ></iframe>";
+                                                    }
                                                     ?>
-                                                        
-                                                
-                                                            </div>
+
+
+                                                </div>
                                             </fieldset>
 
                                             <div class="form-group">

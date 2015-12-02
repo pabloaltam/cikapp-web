@@ -46,38 +46,34 @@ class OperacionesMYSQL {
     }
 
     function crearUsuario($rut, $email, $password1, $password2, $codigo) {
-
-# Insertando en la Base de Datos con PDOStatement
-        $sql = "INSERT INTO usuario (rut, email, password, codigo) VALUES (?,?,?,?);";
+        $pass = sha1(md5($password1));
+        include("./include/conexion.php");
         $rut = str_replace('.', '', $rut);
+        $cad = "INSERT INTO usuario (rut, email, password, codigo) VALUES ('$rut','$email','$pass','$codigo');";
         if ($this->RutValidate($rut)) {
             if ($this->emailValidate($email)) {
-
-                if ($this->passwordValidate($password1, $password2)) {
-
-                    require("conexion.php");
-                    if ($stmt = $mysqli->prepare($sql)) {
-                        /* ligar parámetros para marcadores */
-                        $stmt->bind_param("sssi", $rut, $email, sha1(md5($password1)), $codigo);
-                        /* ejecutar la consulta */
-                        $stmt->execute();
-                        /* cerrar sentencia */
-                        $stmt->close();
+                if ($this -> passwordValidate($password1, $password2)){
+                    if ($mysqli->query($cad)===TRUE) {
+                        echo '1 - '. $cad;
                         return TRUE;
                     } else {
+                       
+                          echo '2 - '. $cad. " $resultado ". "  ". $mysqli -> error;;
                         return FALSE;
                     }
                 } else {
+                    echo '3 - ' . $cad;
                     return FALSE;
                 }
             } else {
+                echo '4 - '. $cad;
                 return FALSE;
             }
         } else {
+            echo '5 - '. $cad;
             return FALSE;
         }
     }
-
     /**
      * Validador de RUT con digito verificador 
      *
@@ -133,6 +129,7 @@ class OperacionesMYSQL {
             }
         }
     }
+
     function RutValidateLoginEnterprise($rut) {
         $rut = str_replace('.', '', $rut);
         if (preg_match('/^(\d{1,9})-((\d|k|K){1})$/', $rut, $d)) {
@@ -299,7 +296,7 @@ class OperacionesMYSQL {
         return NULL;
     }
 
-    function editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areasInteres,$idIngles,$video) {
+    function editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areasInteres, $idIngles, $video) {
         include("./include/conexion.php");
         $video = substr($video, 32);
         $actualizaUsuario = "UPDATE usuario SET nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM',email='$email', skype='$skype', COMUNA_ID=$COMUNA_ID, areasInteres='$areasInteres', idIngles=$idIngles, video='$video' WHERE idUsuario='$idUsuario';";
@@ -331,26 +328,27 @@ class OperacionesMYSQL {
         }
         return FALSE;
     }
-    
-    function agregarEstudios($idUsuario,$idEstudio) {
+
+    function agregarEstudios($idUsuario, $idEstudio) {
         include("./include/conexion.php");
         $actualizaUsuario = "INSERT INTO usuario_educacion (usuario_id, educacion_id) VALUES ($idUsuario, $idEstudio);";
         $resultado = $mysqli->query($actualizaUsuario);
         $mysqli->close();
         return $resultado;
     }
-    function comprobarUsuarioEducacion($usuarioID, $educacion_id)
-    {
+
+    function comprobarUsuarioEducacion($usuarioID, $educacion_id) {
         include ("./include/conexion.php");
-        $sql        =   "SELECT *FROM usuario_educacion where usuario_id={$usuarioID} and educacion_id={$educacion_id};";
-        $resultado  =   $mysqli->query($sql);
-        while ($rows       =   $resultado -> fetch_assoc()){
-            if($rows['usuario_id']==$usuarioID and $rows['educacion_id']==$educacion_id){
+        $sql = "SELECT *FROM usuario_educacion where usuario_id={$usuarioID} and educacion_id={$educacion_id};";
+        $resultado = $mysqli->query($sql);
+        while ($rows = $resultado->fetch_assoc()) {
+            if ($rows['usuario_id'] == $usuarioID and $rows['educacion_id'] == $educacion_id) {
                 return FALSE;
             }
         }
         return TRUE;
     }
+
     function editarImagenEmpresa($idEmpresa, $rutaImagen) {
         include("./include/conexion.php");
         $actualizar = "UPDATE empresa SET rutaImagen='$rutaImagen' WHERE idEmmpresa='$idEmpresa';";
@@ -362,6 +360,7 @@ class OperacionesMYSQL {
             return FALSE;
         }
     }
+
     function editarEmpresa($idEmpresa, $email, $cargo, $razonSocial, $faxEmpresa, $fonoEmpresa, $websiteEmpresa, $emailEmpresa, $nombre, $apellido, $apellidoM, $idTipoEmpresa, $COMUNA_ID, $direccionEmpresa) {
         include("./include/conexion.php");
         $actualizaEmpresa = "UPDATE empresa SET email='$email', cargo='$cargo', razonSocial='$razonSocial', faxEmpresa=$faxEmpresa, fonoEmpresa=$fonoEmpresa, websiteEmpresa='$websiteEmpresa', emailEmpresa='$emailEmpresa', nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM', tipo_empresa_id=$idTipoEmpresa, comuna_COMUNA_ID=$COMUNA_ID, direccionEmpresa='$direccionEmpresa' WHERE idEmpresa='$idEmpresa';";
