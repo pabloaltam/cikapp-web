@@ -391,4 +391,14 @@ class OperacionesMYSQL {
         return $resultado;
     }
 
+        function enviarMensaje($idUsuario, $mensaje){
+        include("include/conexion.php");
+        $insertar_mensaje ="INSERT INTO conversacion (idUsuario, mensaje) VALUES ('$idUsuario', '$mensaje') ";
+        $resultado = $mysqli->query($insertar_mensaje);
+        $mysqli->close();
+        return $resultado;
+    }
+
+
+
 }

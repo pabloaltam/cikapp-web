@@ -27,12 +27,14 @@
                                     $nombre = $rows['nombre'];
                                     $apellido = $rows['apellido'];
                                     $apellidoM = $rows['apellidoM'];
+                                    $idUsuario = $rows['idUsuario'];
                                 }
                         
 						?>
 
 							<p class="help-block">Enviar mensaje a</p>
-							<label for="user"><?php echo $nombre ." " .$apellido; ?></label>
+							<input type="hidden" class="form-control" id="user" name="user" value="<?php echo $idUsuario ?>">
+							<label for="user"><?php echo $nombre ." " .$apellido ." " .$apellidoM; ?></label>
 						</div>
 						<div class="form-group">							
 							<div class="row">
@@ -58,6 +60,9 @@
 		
 			$(document).on("ready", function(){				
 				registrarMensajes();
+				$.ajaxSetup({"cache":false});
+				setInterval("cargarMensajes()", 500);
+
 			});
 
 			var registrarMensajes = function(){
@@ -69,9 +74,20 @@
 						url: "registrar-mensaje.php",
 						data: frm
 					}).done(function(info){
-
+						console.log( info );
 					})
 				});
+			}
+
+			var cargarMensajes = function(){
+				$.ajax({
+					type: "POST",
+					url: "conversacion.php"
+				}).done(function( info ){
+					$("#conversation").html( info );
+					$("#conversation p:last-child").css({"background-color": "lightgreen", 
+						"paddin-bottom": "20px"});
+				})
 			}
 
 		</script>
