@@ -370,4 +370,17 @@ class OperacionesMYSQL {
         return $resultado;
     }
 
+
+    function mostrarUsuarios($noRutActual){
+        include("include/conexion.php");
+        $consulta_usuarios ="SELECT * FROM usuario WHERE rut <> '$noRutActual' ORDER BY apellido DESC";
+        $resultado = $mysqli->query($consulta_usuarios);
+        $i=0;
+        while($fila = $resultado->fetch_assoc()){
+        $arreglo[$i]=array($fila['nombre'],$fila['apellido'],$fila['email'],$fila['skype'],$fila['areasInteres']);
+        $i++;
+        }
+            return $arreglo;
+    }
+
 }
