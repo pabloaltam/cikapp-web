@@ -383,4 +383,12 @@ class OperacionesMYSQL {
             return $arreglo;
     }
 
+        function recuperarUsuario($idUsuario){
+        include("include/conexion.php");
+        $consulta_usuarios ="SELECT * FROM usuario WHERE idUsuario = '$idUsuario' ";
+        $resultado = $mysqli->query($consulta_usuarios);
+        $mysqli->close();
+        return $resultado;
+    }
+
 }

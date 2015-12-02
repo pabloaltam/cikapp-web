@@ -5,11 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">		
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">		
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-		<title>Programando Brother's</title>
+		<title>Cikapp mensajes</title>
 	</head>
 	<body>
 		<div  class="container-fluid">
-			<section  style="padding: 15%;">			
+			<section  style="padding: 5%;">			
 				<div class="row">				
 					<h1 class="text-center">Sistema de mensajería<small></small></h1>	
 					<hr>
@@ -17,8 +17,22 @@
 				<div class="row">
 					<form id="formChat" role="form">
 						<div class="form-group">
-							<label for="user">Usuario</label>
-							<input type="text" class="form-control" id="user" name="user" placeholder="Enter User">
+						<?php
+
+						$id = $_GET['usuario'];
+                        include("include/conexion.php");
+        				$consulta_usuarios ="SELECT * FROM usuario WHERE idUsuario = '$id' ";
+        				$resultado = $mysqli->query($consulta_usuarios);
+                        while ($rows = $resultado->fetch_assoc()) {
+                                    $nombre = $rows['nombre'];
+                                    $apellido = $rows['apellido'];
+                                    $apellidoM = $rows['apellidoM'];
+                                }
+                        
+						?>
+
+							<p class="help-block">Enviar mensaje a</p>
+							<label for="user"><?php echo $nombre ." " .$apellido; ?></label>
 						</div>
 						<div class="form-group">							
 							<div class="row">
