@@ -377,7 +377,7 @@ class OperacionesMYSQL {
         $resultado = $mysqli->query($consulta_usuarios);
         $i=0;
         while($fila = $resultado->fetch_assoc()){
-        $arreglo[$i]=array($fila['nombre'],$fila['apellido'],$fila['email'],$fila['skype'],$fila['areasInteres']);
+        $arreglo[$i]=array($fila['nombre'],$fila['apellido'],$fila['email'],$fila['skype'],$fila['areasInteres'],$fila['idUsuario']);
         $i++;
         }
             return $arreglo;

@@ -131,7 +131,9 @@ $rutActual = $_SESSION['rut'];
                         <td><?php echo $var_usuarios[$j][2];?></td>
                         <td><?php echo $var_usuarios[$j][3];?></td>
                         <td><?php echo $var_usuarios[$j][4];?></td>
-                        <td><a class="btn btn-sm btn-info btn-fill" href="mensajes.php" role="button" title="Enviar mensaje"><i class="fa fa-envelope"></i> Mensaje</a></td>
+                        <td><?php echo $var_usuarios[$j][5];?></td>
+                        <?php $idUsuario = $var_usuarios[$j][5];?>
+                        <td><a class="btn btn-sm btn-info btn-fill" href="mensajes.php?usuario=<?php echo $idUsuario ?> "   role="button" title="Enviar mensaje"><i class="fa fa-envelope"></i> Mensaje</a></td>
                         <td><a class="btn btn-sm btn-warning btn-fill" href="#" role="button" title="Ver perfil"><i class="fa fa-user"></i> Perfil</a></td>
                         </tr>
                         <?php };?>
