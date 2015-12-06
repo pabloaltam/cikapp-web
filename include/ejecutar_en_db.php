@@ -325,6 +325,17 @@ class OperacionesMYSQL {
         }
         return FALSE;
     }
+    function esIgualE($val, $val2) {
+        include './include/conexion.php';
+        $query = "SELECT password FROM empresa where idEmpresa=$val";
+        $resultado = $mysqli->query($query);
+        while ($rows = $resultado->fetch_assoc()) {
+            if ($rows['password'] === sha1(md5($val2))) {
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
 
     function agregarEstudios($idUsuario, $idEstudio) {
         include("./include/conexion.php");

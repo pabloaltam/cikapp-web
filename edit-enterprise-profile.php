@@ -114,7 +114,7 @@
 
         $Obj_operaciones = new OperacionesMYSQL();
 
-        if ($Obj_operaciones->esIgual($_SESSION['idEmpresa'], $_POST['pwd1']) && $_POST['pwd1'] === $_POST['pwd2']) {
+        if ($Obj_operaciones->esIgualE($_SESSION['idEmpresa'], $_POST['pwd1']) && $_POST['pwd1'] === $_POST['pwd2']) {
             $idEmpresa = $_SESSION['idEmpresa'];
             $nombre = $_POST['nombre'];
             $apellido = $_POST['apellido'];
@@ -122,17 +122,13 @@
             $email = $_POST['email'];
             $cargo = $_POST['cargo'];
             $razonSocial = $_POST['razonSocial'];
-            
             $idTipoEmpresa = $_POST['idTipoEmpresa'];
-            
             $COMUNA_ID = $_POST['COMUNA_ID'];
             $direccionEmpresa = $_POST['direccionEmpresa'];
-            
             $faxEmpresa = $_POST['faxEmpresa'];
             $fonoEmpresa = $_POST['fonoEmpresa'];
             $websiteEmpresa = $_POST['websiteEmpresa'];
             $emailEmpresa = $_POST['emailEmpresa'];
-
             $pwd1 = $_POST['pwd1'];
             $pwd1 = $_POST['pwd2'];
 
@@ -144,7 +140,6 @@
                     $msg = $msg . "El archivo es mayor que 5MB, debes reduzcirlo antes de subirlo<BR>";
                     $uploadedfileload = false;
                 }
-
                 if (!($_FILES["uploadedfile"]["type"] == "image/jpeg" OR $_FILES["uploadedfile"]["type"] == "image/gif" OR $_FILES["uploadedfile"]["type"] == "image/png")) {
                     $msg = $msg . " Tu archivo tiene que ser JPG o GIF. Otros archivos no son permitidos<BR>";
                     $uploadedfileload = false;
@@ -165,7 +160,6 @@
                     echo $msg;
                 }
             }
-
             $test = $Obj_operaciones->editarEmpresa($idEmpresa, $email, $cargo, $razonSocial, $faxEmpresa, $fonoEmpresa, $websiteEmpresa, $emailEmpresa, $nombre, $apellido, $apellidoM, $idTipoEmpresa, $COMUNA_ID, $direccionEmpresa);
             if ($test) {
                 $_SESSION['nombreEmpleado'] = $nombre;
@@ -176,11 +170,10 @@
                 echo 'ERROR: Intentelo más tarde.<br>';
             }
         } else {
-            echo 'INFO: Las contraseñas no coinciden';
+            echo 'Las contraseñas no coinciden';
         }
     }
     if (isset($_SESSION['idEmpresa'])) {
-
         $conSession = 'Si';
         include './include/conexion.php';
         $IDempresa = $_SESSION['idEmpresa'];
@@ -193,17 +186,13 @@
             $email = $rows['email'];
             $cargo = $rows['cargo'];
             $razonSocial = $rows['razonSocial'];
-            
             $idTipoEmpresa = $rows['idTipoEmpresa'];
-            
             $COMUNA_IDempresa = $rows['COMUNA_ID'];
             $direccionEmpresa = $rows['direccionEmpresa'];
-            
             $faxEmpresa = $rows['faxEmpresa'];
             $fonoEmpresa = $rows['fonoEmpresa'];
             $websiteEmpresa = $rows['websiteEmpresa'];
             $emailEmpresa = $rows['emailEmpresa'];
-            
             $pass = $rows['password'];
             $rutaImagen = $rows['rutaImagen'];
         }
