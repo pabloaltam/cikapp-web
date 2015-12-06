@@ -50,11 +50,10 @@
             require('conexion.php'); //Incluimos la conexion a la base de datos.
             $pass_encriptada = sha1(md5($pass));
             $sql = "SELECT * FROM empresa WHERE rut='$user' and password='$pass_encriptada'";
-            if($stmt = $mysqli->query($sql)){
+            if($result = $mysqli->query($sql)){
                 if ($rows = $result->fetch_assoc()) {
                     if($rows['codigo'] == 1){
                         @session_start();
-                        header("Location: panel-empresa.php");
                         if(sesion_iniciada()){
                             logout();
                         }
@@ -73,7 +72,8 @@
                         
                         $_SESSION['direccionEmpresa'] = $rows['direccionEmpresa'];
                         $_SESSION['COMUNA_ID'] = $rows['COMUNA_ID'];
-
+                        
+                        header("Location: panel-empresa.php");
                         return TRUE;
                     }else{
                         echo '<p>Antes de acceder debe confirmar el registrode su cuenta en su email</p>';
