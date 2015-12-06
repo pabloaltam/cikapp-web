@@ -35,8 +35,7 @@
                 echo '<p>Su usuario no se encuentra, por favor regístrese primero</p>';
                 return FALSE;
             }
-            $stmt->free_result();
-            $stmt->close();
+            $mysqli->close();
         }else{
             echo '<p>Rut no valido, ingreselo correctamente</p>';
             return FALSE;
@@ -87,8 +86,7 @@
                 echo '<p>Su empresa no se encuentra en nuestra base de datos, por favor regístrese primero</p>';
                 return FALSE;
             }
-            $stmt->free_result();
-            $stmt->close();
+            $mysqli->close();
         }else{
             echo '<p>Rut no válido, ingréselo correctamente</p>';
             return FALSE;
@@ -172,13 +170,13 @@
     function recuperar_claveEmpresa($email, $rut){
         require('conexion.php'); //Incluimos la conexion a la base de datos.
         $sql = "SELECT * FROM empresa WHERE rut='$rut' and emailEmpresa='$email'";
-        if($stmt = $mysqli->query($sql)){
+        if($result = $mysqli->query($sql)){
             if ($rows = $result->fetch_assoc()) {
                 if($rows['codigo'] == 1){ //revisar otra vez
                     $clave_nueva = clave_aleatoria(5);
                     $clave_nueva_encriptada = sha1(md5($clave_nueva));
                     $sql2="UPDATE empresa SET password = '$clave_nueva_encriptada' WHERE rut = '$rut' and emailEmpresa = '$email'";
-                    $stmt->execute();
+                    $result->execute();
                     
                     $headers = "From: admin@cikapp.com";
                     $mensaje = '<table width="629" border="0" cellspacing="1" cellpadding="2"> 
@@ -213,13 +211,13 @@
     function recuperar_claveUsuario($email, $rut){
         require('conexion.php'); //Incluimos la conexion a la base de datos.
         $sql = "SELECT * FROM usuario WHERE rut='$rut' and email='$email'";
-        if($stmt = $mysqli->query($sql)){
+        if($result = $mysqli->query($sql)){
             if ($rows = $result->fetch_assoc()) {
                 if($rows['codigo'] == 1){ //revisar otra vez
                     $clave_nueva = clave_aleatoria(5);
                     $clave_nueva_encriptada = sha1(md5($clave_nueva));
                     $sql2="UPDATE usuario SET password = '$clave_nueva_encriptada' WHERE rut = '$rut' and email = '$email'";
-                    $stmt->execute();
+                    $result->execute();
                     
                     $headers = "From: admin@cikapp.com";
                     $mensaje = '<table width="629" border="0" cellspacing="1" cellpadding="2"> 
