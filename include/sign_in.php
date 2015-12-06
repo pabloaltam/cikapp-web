@@ -48,12 +48,9 @@
         $user = str_replace('.', '', $user);
         if($obj->RutValidateLoginEnterprise($user)) {
             require('conexion.php'); //Incluimos la conexion a la base de datos.
-            $sql = "SELECT * FROM empresa WHERE rut=? and password=?";
-            if($stmt = $mysqli->prepare($sql)){
-                $pass_encriptada = sha1(md5($pass));
-                $stmt->bind_param('ss',$user, $pass_encriptada);
-                $stmt->execute();
-                $result = $stmt->get_result();
+            $pass_encriptada = sha1(md5($pass));
+            $sql = "SELECT * FROM empresa WHERE rut='$user' and password='$pass_encriptada'";
+            if($stmt = $mysqli->query($sql)){
                 if ($rows = $result->fetch_assoc()) {
                     if($rows['codigo'] == 1){
                         @session_start();
@@ -174,11 +171,8 @@
     
     function recuperar_claveEmpresa($email, $rut){
         require('conexion.php'); //Incluimos la conexion a la base de datos.
-        $sql = "SELECT * FROM empresa WHERE rut=? and emailEmpresa=?";
-        if($stmt = $mysqli->prepare($sql)){
-            $stmt->bind_param('ss',$rut, $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
+        $sql = "SELECT * FROM empresa WHERE rut='$rut' and emailEmpresa='$email'";
+        if($stmt = $mysqli->query($sql)){
             if ($rows = $result->fetch_assoc()) {
                 if($rows['codigo'] == 1){ //revisar otra vez
                     $clave_nueva = clave_aleatoria(5);
@@ -218,11 +212,8 @@
     }
     function recuperar_claveUsuario($email, $rut){
         require('conexion.php'); //Incluimos la conexion a la base de datos.
-        $sql = "SELECT * FROM usuario WHERE rut=? and email=?";
-        if($stmt = $mysqli->prepare($sql)){
-            $stmt->bind_param('ss',$rut, $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
+        $sql = "SELECT * FROM usuario WHERE rut='$rut' and email='$email'";
+        if($stmt = $mysqli->query($sql)){
             if ($rows = $result->fetch_assoc()) {
                 if($rows['codigo'] == 1){ //revisar otra vez
                     $clave_nueva = clave_aleatoria(5);
