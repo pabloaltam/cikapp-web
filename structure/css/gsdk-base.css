@@ -1051,7 +1051,7 @@ input.ct-red + span.switch-left, input.ct-red + span + label + span.switch-right
     margin-left: 0;
 }
 .modal-backdrop.in {
-    opacity: 0.25;
+    /* opacity: 0.25; */
 }
 .carousel-control{
     width: 8%;

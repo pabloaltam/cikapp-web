@@ -30,6 +30,19 @@
                         <p>Mensajes</p>
                     </a>
                 </li>
+                 <li>
+                    <a href="mostrar-avisos.php">
+                        <i class="pe-7s-portfolio"></i>
+                        <p>Ofertas de empleos</p>
+                    </a>
+                </li>
+                 <li>
+                    <a href="mis-postulaciones.php">
+                        <i class="pe-7s-folder"></i>
+                        <p>Mis postulaciones</p>
+                    </a>
+                </li>
+                
                 <li>
                     <a href="edit-user-profile.php">
                         <i class="pe-7s-magic-wand"></i>
@@ -38,7 +51,7 @@
                 </li>
                 <li>
                     <a href="mostrar-usuarios.php">
-                        <i class="pe-7s-magic-wand"></i>
+                        <i class="pe-7s-users"></i>
                         <p>Personas</p>
                     </a>
                 </li>

@@ -1,6 +1,13 @@
 <?php include 'structure/navbarFinSession.php'; ?>
 <div class="wrapper">
-    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+   <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
@@ -9,7 +16,7 @@
             </div>
 
             <ul class="nav">
-                <li>
+                <li >
                     <a href="panel-usuario.php">
                         <i class="pe-7s-home"></i>
                         <p>Escritorio</p>
@@ -21,15 +28,35 @@
                         <p>Mensajes</p>
                     </a>
                 </li>
+                 <li>
+                    <a href="mostrar-avisos.php">
+                        <i class="pe-7s-portfolio"></i>
+                        <p>Ofertas de empleos</p>
+                    </a>
+                </li>
+                 <li>
+                    <a href="mis-postulaciones.php">
+                        <i class="pe-7s-folder"></i>
+                        <p>Mis postulaciones</p>
+                    </a>
+                </li>
+                
                 <li class="active">
                     <a href="edit-user-profile.php">
                         <i class="pe-7s-magic-wand"></i>
                         <p>Editar perfil</p>
                     </a>
                 </li>
+                <li>
+                    <a href="mostrar-usuarios.php">
+                        <i class="pe-7s-users"></i>
+                        <p>Personas</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
+
 
     <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
@@ -268,7 +295,7 @@
                                             </div>
                                             <fieldset>
                                                 <legend>Información personal</legend>
-
+                                                        
                                                 <div class="form-group">
                                                     <label class="col-lg-3 control-label">Nombre:</label>
                                                     <div class="col-lg-8">
@@ -310,25 +337,26 @@
                                                         <div class="ui-select">
                                                             <select id="region" class="form-control">
                                                                 <?php
-                                                                include './include/conexion.php';
+                                                                require 'include/conexion.php';
                                                                 $query = "SELECT * FROM region";
                                                                 $resultado = $mysqli->query($query);
                                                                 $regionID = null;
-                                                                 $selected = null;
                                                                 while ($rows = $resultado->fetch_assoc()) {
-                                                                   
                                                                     $sql = "select REGION_ID from comuna a, provincia b, region c where COMUNA_PROVINCIA_ID = PROVINCIA_ID and PROVINCIA_REGION_ID = REGION_ID and COMUNA_ID=$COMUNA_IDusuario;";
-                                                                    if ($resultado2 = $mysqli->query($sql)){
-                                                                   
+                                                                    $resultado2 = $mysqli->query($sql);
+                                                                    $selected = null;
+                                                                   if($resultado2 = $mysqli->query($sql)) {
                                                                     while ($rows2 = $resultado2->fetch_assoc()) {
-                                                                        
-                                                                        if ($rows['REGION_ID'] === $rows2['REGION_ID']) {
+                                                                        if ($rows['REGION_ID'] == $rows2['REGION_ID']) {
                                                                             $selected = "selected='selected'";
                                                                             $regionID = $rows2['REGION_ID'];
                                                                         }
                                                                     }
-                                                                    } 
                                                                     print("<option value='" . $rows['REGION_ID'] . "' $selected>" . $rows['REGION_NOMBRE'] . "</option>");
+                                                                   } else {
+                                                                       print("<option value='" . $rows['REGION_ID'] . "'>" . $rows['REGION_NOMBRE'] . "</option>");
+                                                                   }
+                                                                    
                                                                 }
                                                                 ?>
                                                             </select>
@@ -458,7 +486,7 @@
                                                 <div class="form-group">
                                                     <label class="col-lg-3 control-label">Video de presentación: (URL de youtube) <a href="#" title="Info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Actualmente solo aceptamos videos provenientes de youtube">Más info</a></label>
                                                     <div class="col-lg-8">
-                                                        <input class="form-control" value="<?php print "https://www.youtube.com/embed/$video1"; ?>" type="text" name="video" id="video">
+                                                        <input class="form-control" value="<?php print "https://www.youtube.com/watch?v=$video1"; ?>" type="text" name="video" id="video">
                                                         <br/>
                                                         <label class="lblVideo">Ej: https://www.youtube.com/watch?v=0vrdgDdPApQ</label>
 
@@ -557,17 +585,17 @@
 }
 include 'structure/footer.php';
 ?>
+<script src="structure/jquery/jquery-1.11.3.min.js"></script>
 <script src="structure/js/jquery-perfiles.js"></script>
 <script src="structure/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    
         $("#myTags").tagit({
             fieldName: "areasInteres[]",
             availableTags: ["Tecnologia", "Agronomia", "Salud", "Finanzas", "Contabilidad", "Programación", "Proyectos", "Informática", "Redes y Telecomunicaciones", "Innovación", "Pesca"],
             caseSensitive: true,
             allowSpaces: true,
             tagLimit: 3
-        });
     });
 </script>

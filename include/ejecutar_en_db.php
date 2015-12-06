@@ -49,31 +49,27 @@ class OperacionesMYSQL {
         $pass = sha1(md5($password1));
         include("./include/conexion.php");
         $rut = str_replace('.', '', $rut);
+        echo 'cod=' . $codigo . " - ";
         $cad = "INSERT INTO usuario (rut, email, password, codigo) VALUES ('$rut','$email','$pass','$codigo');";
         if ($this->RutValidate($rut)) {
             if ($this->emailValidate($email)) {
-                if ($this -> passwordValidate($password1, $password2)){
-                    if ($mysqli->query($cad)===TRUE) {
-                        echo '1 - '. $cad;
+                if ($this->passwordValidate($password1, $password2)) {
+                    if ($mysqli->query($cad) === TRUE) {
                         return TRUE;
                     } else {
-                       
-                          echo '2 - '. $cad. " $resultado ". "  ". $mysqli -> error;;
                         return FALSE;
                     }
                 } else {
-                    echo '3 - ' . $cad;
                     return FALSE;
                 }
             } else {
-                echo '4 - '. $cad;
                 return FALSE;
             }
         } else {
-            echo '5 - '. $cad;
             return FALSE;
         }
     }
+
     /**
      * Validador de RUT con digito verificador 
      *
@@ -262,7 +258,7 @@ class OperacionesMYSQL {
 
     function validarCodigo($codigo) {
 
-        require 'conexion.php';
+        include 'conexion.php';
         $query = "SELECT * FROM usuario where codigo={$codigo};";
         $resultado = $mysqli->query($query);
         while ($rows = $resultado->fetch_assoc()) {
@@ -343,6 +339,7 @@ class OperacionesMYSQL {
         $resultado = $mysqli->query($sql);
         while ($rows = $resultado->fetch_assoc()) {
             if ($rows['usuario_id'] == $usuarioID and $rows['educacion_id'] == $educacion_id) {
+                
                 return FALSE;
             }
         }
@@ -369,35 +366,61 @@ class OperacionesMYSQL {
         return $resultado;
     }
 
-
-    function mostrarUsuarios($noRutActual){
+    function mostrarUsuarios($noRutActual) {
         include("include/conexion.php");
-        $consulta_usuarios ="SELECT * FROM usuario WHERE rut <> '$noRutActual' ORDER BY apellido DESC";
+        $consulta_usuarios = "SELECT * FROM usuario WHERE rut <> '$noRutActual' ORDER BY apellido DESC";
         $resultado = $mysqli->query($consulta_usuarios);
-        $i=0;
-        while($fila = $resultado->fetch_assoc()){
-        $arreglo[$i]=array($fila['nombre'],$fila['apellido'],$fila['email'],$fila['skype'],$fila['areasInteres'],$fila['idUsuario']);
-        $i++;
+        $i = 0;
+        while ($fila = $resultado->fetch_assoc()) {
+            $arreglo[$i] = array($fila['nombre'], $fila['apellido'], $fila['email'], $fila['skype'], $fila['areasInteres'], $fila['idUsuario']);
+            $i++;
         }
-            return $arreglo;
+        return $arreglo;
     }
 
-        function recuperarUsuario($idUsuario){
+    function recuperarUsuario($idUsuario) {
         include("include/conexion.php");
-        $consulta_usuarios ="SELECT * FROM usuario WHERE idUsuario = '$idUsuario' ";
+        $consulta_usuarios = "SELECT * FROM usuario WHERE idUsuario = '$idUsuario' ";
         $resultado = $mysqli->query($consulta_usuarios);
         $mysqli->close();
         return $resultado;
     }
 
-        function enviarMensaje($idUsuario, $mensaje){
+    function enviarMensaje($idUsuario, $mensaje) {
         include("include/conexion.php");
-        $insertar_mensaje ="INSERT INTO conversacion (idUsuario, mensaje) VALUES ('$idUsuario', '$mensaje') ";
+        $insertar_mensaje = "INSERT INTO conversacion (idUsuario, mensaje) VALUES ('$idUsuario', '$mensaje') ";
         $resultado = $mysqli->query($insertar_mensaje);
         $mysqli->close();
         return $resultado;
     }
 
+    function YaPostulo($idUsuario,$idPublicacion) {
+        include 'include/conexion.php';
+        $sql = "SELECT *FROM usuario_publicaciones where USUARIO_ID={$idUsuario} and PUBLICACION_ID={$idPublicacion}";
+        if ($result = $mysqli->query($sql)) {
+            if($result->fetch_assoc()) {
+                return TRUE;
+            } else {
+                return FALSE;    
+            }
+        } else {
+            return FALSE;
+        }
+    }
 
+    function postulacionUsuario($idPostulacion, $idUsuario){
+        include 'include/conexion.php';
+        $sql="INSERT INTO usuario_publicaciones (PUBLICACION_ID,USUARIO_ID) VALUES ($idPostulacion,$idUsuario)";
+        $result= $mysqli->query($sql);
+        $mysqli->close();
+        return $result;
+        
+    }
 
+    function postulacionesUsuario($idUsuario){
+        include 'include/conexion.php';
+        $sql="SELECT * FROM publicaciones,comuna,region,provincia,pais, usuario_publicaciones,usuario WHERE usuario_publicaciones.PUBLICACION_ID=publicaciones.id and usuario_publicaciones.USUARIO_ID=usuario.idUsuario and publicaciones.COMUNA_ID=comuna.COMUNA_ID and provincia.PROVINCIA_ID=comuna.COMUNA_PROVINCIA_ID and provincia.PROVINCIA_REGION_ID=region.REGION_ID and region.REGION_PAIS_ID=pais.PAIS_ID and usuario_publicaciones.USUARIO_ID={$idUsuario} ORDER BY fecha_publicacion DESC;";
+        $result = $mysqli->query($sql);
+        return $result;
+    }
 }

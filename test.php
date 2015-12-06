@@ -5,12 +5,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-include '/include/ejecutar_en_db.php';
-$obj= new OperacionesMYSQL();
-if($obj->comprobarUsuarioEducacion(9, 1))
+$to="viktor_viro@hotmail.com";
+$subject = "Mensaje de prueba";
+$message ="Esto es una prueba";
+if(mail($to, $subject, $message)) 
 {
-    echo 'Existe';
-}
-else {
-    echo 'no existe';
+    echo 'Mensaje enviado';
+} else {
+    echo 'Mensaje no enviado';
 }

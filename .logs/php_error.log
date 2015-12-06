@@ -1,0 +1,9 @@
+[05-Dec-2015 23:11:08 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/u850781993/public_html/edit-user-profile.php on line 321
+[05-Dec-2015 23:15:28 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/u850781993/public_html/edit-user-profile.php on line 321
+[05-Dec-2015 23:16:57 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/u850781993/public_html/edit-user-profile.php on line 321
+[06-Dec-2015 00:59:03 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/u850781993/public_html/edit-user-profile.php on line 321
+[06-Dec-2015 01:07:51 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/u850781993/public_html/edit-user-profile.php on line 321
+[06-Dec-2015 01:08:03 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/u850781993/public_html/perfil-usuario.php on line 27
+[06-Dec-2015 01:08:08 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/u850781993/public_html/edit-user-profile.php on line 321
+[06-Dec-2015 01:08:41 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/u850781993/public_html/perfil-usuario.php on line 27
+[06-Dec-2015 02:44:08 UTC] PHP Fatal error:  Call to undefined method mysqli_stmt::get_result() in /home/u850781993/public_html/include/sign_in.php on line 181
