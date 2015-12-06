@@ -599,3 +599,5 @@ include 'structure/footer.php';
             tagLimit: 3
     });
 </script>
+    </body>
+</html>

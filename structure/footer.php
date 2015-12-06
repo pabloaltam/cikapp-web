@@ -16,5 +16,3 @@
         <script src="structure/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
         <script src="structure/js/jquery.Rut.min.js"></script>
         <script src="structure/js/filtro.js"></script>
-    </body>
-</html>

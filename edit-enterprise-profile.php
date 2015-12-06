@@ -1,6 +1,111 @@
---<?php include 'structure/navbarFinSession.php'; ?>
+<?php include 'structure/navbarFinSession.php'; ?>
+<div class="wrapper">
+    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
-<div class="container">
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="panel-empresa.php" class="simple-text">
+                    Panel de Empresa
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="panel-empresa.php">
+                        <i class="pe-7s-home"></i>
+                        <p>Control Panel</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="sistema_mensajes.php">
+                        <i class="pe-7s-mail"></i>
+                        <p>Mensajes</p>
+                    </a>
+                </li>
+                 <li>
+                     <a href="publicaciones.php">
+                        <i class="pe-7s-portfolio"></i>
+                        <p>Ofertas publicadas por mi</p>
+                    </a>
+                </li>
+                 <li>
+                     <a href="filtro-usuarios.php">
+                        <i class="pe-7s-folder"></i>
+                        <p>Buscar postulantes</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="edit-enterprise-profile.php">
+                        <i class="pe-7s-magic-wand"></i>
+                        <p>Editar perfil</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="mostrar-usuarios.php">
+                        <i class="pe-7s-users"></i>
+                        <p>Personas</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button> -->
+                    <a class="navbar-brand" href="#">Usuario</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-envelope"></i>
+                                    <b class="caret"></b>
+                                    <span class="notification">1</span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Mensaje 1</a></li>
+                                <li><a href="#">Mensaje 2</a></li>
+                              </ul>
+                        </li>
+                                                <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-dashboard"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                           <a href="">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    
+    
+<div class="container-fluid">
     <h1 class="page-header">Edite el perfil de su empresa</h1>
     <?php
     if (isset($_POST['nombre'])) {
@@ -319,12 +424,12 @@
             </form>
         </div>
     </div>
+</div>
+</div>
     <script src="structure/jquery/jquery-1.11.3.min.js"></script>
     <script src="structure/js/jquery-perfiles.js"></script>
     <?php
-} else {
-    header('Location: ./index.php');
-}
+} 
 include 'structure/footer.php';
 ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
