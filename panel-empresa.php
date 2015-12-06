@@ -1,4 +1,4 @@
-<?php include 'structure/navbar.php'; 
+<?php include 'structure/navbarFinSession.php'; 
 ini_set("display_errors",1);
 ?>
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
