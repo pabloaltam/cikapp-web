@@ -228,30 +228,31 @@ class OperacionesMYSQL {
 
     function crearEmpresa($rut, $email, $password1, $password2, $codigo) {
 # Insertando en la Base de Datos con PDOStatement
-        $sql = "INSERT INTO empresa (rut, email, password, codigo) VALUES (?,?,?,?);";
+        $pass = sha1(md5($password1));
+        include("./include/conexion.php");
         $rut = str_replace('.', '', $rut);
+        echo 'cod=' . $codigo . " - ";
+
+        $sql = "INSERT INTO empresa (rut, email, password, codigo) VALUES ('$rut','$email','$pass','$codigo');";
         if ($this->RutEmpresaValidate($rut)) {
             if ($this->emailEmpresaValidate($email)) {
                 if ($this->passwordValidate($password1, $password2)) {
-                    require("conexion.php");
-                    if ($stmt = $mysqli->prepare($sql)) {
-                        /* ligar parámetros para marcadores */
-                        $stmt->bind_param("sssi", $rut, $email, sha1(md5($password1)), $codigo);
-                        /* ejecutar la consulta */
-                        $stmt->execute();
-                        /* cerrar sentencia */
-                        $stmt->close();
+                    if ($mysqli->query($sql) === TRUE) {
                         return TRUE;
                     } else {
+                        echo "1";
                         return FALSE;
                     }
                 } else {
+                    echo "2";
                     return FALSE;
                 }
             } else {
+                echo "3";
                 return FALSE;
             }
         } else {
+            echo '4';
             return FALSE;
         }
     }
@@ -281,7 +282,7 @@ class OperacionesMYSQL {
         $resultado = $mysqli->query($query);
         while ($rows = $resultado->fetch_assoc()) {
             if (count($rows) != 0) {
-                $sqlUpdate = "UPDATE empresa SET codigo='1' WHERE idEmpresa={$rows['idEmpresa']}";
+                $sqlUpdate = "UPDATE empresa SET codigo='1' WHERE idEmpresa='{$rows['idEmpresa']}'";
                 if ($mysqli->query($sqlUpdate)) {
                     return TRUE;
                 } else {
@@ -339,7 +340,7 @@ class OperacionesMYSQL {
         $resultado = $mysqli->query($sql);
         while ($rows = $resultado->fetch_assoc()) {
             if ($rows['usuario_id'] == $usuarioID and $rows['educacion_id'] == $educacion_id) {
-                
+
                 return FALSE;
             }
         }
@@ -394,33 +395,33 @@ class OperacionesMYSQL {
         return $resultado;
     }
 
-    function YaPostulo($idUsuario,$idPublicacion) {
+    function YaPostulo($idUsuario, $idPublicacion) {
         include 'include/conexion.php';
         $sql = "SELECT *FROM usuario_publicaciones where USUARIO_ID={$idUsuario} and PUBLICACION_ID={$idPublicacion}";
         if ($result = $mysqli->query($sql)) {
-            if($result->fetch_assoc()) {
+            if ($result->fetch_assoc()) {
                 return TRUE;
             } else {
-                return FALSE;    
+                return FALSE;
             }
         } else {
             return FALSE;
         }
     }
 
-    function postulacionUsuario($idPostulacion, $idUsuario){
+    function postulacionUsuario($idPostulacion, $idUsuario) {
         include 'include/conexion.php';
-        $sql="INSERT INTO usuario_publicaciones (PUBLICACION_ID,USUARIO_ID) VALUES ($idPostulacion,$idUsuario)";
-        $result= $mysqli->query($sql);
+        $sql = "INSERT INTO usuario_publicaciones (PUBLICACION_ID,USUARIO_ID) VALUES ($idPostulacion,$idUsuario)";
+        $result = $mysqli->query($sql);
         $mysqli->close();
         return $result;
-        
     }
 
-    function postulacionesUsuario($idUsuario){
+    function postulacionesUsuario($idUsuario) {
         include 'include/conexion.php';
-        $sql="SELECT * FROM publicaciones,comuna,region,provincia,pais, usuario_publicaciones,usuario WHERE usuario_publicaciones.PUBLICACION_ID=publicaciones.id and usuario_publicaciones.USUARIO_ID=usuario.idUsuario and publicaciones.COMUNA_ID=comuna.COMUNA_ID and provincia.PROVINCIA_ID=comuna.COMUNA_PROVINCIA_ID and provincia.PROVINCIA_REGION_ID=region.REGION_ID and region.REGION_PAIS_ID=pais.PAIS_ID and usuario_publicaciones.USUARIO_ID={$idUsuario} ORDER BY fecha_publicacion DESC;";
+        $sql = "SELECT * FROM publicaciones,comuna,region,provincia,pais, usuario_publicaciones,usuario WHERE usuario_publicaciones.PUBLICACION_ID=publicaciones.id and usuario_publicaciones.USUARIO_ID=usuario.idUsuario and publicaciones.COMUNA_ID=comuna.COMUNA_ID and provincia.PROVINCIA_ID=comuna.COMUNA_PROVINCIA_ID and provincia.PROVINCIA_REGION_ID=region.REGION_ID and region.REGION_PAIS_ID=pais.PAIS_ID and usuario_publicaciones.USUARIO_ID={$idUsuario} ORDER BY fecha_publicacion DESC;";
         $result = $mysqli->query($sql);
         return $result;
     }
+
 }

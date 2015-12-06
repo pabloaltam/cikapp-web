@@ -107,8 +107,8 @@
 
         <div class="content">
             <div class="container">
-                <h2>Ofertas de empleo en tu ciudad</h2>
-                <p>Listado de todas las publicaciones realizadas hasta la fecha:</p>  
+                <h2>Mis postulaciones</h2>
+                <p>Listado de mis postulaciones.</p>  
                 
                             <?php
             include './include/ejecutar_en_db.php';
