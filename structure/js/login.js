@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+$('.collapse').collapse();
 $(document).ready(function () {
     $('#rut').Rut({
         on_error: function () {

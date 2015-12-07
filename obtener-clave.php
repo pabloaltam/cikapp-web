@@ -1,4 +1,4 @@
-        <?php include 'structure/navbar.php'; ?>
+        <?php include 'structure/navbarFinSession.php'; ?>
 
 
         <div class="container sign-in-up">
@@ -41,7 +41,6 @@
                                     }
                                 } else {
                                     echo '<p>Ingrese su rut y su email para poder enviarle una nueva contraseña con la cual podra volver a ingresar a su cuenta.</p>';
-                                    echo '<p><b>Si su cuenta es empresa, ingrese rut e email correspondiente a la empresa.</b></p>';
                                 }
                                 ?>
                                 <br>

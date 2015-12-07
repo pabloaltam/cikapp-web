@@ -21,19 +21,7 @@
         </button>
         <a class="navbar-brand" href="#">Cikapp</a>
     </div>
-    <div id="navbar" class="collapse navbar-collapse">
-        
-
-<!--
-<div class="btn-group">
-  <a class="btn btn-warning btn-round dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-fw"></i>Cuenta <span class="fa fa-caret-down"></span></a>
-  <ul class="dropdown-menu">
-    <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Persona</a></li>
-    <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Empresa</a></li>
-  </ul>
-</div>
--->
-
+    <div id="navbar" class="collapse navbar-collapse">    
 <a class="btn btn-round btn-primary" href="registro.php" role="button"><i class="fa fa-user"></i> Registrarse</a>
 <a class="btn btn-round btn-primary" href="login.php" role="button"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
 

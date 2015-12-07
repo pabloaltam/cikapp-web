@@ -63,10 +63,13 @@
                     </div>
                 </fieldset>
                 <br>
-                <div class="text-center">
+                    <a href="obtener-clave.php" >Olvidé mi contraseña</a>
+                <br>
+                <br>
+                
                     <button class="btn btn-primary btn-block btn-fill" type="submit" disabled id="btnIniciar">Ingresar</button>
-                    <a href="obtener-clave.php" role="button" class="btn btn-primary btn-block btn-fill">Olvidé mi contraseña</a>
-                </div>
+                    
+
             </form>
         </div>
     </div>
