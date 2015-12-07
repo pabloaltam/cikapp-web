@@ -64,7 +64,7 @@
 						?>
 
 							<p class="help-block">Enviar mensaje a</p>
-							<input type="text" class="form-control" id="user" name="user" value="<?php echo $idUsuario ?>">
+							<input type="hidden" class="form-control" id="user" name="user" value="<?php echo $idUsuario ?>">
 							<label for="user"><?php echo $nombre ." " .$apellido ." " .$apellidoM; ?></label>
 						</div>
 						<div class="form-group">							

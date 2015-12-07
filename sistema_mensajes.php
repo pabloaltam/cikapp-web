@@ -102,12 +102,36 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Sistema de mensajes privados</h4>
-                                <p class="category">...</p>
-                                <a href="mensajes.php">Conversaciones</a>
-                                <a href="enviar_mensaje.php">Comenzar conversación</a>
+                                <p class="category">Conversaciones</p>
                             </div>
                             <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
+                            <?php
+                                $mi_id = $_SESSION['idUsuario']; 
+                                    require './include/conexion.php';
+                                    $obtener_mensajes = "SELECT `hash`, `usuario_uno`, `usuario_dos` FROM grupo_mensajes WHERE usuario_uno='$mi_id' OR usuario_dos='$mi_id' ";
+                                    $mostrar_usuarios = $mysqli->query($obtener_mensajes);
+
+                                    while ($rows = $mostrar_usuarios->fetch_assoc()) {
+                                        $hash = $rows['hash'];
+                                        $usuario_uno = $rows['usuario_uno'];
+                                        $usuario_dos = $rows['usuario_dos'];
+                                        
+                                        if($usuario_uno == $mi_id){
+                                            $seleccionar_id = $usuario_dos;
+                                        } else {
+                                            $seleccionar_id = $usuario_uno;
+                                        }
+                                            $obtener_usuario = "SELECT `nombre`,`apellido` FROM usuario WHERE idUsuario='$seleccionar_id' ";
+                                            $resultado = $mysqli->query($obtener_usuario);
+                                            while ($rows = $resultado->fetch_assoc()) {
+                                            $seleccionar_nombre = $rows['nombre'];
+                                            $seleccionar_apellido = $rows['apellido'];
+                                        }
+                                        
+                                        echo "<p><a href='mensajes.php?usuario=$usuario_dos'>$seleccionar_nombre $seleccionar_apellido</a></p>";
+                                    }
+                                
+                            ?>
 
                                 <div class="footer">
                                     <div class="legend">
