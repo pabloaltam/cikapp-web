@@ -1,5 +1,5 @@
 
-<?php include 'structure/navbar.php'; ?>
+<?php include 'structure/navbarFinSession.php'; ?>
 <div class="container sign-in-up">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -84,7 +84,7 @@
 
                 <div class="tab-content">
                     <div class="tab-pane fade in active text-center" id="pp">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnEnviar">Registrarme</button>
+                        <button class="btn btn-primary btn-lg btn-block btn-fill" type="submit" name="btnEnviar">Registrarme</button>
                     </div>
                 </div>
             </form>

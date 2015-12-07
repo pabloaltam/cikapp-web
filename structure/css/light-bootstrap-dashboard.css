@@ -731,7 +731,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 
 .btn-round {
   border-width: 1px;
-  border-radius: 30px !important;
+  /* border-radius: 30px !important; */
   padding: 9px 18px;
 }
 .btn-round.btn-icon {

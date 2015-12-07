@@ -20,6 +20,12 @@
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
         <link href="structure/css/jquery.tagit.css" rel="stylesheet" type="text/css">
         <link href="structure/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+
+
+        <link href="structure/bstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="structure/css/shit.css" rel="stylesheet">
+
+
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -34,25 +40,7 @@
                     <a class="navbar-brand" href="#">Cikapp</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
-                    <form class="nav navbar-nav navbar-right">
-                        <!--
-                        <div class="btn-group">
-                          <a class="btn btn-warning btn-round dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-fw"></i>Cuenta <span class="fa fa-caret-down"></span></a>
-                          <ul class="dropdown-menu">
-                            <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Persona</a></li>
-                            <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Empresa</a></li>
-                          </ul>
-                        </div> -->
-                        <a class="btn btn-sm btn-primary btn-round" title="Ver mi perfil" href="./perfil-usuario.php" role="button"><i class="fa fa-user"></i>
-                            <a class="btn btn-sm btn-primary btn-round" title="Editar mi perfil" href="./edit-user-profile.php" role="button"><i class="fa fa-user"></i>
-                                <?php
-                                //hola
-                                @session_start();
-                                echo $_SESSION['nombre'] . " " . $_SESSION['apellido'];
-                                ?>
-                            </a>
-                            <a class="btn btn-sm btn-primary btn-round btn-fill" href="./logout.php" role="button" title="Salir"><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
-                    </form>
+
                     <ul class="nav navbar-nav">
                         <li><a href="index.php">Inicio</a></li>
                         <li><a href="#">Nosotros</a></li>
@@ -67,8 +55,54 @@
                                 <li><a href="#">Otros</a></li>
                             </ul>
                         </li>
+                        <li role="separator" class="divider"></li>
+                        <?php
+                        //hola
+                        @session_start();
+                        if (isset($_SESSION['nombre'])) {
+                            ?>
+                            <li>
+                                <a title="Ver mi perfil" href="./perfil-usuario.php" ><i class="fa fa-user"></i></a>
+                            </li>
+                            <li>
+                                <a title="Editar mi perfil" href="./edit-user-profile.php"><i class="fa fa-user"></i>
+                                    <?php echo $_SESSION['nombre'] . " " . $_SESSION['apellido']; ?>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./logout.php" title="Salir"><i class="fa fa-sign-out"></i> Cerrar Sesión</a>
+
+                            </li>
+                            <?php
+                        } elseif (isset($_SESSION['nombreEmpleado'])) {
+                            ?>
+                            <li>
+                                <a title="Ver mi perfil" href="./perfil-empresa.php" role="button"><i class="fa fa-user"></i></a>
+                            </li>
+                            <li>
+                                <a title="Editar mi perfil" href="./edit-enterprise-profile.php" role="button"><i class="fa fa-user"></i>
+                                    <?php echo $_SESSION['nombreEmpleado'] . " " . $_SESSION['apellidoEmpleado'] . " ({$_SESSION["razonSocial"]})"; ?>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./logout.php" role="button" title="Salir"><i class="fa fa-sign-in"></i> Cerrar Sesión</a>
+
+                            </li>
+                            <?php
+                        } else {
+                            ?>
+                            <li>
+                                <a href="registro.php" role="button"><i class="fa fa-user"></i> Registrarse</a>    
+                            </li>
+                            <li>
+                                <a href="login.php" role="button"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>    
+                            </li>
+                            <?php
+                        }
+                        ?>
+                        </li>
                     </ul>
+
                 </div>
             </div>
         </nav>
-

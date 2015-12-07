@@ -22,7 +22,7 @@
         <a class="navbar-brand" href="#">Cikapp</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
-        <form class="nav navbar-nav navbar-right">
+        
 
 <!--
 <div class="btn-group">
@@ -37,7 +37,7 @@
 <a class="btn btn-round btn-primary" href="registro.php" role="button"><i class="fa fa-user"></i> Registrarse</a>
 <a class="btn btn-round btn-primary" href="login.php" role="button"><i class="fa fa-sign-in"></i> Iniciar Sesión</a>
 
-        </form>
+ 
 
         <ul class="nav navbar-nav">
             <li><a href="index.php">Inicio</a></li>

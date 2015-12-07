@@ -1,4 +1,4 @@
-<?php include 'structure/navbar.php'; ?>
+<?php include 'structure/navbarFinSession.php'; ?>
 <div align="center">
     <div class="alert alert-warning" role="alert">Estamos trabajando en nuestra nueva plataforma.</div>
     </div>
