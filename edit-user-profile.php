@@ -1,13 +1,24 @@
-<?php include 'structure/navbarFinSession.php'; ?>
+<?php
+@session_start();
+if (isset($_SESSION['idUsuario'])) {
+    
+} else {
+    header('Location: index.php');
+}
+include 'structure/navbarFinSession.php';
+include './include/ejecutar_en_db.php';
+
+$Obj_operaciones = new OperacionesMYSQL();
+?>
 <div class="wrapper">
-   <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
-    <!--
-
-        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-        Tip 2: you can also add an image using data-image tag
-
-    -->
+        <!--
+    
+            Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+            Tip 2: you can also add an image using data-image tag
+    
+        -->
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
@@ -28,19 +39,19 @@
                         <p>Mensajes</p>
                     </a>
                 </li>
-                 <li>
+                <li>
                     <a href="mostrar-avisos.php">
                         <i class="pe-7s-portfolio"></i>
                         <p>Ofertas de empleos</p>
                     </a>
                 </li>
-                 <li>
+                <li>
                     <a href="mis-postulaciones.php">
                         <i class="pe-7s-folder"></i>
                         <p>Mis postulaciones</p>
                     </a>
                 </li>
-                
+
                 <li class="active">
                     <a href="edit-user-profile.php">
                         <i class="pe-7s-magic-wand"></i>
@@ -125,9 +136,8 @@
                             <?php
                             if (isset($_POST['nombre'])) {
 
-                                include './include/ejecutar_en_db.php';
 
-                                $Obj_operaciones = new OperacionesMYSQL();
+
 
                                 if ($Obj_operaciones->esIgual($_SESSION['idUsuario'], $_POST['pwd1']) && $_POST['pwd1'] === $_POST['pwd2']) {
                                     $idUsuario = $_SESSION['idUsuario'];
@@ -138,43 +148,55 @@
                                     $skype = $_POST['skype'];
                                     $COMUNA_ID = $_POST['COMUNA_ID'];
                                     $video = $_POST['video'];
+                                    if (isset($_POST['selEducacion'])) {
+                                        $selEducacion = $_POST['selEducacion'];
+                                        if ($Obj_operaciones->comprobarUsuario($idUsuario)) {
+                                            echo 'Agrego';
+                                            $Obj_operaciones->agregarEstudios($idUsuario, $selEducacion);
+                                        } else {
+                                            echo "Actualizo ";
+                                            $Obj_operaciones->actualizarEstudios($idUsuario, $selEducacion);
+                                        }
+                                    }
 
-                                    if (isset($_POST['chkBasica'])) {
-                                        $chkBasica = $_POST['chkBasica'];
-                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkBasica)) {
-                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkBasica);
-                                        }
-                                    }
-                                    if (isset($_POST['chkMedia'])) {
-                                        $chkMedia = $_POST['chkMedia'];
-                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkMedia)) {
-                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkMedia);
-                                        }
-                                    }
-                                    if (isset($_POST['chkcft'])) {
-                                        $chkcft = $_POST['chkcft'];
-                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkcft)) {
-                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkcft);
-                                        }
-                                    }
-                                    if (isset($_POST['chkIp'])) {
-                                        $chkIp = $_POST['chkIp'];
-                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkIp)) {
-                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkIp);
-                                        }
-                                    }
-                                    if (isset($_POST['chkUniversidad'])) {
-                                        $chkUniversidad = $_POST['chkUniversidad'];
-                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkUniversidad)) {
-                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkUniversidad);
-                                        }
-                                    }
-                                    if (isset($_POST['chkOtro'])) {
-                                        $chkOtro = $_POST['chkOtro'];
-                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkOtro)) {
-                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkOtro);
-                                        }
-                                    }
+
+//
+//                                    if (isset($_POST['chkBasica'])) {
+//                                        $chkBasica = $_POST['chkBasica'];
+//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkBasica)) {
+//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkBasica);
+//                                        }
+//                                    }
+//                                    if (isset($_POST['chkMedia'])) {
+//                                        $chkMedia = $_POST['chkMedia'];
+//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkMedia)) {
+//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkMedia);
+//                                        }
+//                                    }
+//                                    if (isset($_POST['chkcft'])) {
+//                                        $chkcft = $_POST['chkcft'];
+//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkcft)) {
+//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkcft);
+//                                        }
+//                                    }
+//                                    if (isset($_POST['chkIp'])) {
+//                                        $chkIp = $_POST['chkIp'];
+//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkIp)) {
+//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkIp);
+//                                        }
+//                                    }
+//                                    if (isset($_POST['chkUniversidad'])) {
+//                                        $chkUniversidad = $_POST['chkUniversidad'];
+//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkUniversidad)) {
+//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkUniversidad);
+//                                        }
+//                                    }
+//                                    if (isset($_POST['chkOtro'])) {
+//                                        $chkOtro = $_POST['chkOtro'];
+//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkOtro)) {
+//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkOtro);
+//                                        }
+//                                    }
 
 
                                     if (isset($_POST['areasInteres'][0], $_POST['areasInteres'][1], $_POST['areasInteres'][2])) {
@@ -295,7 +317,7 @@
                                             </div>
                                             <fieldset>
                                                 <legend>Información personal</legend>
-                                                        
+
                                                 <div class="form-group">
                                                     <label class="col-lg-3 control-label">Nombre:</label>
                                                     <div class="col-lg-8">
@@ -345,18 +367,17 @@
                                                                     $sql = "select REGION_ID from comuna a, provincia b, region c where COMUNA_PROVINCIA_ID = PROVINCIA_ID and PROVINCIA_REGION_ID = REGION_ID and COMUNA_ID=$COMUNA_IDusuario;";
                                                                     $resultado2 = $mysqli->query($sql);
                                                                     $selected = null;
-                                                                   if($resultado2 = $mysqli->query($sql)) {
-                                                                    while ($rows2 = $resultado2->fetch_assoc()) {
-                                                                        if ($rows['REGION_ID'] == $rows2['REGION_ID']) {
-                                                                            $selected = "selected='selected'";
-                                                                            $regionID = $rows2['REGION_ID'];
+                                                                    if ($resultado2 = $mysqli->query($sql)) {
+                                                                        while ($rows2 = $resultado2->fetch_assoc()) {
+                                                                            if ($rows['REGION_ID'] == $rows2['REGION_ID']) {
+                                                                                $selected = "selected='selected'";
+                                                                                $regionID = $rows2['REGION_ID'];
+                                                                            }
                                                                         }
+                                                                        print("<option value='" . $rows['REGION_ID'] . "' $selected>" . $rows['REGION_NOMBRE'] . "</option>");
+                                                                    } else {
+                                                                        print("<option value='" . $rows['REGION_ID'] . "'>" . $rows['REGION_NOMBRE'] . "</option>");
                                                                     }
-                                                                    print("<option value='" . $rows['REGION_ID'] . "' $selected>" . $rows['REGION_NOMBRE'] . "</option>");
-                                                                   } else {
-                                                                       print("<option value='" . $rows['REGION_ID'] . "'>" . $rows['REGION_NOMBRE'] . "</option>");
-                                                                   }
-                                                                    
                                                                 }
                                                                 ?>
                                                             </select>
@@ -401,7 +422,7 @@
                                                             $areas = explode(",", $areaInteres);
 
                                                             foreach ($areas as $area) {
-                                                                print "<li class='btn btn-success'>" . $area . '</li>';
+                                                                print "<li>" . $area . '</li>';
                                                             }
                                                             ?>
                                                         </ul>
@@ -433,40 +454,57 @@
                                                 <div class="form-group">
                                                     <label class="col-md-3 control-label">Mi educación:</label>
                                                     <div class="col-md-8">
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <span class="icons"><span class="first-icon fa fa-square-o"></span><span class="second-icon fa fa-check-square-o"></span></span>
-                                                                <input name="chkBasica" value="1" type="checkbox" id="chkBasica">Educación Básica</label>
-                                                        </div>
-                                                        <div class="checkbox">
-                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
-                                                                    <span class="second-icon fa fa-check-square-o"></span></span>
-                                                                <input class="chkMedia disabled" type="checkbox" value="2" name="chkMedia" id="chkMedia">Educación Media</label>
-                                                        </div>
-                                                        <div class="checkbox">
-                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
-                                                                    <span class="second-icon fa fa-check-square-o"></span></span>
-                                                                <input type="checkbox" name="chkcft" value="3" id="chkCft">
-                                                                Centro de formación técnica</label>
-                                                        </div>
 
-                                                        <div class="checkbox">
-                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
-                                                                    <span class="second-icon fa fa-check-square-o"></span></span>
-                                                                <input class=""  type="checkbox" name="chkIp" id="chkIp" value="4">Instituto Profesional</label>
-                                                        </div>
+                                                        <select id="txtEstudios" class="form-control" name="selEducacion">
 
-                                                        <div class="checkbox">
-                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
-                                                                    <span class="second-icon fa fa-check-square-o"></span>                                                
-                                                                </span><input class="" type="checkbox" name="chkUniversidad" id="chkUniver" value="5">Universidad</label>
-                                                        </div>
-
-                                                        <div class="checkbox">
-                                                            <label><span class="icons"><span class="first-icon fa fa-square-o"></span><span class="second-icon fa fa-check-square-o"></span></span>
-                                                                <input class="" type="checkbox" name="chkOtro" id="chkOtro" value="6">Otro (especificar)</label>
-                                                        </div>
-                                                        <br>
+                                                            <?php
+                                                            require 'include/conexion.php';
+                                                            $query = "SELECT * FROM educacion;";
+                                                            $resultado = $mysqli->query($query);
+                                                            while ($rows = $resultado->fetch_assoc()) {
+                                                                if ($Obj_operaciones->comprobarUsuarioEducacion($_SESSION['idUsuario'],$rows['educacion_id'])) {
+                                                                    print("<option value='" . $rows['educacion_id'] . "' selected='selected'>" . $rows['educacion_nombre'] . "</option>");
+                                                                } else {
+                                                                    print("<option value='" . $rows['educacion_id'] . "' >" . $rows['educacion_nombre'] . "</option>");
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                        <!--
+                                                                                                                <div id="chkBasicaVal" class="checkbox">
+                                                                                                                    <label>
+                                                                                                                        <span class="icons"><span class="first-icon fa fa-square-o"></span><span class="second-icon fa fa-check-square-o"></span></span>
+                                                                                                                        <input name="chkBasica" value="1" type="checkbox" id="chkBasica" >Educación Básica</label>
+                                                                                                                </div>
+                                                                                                                <div id="chkMediaVal" class="checkbox disabled">
+                                                                                                                    <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
+                                                                                                                            <span class="second-icon fa fa-check-square-o"></span></span>
+                                                                                                                        <input class="chkMedia " type="checkbox" value="2" name="chkMedia" id="chkMedia">Educación Media</label>
+                                                                                                                </div>
+                                                                                                                <div class="checkbox">
+                                                                                                                    <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
+                                                                                                                            <span class="second-icon fa fa-check-square-o"></span></span>
+                                                                                                                        <input type="checkbox" name="chkcft" value="3" id="chkCft">
+                                                                                                                        Centro de formación técnica</label>
+                                                                                                                </div>
+                                                        
+                                                                                                                <div class="checkbox">
+                                                                                                                    <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
+                                                                                                                            <span class="second-icon fa fa-check-square-o"></span></span>
+                                                                                                                        <input class=""  type="checkbox" name="chkIp" id="chkIp" value="4">Instituto Profesional</label>
+                                                                                                                </div>
+                                                        
+                                                                                                                <div class="checkbox">
+                                                                                                                    <label><span class="icons"><span class="first-icon fa fa-square-o"></span>
+                                                                                                                            <span class="second-icon fa fa-check-square-o"></span>                                                
+                                                                                                                        </span><input class="" type="checkbox" name="chkUniversidad" id="chkUniver" value="5">Universidad</label>
+                                                                                                                </div>
+                                                        
+                                                                                                                <div class="checkbox">
+                                                                                                                    <label><span class="icons"><span class="first-icon fa fa-square-o"></span><span class="second-icon fa fa-check-square-o"></span></span>
+                                                                                                                        <input class="" type="checkbox" name="chkOtro" id="chkOtro" value="6">Otro (especificar)</label>
+                                                                                                                </div>
+                                                                                                                <br>-->
                                                         <input type="text" name="txtOtros" id="txtOtro"> <button type="submit" id="btnAgregarCurso">Agregar</button>
                                                         <br>
 
@@ -577,27 +615,10 @@
             </footer>
 
         </div>
-    </div>
 
-    <?php
-} else {
-    header('Location: index.php');
-}
-include 'structure/footer.php';
-?>
-<script src="structure/jquery/jquery-1.11.3.min.js"></script>
-<script src="structure/js/jquery-perfiles.js"></script>
-<script src="structure/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
-
-<script type="text/javascript">
-    
-        $("#myTags").tagit({
-            fieldName: "areasInteres[]",
-            availableTags: ["Tecnologia", "Agronomia", "Salud", "Finanzas", "Contabilidad", "Programación", "Proyectos", "Informática", "Redes y Telecomunicaciones", "Innovación", "Pesca"],
-            caseSensitive: true,
-            allowSpaces: true,
-            tagLimit: 3
-    });
-</script>
-    </body>
+        <?php
+    }
+    include './structure/footer.php';
+    ?> 
+</body>
 </html>

@@ -20,41 +20,6 @@
         <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
         <link href="structure/css/jquery.tagit.css" rel="stylesheet" type="text/css">
         <link href="structure/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
-
-
-        <script src="structure/jquery/jquery-1.11.3.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-        <link href="structure/fawesome/css/font-awesome.min.css" rel="stylesheet">
-        <!--  Checkbox, Radio & Switch Plugins -->
-        <script src="structure/js/bootstrap-checkbox-radio-switch.js"></script>
-        <!--  Charts Plugin -->
-        <script src="structure/js/chartist.min.js"></script>
-        <!--  Notifications Plugin    -->
-        <script src="structure/js/bootstrap-notify.js"></script>
-        <!--  Google Maps Plugin    -->
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-        <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-        <script src="structure/js/light-bootstrap-dashboard.js"></script>
-        <script src="structure/bstrap/js/bootstrap.min.js"></script>
-        <script src="structure/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
-        <script src="structure/js/jquery.Rut.min.js"></script>
-        <script src="structure/js/filtro.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#exito').alert();
-                demo.initChartist();
-
-                $.notify({
-                    icon: 'pe-7s-gift',
-                    message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
-
-                }, {
-                    type: 'info',
-                    timer: 4000
-                });
-
-            });
-        </script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">

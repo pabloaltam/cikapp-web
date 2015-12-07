@@ -344,13 +344,35 @@ class OperacionesMYSQL {
         $mysqli->close();
         return $resultado;
     }
+    
+    
+    function actualizarEstudios($idUsuario, $idEstudio) {
+        include("./include/conexion.php");
+        $actualizaUsuario = "UPDATE usuario_educacion set educacion_id=$idEstudio WHERE usuario_id={$idUsuario};";
+        $resultado = $mysqli->query($actualizaUsuario);
+        $mysqli->close();
+        return $resultado;
+    }
 
-    function comprobarUsuarioEducacion($usuarioID, $educacion_id) {
+    function comprobarUsuarioEducacion($usuarioID, $educacionID) {
         include ("./include/conexion.php");
-        $sql = "SELECT *FROM usuario_educacion where usuario_id={$usuarioID} and educacion_id={$educacion_id};";
+        $sql = "SELECT *FROM usuario_educacion where usuario_id={$usuarioID} and educacion_id={$educacionID}";
         $resultado = $mysqli->query($sql);
         while ($rows = $resultado->fetch_assoc()) {
-            if ($rows['usuario_id'] == $usuarioID and $rows['educacion_id'] == $educacion_id) {
+            if ($rows['usuario_id'] == $usuarioID and $rows['educacion_id']== $educacionID) {
+
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+    
+    function comprobarUsuario($usuarioID) {
+        include ("./include/conexion.php");
+        $sql = "SELECT *FROM usuario_educacion where usuario_id={$usuarioID}";
+        $resultado = $mysqli->query($sql);
+        while ($rows = $resultado->fetch_assoc()) {
+            if ($rows['usuario_id'] == $usuarioID) {
 
                 return FALSE;
             }

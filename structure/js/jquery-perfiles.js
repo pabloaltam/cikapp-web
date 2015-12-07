@@ -12,14 +12,22 @@ $(document).ready(function () {
                     type: "POST",
                     url: "include/resultado-ajax.php",
                     data: dataString,
+                    beforeSend:
+                            function (){
+                                $("#ciudad").html("<option>Espere...</option>");
+                                $("#ciudad").attr("disabled",true);
+                            },
                     cache: false,
                     success: function (html)
                     {
                         $("#ciudad").html(html);
+                        $('#ciudad').removeAttr("disabled");
                     }
                 });
 
     });
+    
+    
 
     function mostrarImagen(input) {
         if (input.files && input.files[0]) {
