@@ -360,7 +360,7 @@ class OperacionesMYSQL {
 
     function editarImagenEmpresa($idEmpresa, $rutaImagen) {
         include("./include/conexion.php");
-        $actualizar = "UPDATE empresa SET rutaImagen='$rutaImagen' WHERE idEmmpresa='$idEmpresa';";
+        $actualizar = "UPDATE empresa SET rutaImagen='$rutaImagen' WHERE idEmpresa='$idEmpresa';";
         $resultado = $mysqli->query($actualizar);
         $mysqli->close();
         if ($resultado) {
@@ -372,7 +372,7 @@ class OperacionesMYSQL {
 
     function editarEmpresa($idEmpresa, $email, $cargo, $razonSocial, $faxEmpresa, $fonoEmpresa, $websiteEmpresa, $emailEmpresa, $nombre, $apellido, $apellidoM, $idTipoEmpresa, $COMUNA_ID, $direccionEmpresa) {
         include("./include/conexion.php");
-        $actualizaEmpresa = "UPDATE empresa SET email='$email', cargo='$cargo', razonSocial='$razonSocial', faxEmpresa=$faxEmpresa, fonoEmpresa=$fonoEmpresa, websiteEmpresa='$websiteEmpresa', emailEmpresa='$emailEmpresa', nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM', tipo_empresa_id=$idTipoEmpresa, comuna_COMUNA_ID=$COMUNA_ID, direccionEmpresa='$direccionEmpresa' WHERE idEmpresa='$idEmpresa';";
+        $actualizaEmpresa = "UPDATE empresa SET email='$email', cargo='$cargo', razonSocial='$razonSocial', faxEmpresa=$faxEmpresa, fonoEmpresa=$fonoEmpresa, websiteEmpresa='$websiteEmpresa', emailEmpresa='$emailEmpresa', nombre='$nombre', apellido='$apellido', apellidoM='$apellidoM', idTipoEmpresa=$idTipoEmpresa, COMUNA_ID=$COMUNA_ID, direccionEmpresa='$direccionEmpresa' WHERE idEmpresa='$idEmpresa';";
         $resultado = $mysqli->query($actualizaEmpresa);
         $mysqli->close();
         return $resultado;

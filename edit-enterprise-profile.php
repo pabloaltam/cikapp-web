@@ -167,7 +167,7 @@
 
                 echo 'ÉXITO: Los datos de la empresa han sido actualizados correctamente.<br>';
             } else {
-                echo 'ERROR: Intentelo más tarde.<br>';
+                echo 'ERROR: Intentelo más tarde por favor.<br>';
             }
         } else {
             echo 'Las contraseñas no coinciden';
