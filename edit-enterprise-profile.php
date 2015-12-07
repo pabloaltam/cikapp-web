@@ -1,4 +1,4 @@
-<?php include 'structure/navbarFinSession.php'; ?>
+<?php include 'structure/navbarEmpresa.php'; ?>
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
