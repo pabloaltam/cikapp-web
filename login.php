@@ -7,7 +7,7 @@
                     <br>
                     <!-- Nav tabs -->
                     <div class="text-center">
-                    Iniciar Sesión
+                        <h3>INICIAR SESIÓN</h3>
                     </div>
                     <br />
                             <form action="" method="POST" autocomplete="off" name="frmIdentificarme" id="frmIdentificarme">
@@ -38,8 +38,8 @@
                                         echo '<p>Es necesario que ingrese sus datos primero</p>';
                                     }
                                 } else {
-                                    echo '<p>Si cuenta con un registro previo a continuación ingrese sus datos.</p>';
-                                }
+                                    echo '<p>Ingrese sus datos a continuación:</p>';
+                                } 
                                 ?>
                                 <br>
                                 <fieldset>
