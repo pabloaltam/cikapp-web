@@ -49,7 +49,6 @@ class OperacionesMYSQL {
         $pass = sha1(md5($password1));
         include("./include/conexion.php");
         $rut = str_replace('.', '', $rut);
-        echo 'cod=' . $codigo . " - ";
         $cad = "INSERT INTO usuario (rut, email, password, codigo) VALUES ('$rut','$email','$pass','$codigo');";
         if ($this->RutValidate($rut)) {
             if ($this->emailValidate($email)) {

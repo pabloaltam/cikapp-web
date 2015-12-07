@@ -21,14 +21,14 @@
                                     if (!($user == '') and ! ($pass == '')) {
                                         if(esEmpresa($user)== TRUE){
                                             if (loginEmpresa($user, $pass) == TRUE) {
-                                                echo "<meta http-equiv='Refresh' content='2;url= edit-user-profile.php'>";
+                                               header("Location: panel-empresa.php");
                                             } else {
                                                 // Login failed
                                                 echo '<p>Sus datos son incorrectos, intente nuevamente por favor.</p>';
                                             }
                                         }else{
                                             if (loginUsuario($user, $pass) == TRUE) {
-                                                echo "<meta http-equiv='Refresh' content='2;url= edit-enterprise-profile.php'>";
+                                                header("Location: panel-usuario.php");
                                             } else {
                                                 // Login failed
                                                 echo '<p>Datos incorrectos, intente nuevamente por favor.</p>';
@@ -43,9 +43,9 @@
                                 ?>
                                 <br>
                                 <fieldset>
-                                    <div class="form-group has-success">
+                                    <div id="txtRut" class="form-group has-success">
                                         <div class="right-inner-addon">
-                                            <i class="fa fa-envelope"></i>
+                                            <i id="imgRut" class="fa fa-user"></i>
                                             <input class="form-control input-lg" placeholder="Rut" id="rut" name="rut" type="text">
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                 </fieldset>
                                 <br>
                                 <div class="text-center">
-                                    <button class="btn btn-primary btn-block btn-fill" type="submit">Ingresar</button>
+                                    <button class="btn btn-primary btn-block btn-fill" type="submit" disabled id="btnIniciar">Ingresar</button>
                                     <a href="obtener-clave.php" role="button" class="btn btn-primary btn-block btn-fill">Olvidé mi contraseña</a>
                                 </div>
                             </form>
@@ -67,8 +67,6 @@
                 </div>
 
 
-
         <?php include 'structure/footer.php'; ?>
-        <script src="structure/js/jquery.Rut.min.js"></script>
-        <script src="structure/js/login.js"></script>
+    
 

@@ -1,3 +1,4 @@
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="structure/bstrap/js/bootstrap.min.js"></script>
@@ -5,7 +6,7 @@
 <script src="structure/js/jquery.Rut.min.js"></script>
 <script src="structure/js/filtro.js"></script>
 <script src="structure/js/jquery-perfiles.js"></script>
-
+<script src="structure/js/login.js"></script>
 
 <link href="structure/fawesome/css/font-awesome.min.css" rel="stylesheet">
 <!--  Checkbox, Radio & Switch Plugins -->

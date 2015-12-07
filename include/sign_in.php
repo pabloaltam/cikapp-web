@@ -21,7 +21,6 @@
                         $_SESSION['apellidoM'] = $rows['apellidoM'];
                         $_SESSION['email'] = $rows['email'];
                         $_SESSION['COMUNA_ID'] = $rows['COMUNA_ID'];
-                        header("Location: panel-usuario.php");
                         return TRUE;
                     }else{
                         echo '<p>Antes de acceder debe confirmar el registro en su email</p>';
@@ -41,6 +40,91 @@
             return FALSE;
         }
     }
+    
+    
+    function loginUsuarioCon($user, $pass) {
+        include_once('ejecutar_en_db.php');
+        $obj = new OperacionesMYSQL();
+        $user = str_replace('.', '', $user);
+        if($obj->RutValidateLoginUser($user)) {
+            require('conexion.php'); //Incluimos la conexion a la base de datos.
+            $sql = "SELECT * FROM usuario WHERE rut='$user' and password='$pass'";
+            if($result = $mysqli->query($sql)){
+                if ($rows = $result->fetch_assoc()) {
+                        @session_start();
+                        if(sesion_iniciada()){
+                            logout();
+                        }
+                        $_SESSION['idUsuario'] = $rows['idUsuario'];
+                        $_SESSION['rut'] = $rows['rut'];
+                        $_SESSION['nombre'] = $rows['nombre'];//Le damos el valor del nombre de usuario a la sesion usuario.
+                        $_SESSION['apellido'] = $rows['apellido'];
+                        $_SESSION['apellidoM'] = $rows['apellidoM'];
+                        $_SESSION['email'] = $rows['email'];
+                        $_SESSION['COMUNA_ID'] = $rows['COMUNA_ID'];
+                        return TRUE;
+                    
+                } else {
+                    echo '<p>No ha podido iniciar sesion, intente mas tarde</p>';
+                    return FALSE;
+                }
+            } else {
+                echo '<p>Su usuario no se encuentra, por favor regístrese primero</p>';
+                return FALSE;
+            }
+            $mysqli->close();
+        }else{
+            echo '<p>Rut no valido, ingreselo correctamente</p>';
+            return FALSE;
+        }
+    }
+    
+    
+    function loginEmpresaCon($user, $pass) {
+        include_once('ejecutar_en_db.php');
+        $obj = new OperacionesMYSQL();
+        $user = str_replace('.', '', $user);
+        if($obj->RutValidateLoginEnterprise($user)) {
+            require('conexion.php'); //Incluimos la conexion a la base de datos.
+            $sql = "SELECT * FROM empresa WHERE rut='$user' and password='$pass'";
+            if($result = $mysqli->query($sql)){
+                if ($rows = $result->fetch_assoc()) {
+                        @session_start();
+                        if(sesion_iniciada()){
+                            logout();
+                        }
+                        $_SESSION['idEmpresa'] = $rows['idEmpresa'];
+                        $_SESSION['rutEmpresa'] = $rows['rut'];
+                        $_SESSION['nombreEmpleado'] = $rows['nombre'];//Le damos el valor del nombre de usuario a la sesion usuario.
+                        $_SESSION['apellidoEmpleado'] = $rows['apellido'];
+                        $_SESSION['apellidoMEmpleado'] = $rows['apellidoM'];
+                        $_SESSION['emailEmpleado'] = $rows['email'];
+                        $_SESSION['cargoEmpleado'] = $rows['cargo'];
+                        $_SESSION['razonSocial'] = $rows['razonSocial'];
+                        $_SESSION['faxEmpresa'] = $rows['faxEmpresa'];
+                        $_SESSION['fonoEmpresa'] = $rows['fonoEmpresa'];
+                        $_SESSION['websiteEmpresa'] = $rows['websiteEmpresa'];
+                        $_SESSION['emailEmpresa'] = $rows['emailEmpresa'];                       
+                        $_SESSION['direccionEmpresa'] = $rows['direccionEmpresa'];
+                        $_SESSION['COMUNA_ID'] = $rows['COMUNA_ID'];
+                        return TRUE;
+                
+                } else {
+                    echo '<p>No ha podido iniciar sesión, intente más tarde</p>';
+                    return FALSE;
+                }
+            } else {
+                echo '<p>Su empresa no se encuentra en nuestra base de datos, por favor regístrese primero</p>';
+                return FALSE;
+            }
+            $mysqli->close();
+        }else{
+            echo '<p>Rut no válido, ingréselo correctamente</p>';
+            return FALSE;
+        }
+    }
+    
+    
     function loginEmpresa($user, $pass) {
         include('ejecutar_en_db.php');
         $obj = new OperacionesMYSQL();
