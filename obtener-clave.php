@@ -20,19 +20,21 @@
 
                                     if (!($user == '') and ! ($email == '')) {
                                         if(esEmpresa($user)== TRUE){
-                                            if (recuperar_claveEmpresa($email, $user) == TRUE) {
-                                                echo '<p>Revise en su correo el email con asunto: "Nueva contraseña para acceder a su cuenta de cikapp."</p>';
-                                            } else {
+                                            recuperar_claveEmpresa($email, $user);
+                                            //if (recuperar_claveEmpresa($email, $user) == TRUE) {
+                                                //echo '<p>Revise en su correo el email con asunto: "Nueva contraseña para acceder a su cuenta de cikapp."</p>';
+                                            //} else {
                                                 // Login failed
-                                                echo '<p>No se ha podido realizar la operacion requerida, inténtelo más tarde por favor.</p>';
-                                            }
+                                                //echo '<p>No se ha podido realizar la operacion requerida, inténtelo más tarde por favor.</p>';
+                                            //}
                                         }else{
-                                            if (recuperar_claveUsuario($email, $user) == TRUE) {
-                                                echo '<p>Revise en su correo el email con asunto: "Nueva contraseña para acceder a su cuenta de cikapp."</p>';
-                                            } else {
+                                            recuperar_claveUsuario($email, $user);
+                                            //if (recuperar_claveUsuario($email, $user) == TRUE) {
+                                                //echo '<p>Revise en su correo el email con asunto: "Nueva contraseña para acceder a su cuenta de cikapp."</p>';
+                                            //} else {
                                                 // Login failed
-                                                echo '<p>No se ha podido realizar la operacion requerida, inténtelo más tarde por favor.</p>';
-                                            }
+                                                //echo '<p>No se ha podido realizar la operacion requerida, inténtelo más tarde por favor.</p>';
+                                            //}
                                         } 
                                     } else {
                                         echo '<p>Es necesario que llene todos los campos requeridos.</p>';
