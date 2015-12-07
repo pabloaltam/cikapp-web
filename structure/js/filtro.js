@@ -8,9 +8,9 @@ $(document).ready(function () {
     $('#conocimientos').click(function () {
   
         if ($(this).is(':checked')) {
-            $('#txtConocimientos').removeProp('disabled');
+            $('#txtConocimientos').removeAttr('disabled');
         } else {
-            $('#txtConocimientos').prop('disabled', true);
+            $('#txtConocimientos').attr('disabled', true);
             $('#txtConocimientos').val("");
             ajax();
         }
@@ -18,9 +18,9 @@ $(document).ready(function () {
     $('#estudios').click(function () {
    
         if ($(this).is(':checked')) {
-            $('#txtEstudios').removeProp('disabled');
+            $('#txtEstudios').removeAttr('disabled');
         } else {
-            $('#txtEstudios').prop('disabled', true);
+            $('#txtEstudios').attr('disabled', true);
             $('#txtEstudios').val("-1");
             ajax();
         }
@@ -28,9 +28,9 @@ $(document).ready(function () {
     $('#nivIngles').click(function () {
  
         if ($(this).is(':checked')) {
-            $('#txtNivIngles').removeProp('disabled');
+            $('#txtNivIngles').removeAttr('disabled');
         } else {
-            $('#txtNivIngles').prop('disabled', true);
+            $('#txtNivIngles').attr('disabled', true);
             $('#txtNivIngles').val("-1");
         ajax();
         }
@@ -38,9 +38,9 @@ $(document).ready(function () {
     $('#region').click(function () {
  
         if ($(this).is(':checked')) {
-            $('#txtRegion').removeProp('disabled');
+            $('#txtRegion').removeAttr('disabled');
         } else {
-            $('#txtRegion').prop('disabled', true);
+            $('#txtRegion').attr('disabled', true);
             $('#txtRegion').val("-1");
             ajax();
         }
@@ -48,9 +48,9 @@ $(document).ready(function () {
     $('#ciudad').click(function () {
 
         if ($(this).is(':checked')) {
-            $('#txtCiudad').removeProp('disabled');
+            $('#txtCiudad').removeAttr('disabled');
         } else {
-            $('#txtCiudad').prop('disabled', true);
+            $('#txtCiudad').attr('disabled', true);
             $('#txtCiudad').val("-1");
             ajax();
         }

@@ -151,10 +151,8 @@ $Obj_operaciones = new OperacionesMYSQL();
                                     if (isset($_POST['selEducacion'])) {
                                         $selEducacion = $_POST['selEducacion'];
                                         if ($Obj_operaciones->comprobarUsuario($idUsuario)) {
-                                            echo 'Agrego';
                                             $Obj_operaciones->agregarEstudios($idUsuario, $selEducacion);
                                         } else {
-                                            echo "Actualizo ";
                                             $Obj_operaciones->actualizarEstudios($idUsuario, $selEducacion);
                                         }
                                     }
