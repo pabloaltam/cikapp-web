@@ -30,16 +30,25 @@
                              $resultado = $mysqli->query($revisar_conversacion);
                              $row_cnt = mysqli_num_rows($resultado);
                              echo "<p>$row_cnt</p>";
-                                                                                  
-                                 if($row_cnt == 1){
-                                                    
+                             while ($rows = $resultado->fetch_assoc()) {
+                                    $old_hash = $rows['hash'];
+                                }
+
+                             if($row_cnt >= 1){
+
+                             	$guardar_msj = "INSERT INTO `mensajes` VALUES ('', '$old_hash', '$mi_id', '$mensaje')";
+                             	$resultado = $mysqli->query($guardar_msj);
+
+            
                              } else {
+                                                                                  
                              $iniciar_conversacion = "INSERT INTO `grupo_mensajes` VALUES ('$mi_id', '$usuario','$random_number')";
                              $guardar_mensaje = "INSERT INTO `mensajes` VALUES ('', '$random_number', '$mi_id', '$mensaje')";
                                                 
                              $resultado = $mysqli->query($iniciar_conversacion);
-                             $resultado = $mysqli->query($guardar_mensaje);                                   
-                             }
+                             $resultado = $mysqli->query($guardar_mensaje);
+                             }                                   
+                        
 						}
 						$id = $_GET['usuario'];
                         include("include/conexion.php");
