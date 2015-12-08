@@ -668,10 +668,10 @@ input.ct-red + span.switch-left, input.ct-red + span + label + span.switch-right
         border-right: 11px solid rgba(0, 0, 0, 0);
         content: "";
         display: inline-block;
-        position: absolute;
+        /* position: absolute; */
         left: 100%;
         margin-left: -60%;
-        top: -11px;
+        /* top: -11px; */
     }
     .dropdown-menu:after {
         border-bottom: 11px solid #FFFFFF;

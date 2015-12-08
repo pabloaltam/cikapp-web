@@ -33,4 +33,18 @@ $(document).ready(function () {
             $('#btnIniciar').removeAttr("disabled");
         }
     });
+    $('#pass').focusin(function (){
+         if($('#pass').val()=="")
+         {
+              $('#btnIniciar').prop("disabled",true);
+         }
+    });
+    
+    $('#pass').focusout(function (){
+         if($('#pass').val()=="")
+         {
+              $('#btnIniciar').prop("disabled",true);
+         }
+    });
+    
 });

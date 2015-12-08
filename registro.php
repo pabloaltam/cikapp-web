@@ -53,10 +53,10 @@
                 ?>
                 <br>
                 <fieldset>
-                    <div class="form-group" id="campoRut">
+                    <div class="form-group" id="txtRut">
                         <div class="right-inner-addon">
                             <i id="imgRut" class="fa fa-user"></i>
-                            <input class="form-control input-lg" id="txtRut" required placeholder="Rut" name="txtRut" type="text" >
+                            <input class="form-control input-lg" id="rut" required placeholder="Rut" name="txtRut" type="text" >
                         </div>
                     </div>
                     <div class="form-group" id="campoEmail">
