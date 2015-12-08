@@ -1,4 +1,5 @@
 <?php include 'structure/navbarFinSession.php'; ?>
+<script src="structure/rss/ajax.js"></script>
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
@@ -121,10 +122,28 @@
                             <div class="header">
                                 <h4 class="title">Noticias</h4>
                                 <p class="category">...</p>
+                                 
+                                <!--<script>
+                                ajaxinclude("structure/rss/rss.php"); //Ruta al archivo con las noticias
+                                </script>-->
+                            </div>
+                            <div class="container-fluid">
+                                <?php
+                                include "structure/rss/lastRSS.php";
+                                $rss = new lastRSS;
+                                $rss->cache_dir = './temp';
+                                $rss->cache_time = 1200;
+                                // cargar archivo RSS
+                                $rs = $rss->get('https://www.df.cl/noticias/site/list/port/rss.xml');
+                                // Muestra titulo y enlace
+                                echo "<ul>\n";
+                                foreach($rs['items'] as $item) {
+                                    echo "\t<li><a href=\"$item[link]\">".$item['title']."</a></li>\n";
+                                }
+                                echo "</ul>\n";
+                                ?>
                             </div>
                             <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
-
                                 <div class="footer">
                                     <div class="legend">
                                         <i class="fa fa-circle text-info"></i> Hoy
@@ -300,3 +319,7 @@
 </div>
 
 <?php include 'structure/footer.php';?>
+
+
+
+
