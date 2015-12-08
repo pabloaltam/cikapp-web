@@ -16,16 +16,10 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="panel-empresa.php">
                         <i class="pe-7s-home"></i>
                         <p>Control Panel</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="sistema_mensajes.php">
-                        <i class="pe-7s-mail"></i>
-                        <p>Mensajes</p>
                     </a>
                 </li>
                 <li>
@@ -34,7 +28,7 @@
                         <p>Ofertas publicadas por mi</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="filtro-usuarios.php">
                         <i class="pe-7s-folder"></i>
                         <p>Buscar postulantes</p>
@@ -45,12 +39,6 @@
                     <a href="edit-enterprise-profile.php">
                         <i class="pe-7s-magic-wand"></i>
                         <p>Editar perfil</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="mostrar-usuarios.php">
-                        <i class="pe-7s-users"></i>
-                        <p>Personas</p>
                     </a>
                 </li>
             </ul>
@@ -103,99 +91,103 @@
             </div>
         </nav>
 
-
+        <div class="content">
 
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">
-                    <br>
-                    <!-- Nav tabs -->
-                    <div class="text-center">
-                        <h3>Filtro de postulantes</h3>
+                    <div class="card">
+                        <!-- Nav tabs -->
+
+                        <div class="header">
+                            <h3 class="text-center">Filtro de postulantes</h3>
+                        </div>
+                        <br />
+                        <div class="content">
+                            <form action="" method="POST" autocomplete="off" name="frmIdentificarme" id="frmIdentificarme">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input type="checkbox" class="" id="conocimientos">
+                                        <label for="conocimientos"> Conocimientos</label>
+                                        <br>
+                                        <input id="txtConocimientos" class="form-control input-ajax" disabled>
+                                        <br>
+                                        <input type="checkbox" class="" id="estudios">
+                                        <label for="estudios">Estudios</label>
+                                        <br>
+
+                                        <div class="ui-select">
+                                            <select id="txtEstudios" class="form-control input-ajax" disabled>
+                                                <option value="-1">Seleccione...</option>
+                                                <?php
+                                                require 'include/conexion.php';
+                                                $query = "SELECT * FROM educacion;";
+                                                $resultado = $mysqli->query($query);
+                                                while ($rows = $resultado->fetch_assoc()) {
+                                                    print("<option value='" . $rows['educacion_id'] . "'>" . $rows['educacion_nombre'] . "</option>");
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <input type="checkbox" class="" id="nivIngles">
+                                        <label for="nivIngles">Nivel de Ingles</label>
+                                        <br>
+
+                                        <div class="ui-select">
+                                            <select id="txtNivIngles" class="form-control input-ajax" disabled>
+                                                <option value="-1">Seleccione...</option>
+                                                <?php
+                                                require 'include/conexion.php';
+                                                $query = "SELECT * FROM nivel_ingles;";
+                                                $resultado = $mysqli->query($query);
+                                                while ($rows = $resultado->fetch_assoc()) {
+                                                    print("<option value='" . $rows['idIngles'] . "'>" . $rows['Nivel'] . "</option>");
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <input type="checkbox" class="" id="region">
+                                        <label for="region">Region</label>
+                                        <br>
+                                        <div class="ui-select">
+                                            <select id="txtRegion" class="form-control input-ajax" disabled>
+                                                <option value="-1">Seleccione...</option>
+                                                <?php
+                                                require 'include/conexion.php';
+                                                $query = "SELECT * FROM region";
+                                                $resultado = $mysqli->query($query);
+                                                while ($rows = $resultado->fetch_assoc()) {
+                                                    print("<option value='" . $rows['REGION_ID'] . "'>" . $rows['REGION_NOMBRE'] . "</option>");
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <input type="checkbox" class="" id="ciudad">
+                                        <label for="ciudad">Ciudad</label>
+                                        <br>
+
+                                        <div class="ui-select">
+                                            <select id="txtCiudad" class="form-control input-ajax" disabled>
+                                                <option value="-1">Seleccione...</option>
+                                                <?php
+                                                require 'include/conexion.php';
+                                                $query = "SELECT * FROM comuna ORDER BY COMUNA_NOMBRE";
+                                                $resultado = $mysqli->query($query);
+                                                while ($rows = $resultado->fetch_assoc()) {
+                                                    print("<option value='" . $rows['COMUNA_ID'] . "'>" . $rows['COMUNA_NOMBRE'] . "</option>");
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
-                    <br />
-                    <form action="" method="POST" autocomplete="off" name="frmIdentificarme" id="frmIdentificarme">
-                        <fieldset>
-                            <div class="form-group">
-                                <input type="checkbox" class="" id="conocimientos">
-                                <label for="conocimientos"> Conocimientos</label>
-                                <br>
-                                <input id="txtConocimientos" class="form-control input-ajax" disabled>
-                                <br>
-                                <input type="checkbox" class="" id="estudios">
-                                <label for="estudios">Estudios</label>
-                                <br>
-
-                                <div class="ui-select">
-                                    <select id="txtEstudios" class="form-control input-ajax" disabled>
-                                        <option value="-1">Seleccione...</option>
-                                        <?php
-                                        require 'include/conexion.php';
-                                        $query = "SELECT * FROM educacion;";
-                                        $resultado = $mysqli->query($query);
-                                        while ($rows = $resultado->fetch_assoc()) {
-                                            print("<option value='" . $rows['educacion_id'] . "'>" . $rows['educacion_nombre'] . "</option>");
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <br>
-                                <input type="checkbox" class="" id="nivIngles">
-                                <label for="nivIngles">Nivel de Ingles</label>
-                                <br>
-
-                                <div class="ui-select">
-                                    <select id="txtNivIngles" class="form-control input-ajax" disabled>
-                                        <option value="-1">Seleccione...</option>
-                                        <?php
-                                        require 'include/conexion.php';
-                                        $query = "SELECT * FROM nivel_ingles;";
-                                        $resultado = $mysqli->query($query);
-                                        while ($rows = $resultado->fetch_assoc()) {
-                                            print("<option value='" . $rows['idIngles'] . "'>" . $rows['Nivel'] . "</option>");
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <br>
-                                <input type="checkbox" class="" id="region">
-                                <label for="region">Region</label>
-                                <br>
-                                <div class="ui-select">
-                                    <select id="txtRegion" class="form-control input-ajax" disabled>
-                                        <option value="-1">Seleccione...</option>
-                                        <?php
-                                        require 'include/conexion.php';
-                                        $query = "SELECT * FROM region";
-                                        $resultado = $mysqli->query($query);
-                                        while ($rows = $resultado->fetch_assoc()) {
-                                            print("<option value='" . $rows['REGION_ID'] . "'>" . $rows['REGION_NOMBRE'] . "</option>");
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <br>
-                                <input type="checkbox" class="" id="ciudad">
-                                <label for="ciudad">Ciudad</label>
-                                <br>
-
-                                <div class="ui-select">
-                                    <select id="txtCiudad" class="form-control input-ajax" disabled>
-                                        <option value="-1">Seleccione...</option>
-                                        <?php
-                                        require 'include/conexion.php';
-                                        $query = "SELECT * FROM comuna ORDER BY COMUNA_NOMBRE";
-                                        $resultado = $mysqli->query($query);
-                                        while ($rows = $resultado->fetch_assoc()) {
-                                            print("<option value='" . $rows['COMUNA_ID'] . "'>" . $rows['COMUNA_NOMBRE'] . "</option>");
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <br>
-                            </div>
-                        </fieldset>
-                    </form>
                 </div>
                 <br>
                 <br/>
@@ -214,6 +206,7 @@
 
 
 
+        </div>
         </div>
     </div>
 </div>

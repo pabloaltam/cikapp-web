@@ -1872,7 +1872,7 @@ body > .navbar-collapse[data-color="purple"]:after {
   padding: 15px 15px 10px 15px;
 }
 .card .header {
-  padding: 15px 15px 0;
+  padding: 15px;
 }
 .card .category,
 .card label {
@@ -1887,7 +1887,7 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 .card label {
   font-size: 12px;
-  margin-bottom: 5px;
+  margin: 10px;
   text-transform: uppercase;
 }
 .card .title {

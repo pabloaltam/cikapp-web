@@ -33,7 +33,7 @@ $Obj_operaciones = new OperacionesMYSQL();
                         <p>Escritorio</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="sistema_mensajes.php">
                         <i class="pe-7s-mail"></i>
                         <p>Mensajes</p>
@@ -52,7 +52,7 @@ $Obj_operaciones = new OperacionesMYSQL();
                     </a>
                 </li>
 
-                <li class="active">
+                <li >
                     <a href="edit-user-profile.php">
                         <i class="pe-7s-magic-wand"></i>
                         <p>Editar perfil</p>

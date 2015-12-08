@@ -3,9 +3,10 @@
 // id,rut,cargo,lugar_trabajo,tipo_contrato,tipo_jornada,fecha_inicio,publicacion,tipo_publicacion,fecha_publicacion
 class publicacion {
 
-    function obtienePublicacionesUsuario($rut) {
+    function obtienePublicacionesEmpresa($rut) {
         include("include/conexion.php");
         $consulta_publicaciones = "SELECT * FROM publicaciones WHERE rut='$rut' ORDER BY fecha_publicacion DESC";
+        $arreglo=array();
         $resultado = $mysqli->query($consulta_publicaciones);
         $i = 0;
         while ($fila = $resultado->fetch_assoc()) {
@@ -15,11 +16,11 @@ class publicacion {
         return $arreglo;
     }
 
-    function agregarPublicacion($rut, $cargo, $lugar_trabajo, $tipo_contrato, $tipo_jornada, $fecha_inicio, $publicacion, $tipo_publicacion) {
+    function agregarPublicacion($rut, $cargo, $lugar_trabajo, $tipo_contrato, $tipo_jornada, $fecha_inicio, $publicacion, $tipo_publicacion,$titulo,$COMUNA_ID) {
         include("include/conexion.php");
         $hora = date("Y-m-d H:i:s");
-        $agrega_publicacion = "insert into publicaciones(rut,cargo,lugar_trabajo,tipo_contrato,tipo_jornada,fecha_inicio,publicacion,tipo_publicacion,fecha_publicacion)
-		values('$rut','$cargo','$lugar_trabajo','$tipo_contrato','$tipo_jornada','$fecha_inicio','$publicacion','$tipo_publicacion','$hora')";
+        $agrega_publicacion = "insert into publicaciones(rut,cargo,lugar_trabajo,tipo_contrato,tipo_jornada,fecha_inicio,publicacion,tipo_publicacion,fecha_publicacion,titulo,COMUNA_ID)
+		values('$rut','$cargo','$lugar_trabajo','$tipo_contrato','$tipo_jornada','$fecha_inicio','$publicacion','$tipo_publicacion','$hora','$titulo',$COMUNA_ID)";
         $resultado = $mysqli->query($agrega_publicacion);
         $mysqli->close();
     }
@@ -29,13 +30,15 @@ class publicacion {
         $elimina_publicacion = "DELETE FROM publicaciones WHERE id='$id' AND rut='$rut'";
         $resultado = $mysqli->query($elimina_publicacion);
         $mysqli->close();
+        return $resultado;
     }
 
-    function editaPublicacion($id, $rut, $cargo, $lugar_trabajo, $tipo_contrato, $tipo_jornada, $fecha_inicio, $publicacion, $tipo_publicacion) {
+    function editaPublicacion($id, $rut, $cargo, $tipo_contrato, $tipo_jornada, $fecha_inicio, $publicacion, $tipo_publicacion,$titulo,$COMUNA_ID) {
         include("include/conexion.php");
-        $edita_publicacion = "UPDATE publicaciones set cargo='$cargo',lugar_trabajo='$lugar_trabajo',tipo_contrato='$tipo_contrato',tipo_jornada='$tipo_jornada',fecha_inicio='$fecha_inicio',publicacion='$publicacion',tipo_publicacion='$tipo_publicacion' WHERE id='$id' AND rut='$rut'";
+        $edita_publicacion = "UPDATE publicaciones set cargo='$cargo',tipo_contrato='$tipo_contrato',tipo_jornada='$tipo_jornada',fecha_inicio='$fecha_inicio',publicacion='$publicacion',tipo_publicacion='$tipo_publicacion',titulo='$titulo',COMUNA_ID=$COMUNA_ID WHERE id='$id' AND rut='$rut'";
         $resultado = $mysqli->query($edita_publicacion);
         $mysqli->close();
+        return $resultado;
     }
 
     function obtieneUnaPublicacion($id, $rut) {
@@ -44,7 +47,7 @@ class publicacion {
         $resultado = $mysqli->query($consulta_publicacion);
         $i = 0;
         while ($fila = $resultado->fetch_assoc()) {
-            $arreglo[$i] = array($fila['id'], $fila['cargo'], $fila['lugar_trabajo'], $fila['tipo_contrato'], $fila['tipo_jornada'], $fila['fecha_inicio'], $fila['publicacion'], $fila['tipo_publicacion'], $fila['fecha_publicacion']);
+            $arreglo[$i] = array($fila['id'], $fila['cargo'], $fila['lugar_trabajo'], $fila['tipo_contrato'], $fila['tipo_jornada'], $fila['fecha_inicio'], $fila['publicacion'], $fila['tipo_publicacion'], $fila['fecha_publicacion'],$fila['titulo'],$fila['COMUNA_ID']);
             $i++;
         }
         return $arreglo;

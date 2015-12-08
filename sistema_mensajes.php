@@ -17,22 +17,41 @@
             </div>
 
             <ul class="nav">
-                <li>
+                 <li >
                     <a href="panel-usuario.php">
                         <i class="pe-7s-home"></i>
                         <p>Escritorio</p>
                     </a>
                 </li>
-            <li class="active">
-                    <a href="#">
+                <li class="active">
+                    <a href="sistema_mensajes.php">
                         <i class="pe-7s-mail"></i>
                         <p>Mensajes</p>
                     </a>
                 </li>
+                 <li>
+                    <a href="mostrar-avisos.php">
+                        <i class="pe-7s-portfolio"></i>
+                        <p>Ofertas de empleos</p>
+                    </a>
+                </li>
+                 <li>
+                    <a href="mis-postulaciones.php">
+                        <i class="pe-7s-folder"></i>
+                        <p>Mis postulaciones</p>
+                    </a>
+                </li>
+                
                 <li>
                     <a href="edit-user-profile.php">
                         <i class="pe-7s-magic-wand"></i>
                         <p>Editar perfil</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="mostrar-usuarios.php">
+                        <i class="pe-7s-users"></i>
+                        <p>Personas</p>
                     </a>
                 </li>
             </ul>

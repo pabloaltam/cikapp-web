@@ -4,12 +4,12 @@
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
-    <!--
-
-        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-        Tip 2: you can also add an image using data-image tag
-
-    -->
+        <!--
+    
+            Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+            Tip 2: you can also add an image using data-image tag
+    
+        -->
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="panel-empresa.php" class="simple-text">
@@ -25,34 +25,22 @@
                     </a>
                 </li>
                 <li>
-                    <a href="sistema_mensajes.php">
-                        <i class="pe-7s-mail"></i>
-                        <p>Mensajes</p>
-                    </a>
-                </li>
-                 <li>
-                     <a href="publicaciones.php">
+                    <a href="publicaciones.php">
                         <i class="pe-7s-portfolio"></i>
                         <p>Ofertas publicadas por mi</p>
                     </a>
                 </li>
-                 <li>
-                     <a href="filtro-usuarios.php">
+                <li>
+                    <a href="filtro-usuarios.php">
                         <i class="pe-7s-folder"></i>
                         <p>Buscar postulantes</p>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="edit-enterprise-profile.php">
                         <i class="pe-7s-magic-wand"></i>
                         <p>Editar perfil</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="mostrar-usuarios.php">
-                        <i class="pe-7s-users"></i>
-                        <p>Personas</p>
                     </a>
                 </li>
             </ul>
@@ -118,7 +106,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="card ">
                             <div class="header">
                                 <h4 class="title">Noticias</h4>
@@ -141,22 +129,22 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        
                         <div class="card ">
                             <div class="header">
                                 <h4 class="title">Publicar Aviso</h4>
-                                <p class="category">Cosas por hacer</p>
                             </div>
                             <div class="content">
-                                <div class="table-full-width">
-                                    <div class="panel panel-default">
-                                        
-                                        <div class="panel-body">
-
-                                            <!-- FORMULARIO -->
-
-
-                                            <form class="form form-vertical" action="publicaciones.php" method="get">
+                                    
+                                       
+                                            <form class="form form-vertical" action="publicaciones.php" method="post">
+                                                <div class="control-group">
+                                                    <label>Titulo del aviso</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="titulo" class="form-control" placeholder="Titulo del aviso">
+                                                    </div>
+                                                </div>
                                                 <div class="control-group">
                                                     <label>Nombre del Cargo</label>
                                                     <div class="controls">
@@ -165,22 +153,41 @@
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label>Lugar del trabajo</label>
+                                                    <label>Ubicación</label>
                                                     <div class="controls">
-                                                        <input type="text" name="lugarTrabajo" class="form-control" placeholder="Lugar del Trabajo">
+                                                        <select id="txtCiudad" class="form-control" name="COMUNA_ID">
+                                                            <option value="-1">Seleccione...</option>
+                                                            <?php
+                                                            require 'include/conexion.php';
+                                                            $query = "SELECT * FROM comuna ORDER BY COMUNA_NOMBRE";
+                                                            $resultado = $mysqli->query($query);
+                                                            while ($rows = $resultado->fetch_assoc()) {
+                                                                print("<option value='" . $rows['COMUNA_ID'] . "'>" . $rows['COMUNA_NOMBRE'] . "</option>");
+                                                            }
+                                                            ?>
+                                                        </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group">
                                                     <label>Tipo de Contrato</label>
                                                     <div class="controls">
-                                                        <input type="text" name="tipoContrato" class="form-control" placeholder="Tipo del Contrato del Trabajo">
+                                                        <select name="tipoContrato" class="form-control">
+                                                            <option value="1">A Plazo Fijo </option>
+                                                            <option value="2">A Plazo Indefinido</option>
+                                                            <option value="3">Por Faena</option>
+                                                        </select>
                                                     </div>
 
                                                     <div class="control-group">
                                                         <label>Tipo de Jornada Laboral</label>
                                                         <div class="controls">
-                                                            <input type="text" name="tipoJornadaLaboral" class="form-control" placeholder="Tipo de Jornada Laboral del Trabajo">
+                                                            <select name="tipoJornadaLaboral" class="form-control">
+                                                                <option value="1">Free lance</option>
+                                                                <option value="2">Part time (20 hrs semanales)</option>
+                                                                <option value="3">Part time (30 hrs semanales)</option>
+                                                                <option value="4">Full time (45 ó mas horas semanales)</option>
+                                                            </select>
                                                         </div>
                                                     </div>
 
@@ -205,7 +212,7 @@
                                                     </div>    
 
                                                     <div class="control-group">
-                                                        <label>Confirmar Contraseña</label>
+                                                        <label>Contraseña</label>
                                                         <div class="controls">
                                                             <input type="password" name="pass" class="form-control" placeholder="Clave">
 
@@ -214,16 +221,14 @@
                                                         <div class="control-group">
                                                             <label></label>
                                                             <div class="controls">
-                                                                <input type="hidden" name="rut" value="<?php $idEmpresa;?>"/>
+                                                                <input type="hidden" name="rut" value="<?php $idEmpresa; ?>"/>
                                                                 <input type="hidden" name="accion" value="agregar"/>
-                                                                <button type="submit" class="btn btn-primary">
+                                                                <button type="submit" class="btn btn-primary btn-fill">
                                                                     Publicar
                                                                 </button>
                                                             </div>
 
                                                         </div>   
-
-                                                        </form>
 
 
 
@@ -232,7 +237,10 @@
 
                                                     </div><!--/panel content-->
                                                 </div><!--/panel-->
-                                        </div>
+                                            </form>
+                                      
+
+
 
                                         <div class="footer">
                                             <hr>
@@ -240,8 +248,7 @@
                                                 <i class="fa fa-history"></i> Actualizado hace 3 minutos
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                             
                             </div>
                         </div>
                     </div>

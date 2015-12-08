@@ -1,4 +1,4 @@
-<?php include 'structure/navbarEmpresa.php'; ?>
+<?php include 'structure/navbarFinSession.php'; ?>
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
@@ -16,16 +16,10 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="panel-empresa.php">
                         <i class="pe-7s-home"></i>
                         <p>Control Panel</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="sistema_mensajes.php">
-                        <i class="pe-7s-mail"></i>
-                        <p>Mensajes</p>
                     </a>
                 </li>
                  <li>
@@ -41,16 +35,10 @@
                     </a>
                 </li>
                 
-                <li>
+                <li class="active">
                     <a href="edit-enterprise-profile.php">
                         <i class="pe-7s-magic-wand"></i>
                         <p>Editar perfil</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="mostrar-usuarios.php">
-                        <i class="pe-7s-users"></i>
-                        <p>Personas</p>
                     </a>
                 </li>
             </ul>
