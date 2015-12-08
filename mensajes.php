@@ -133,12 +133,13 @@ $Obj_operaciones = new OperacionesMYSQL();
                                         <form method="post" id="formChat" role="form">
                                             <div class="form-group">
                                                 <?php
+                                                include("include/conexion.php");
                                                 $mi_id = $_SESSION['idUsuario'];
                                                 $usuario = $_GET['usuario'];
                                                 $random_number = rand();
 
                                                 if (isset($_POST['message']) && !empty($_POST['message'])) {
-                                                    include("include/conexion.php");
+                                                  
                                                     $mensaje = $_POST['message'];
                                                     $revisar_conversacion = "SELECT `hash` FROM `grupo_mensajes` WHERE (`usuario_uno`='$mi_id' AND `usuario_dos`='$usuario') OR (`usuario_uno`='$usuario' AND `usuario_dos`='$mi_id')";
                                                     $resultado = $mysqli->query($revisar_conversacion);
@@ -150,20 +151,19 @@ $Obj_operaciones = new OperacionesMYSQL();
 
                                                     if ($row_cnt >= 1) {
 
-                                                        $guardar_msj = "INSERT INTO `mensajes` VALUES ('', '$old_hash', '$mi_id', '$mensaje')";
+                                                        $guardar_msj = "INSERT INTO `mensajes` VALUES ('', '$old_hash', '$mi_id', '$mensaje',NOW())";
                                                         $resultado = $mysqli->query($guardar_msj);
                                                     } else {
 
                                                         $iniciar_conversacion = "INSERT INTO `grupo_mensajes` VALUES ('$mi_id', '$usuario','$random_number')";
-                                                        $guardar_mensaje = "INSERT INTO `mensajes` VALUES ('', '$random_number', '$mi_id', '$mensaje')";
+                                                        $guardar_mensaje = "INSERT INTO `mensajes` VALUES ('', '$random_number', '$mi_id', '$mensaje',NOW())";
 
                                                         $resultado = $mysqli->query($iniciar_conversacion);
                                                         $resultado = $mysqli->query($guardar_mensaje);
                                                     }
                                                 }
                                                 $id = $_GET['usuario'];
-                                                include("include/conexion.php");
-                                                $consulta_usuarios = "SELECT * FROM usuario WHERE idUsuario = '$id' ";
+                                                $consulta_usuarios = "SELECT nombre,apellido,apellidoM,idUsuario FROM usuario WHERE idUsuario = '$id' ";
                                                 $resultado = $mysqli->query($consulta_usuarios);
                                                 while ($rows = $resultado->fetch_assoc()) {
                                                     $nombre = $rows['nombre'];
