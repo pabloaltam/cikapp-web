@@ -3,12 +3,12 @@
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
-    <!--
-
-        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-        Tip 2: you can also add an image using data-image tag
-
-    -->
+        <!--
+    
+            Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+            Tip 2: you can also add an image using data-image tag
+    
+        -->
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
@@ -29,19 +29,19 @@
                         <p>Mensajes</p>
                     </a>
                 </li>
-                 <li>
+                <li>
                     <a href="mostrar-avisos.php">
                         <i class="pe-7s-portfolio"></i>
                         <p>Ofertas de empleos</p>
                     </a>
                 </li>
-                 <li>
+                <li>
                     <a href="mis-postulaciones.php">
                         <i class="pe-7s-folder"></i>
                         <p>Mis postulaciones</p>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="edit-user-profile.php">
                         <i class="pe-7s-magic-wand"></i>
@@ -62,12 +62,6 @@
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button> -->
                     <a class="navbar-brand" href="#">Usuario</a>
                 </div>
                 <div class="collapse navbar-collapse">
@@ -77,24 +71,24 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-envelope"></i>
-                                    <b class="caret"></b>
-                                    <span class="notification">1</span>
-                              </a>
-                              <ul class="dropdown-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope"></i>
+                                <b class="caret"></b>
+                                <span class="notification">1</span>
+                            </a>
+                            <ul class="dropdown-menu">
                                 <li><a href="#">Mensaje 1</a></li>
                                 <li><a href="#">Mensaje 2</a></li>
-                              </ul>
+                            </ul>
                         </li>
-                                                <li>
+                        <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-dashboard"></i>
                             </a>
                         </li>
 
                         <li>
-                           <a href="">
+                            <a href="">
                                 <i class="fa fa-search"></i>
                             </a>
                         </li>
@@ -121,13 +115,13 @@
                         <div class="card ">
                             <div class="header">
                                 <h4 class="title">Noticias</h4>
-                                <p class="category">...</p>
-                                 
-                                <!--<script>
-                                ajaxinclude("structure/rss/rss.php"); //Ruta al archivo con las noticias
-                                </script>-->
+                                <p class="category">Diario financiero RSS</p>
+
+<!--<script>
+ajaxinclude("structure/rss/rss.php"); //Ruta al archivo con las noticias
+</script>-->
                             </div>
-                            <div class="container-fluid">
+                            <div class="container-fluid" style="height:300px; overflow-x: hidden;">
                                 <?php
                                 include "structure/rss/lastRSS.php";
                                 $rss = new lastRSS;
@@ -136,19 +130,20 @@
                                 // cargar archivo RSS
                                 $rs = $rss->get('https://www.df.cl/noticias/site/list/port/rss.xml');
                                 // Muestra titulo y enlace
-                                echo "<ul>\n";
-                                foreach($rs['items'] as $item) {
-                                    echo "\t<li><a href=\"$item[link]\">".$item['title']."</a></li>\n";
+                                echo "<dl>\n";
+                                foreach ($rs['items'] as $item) {
+                                    ?>
+                                    <dt><a href='<?php echo $item['link'] ?> '><?php echo $item['title'] ?> </a>
+                                        <p><?php echo $item['description'] ?></p>
+                                        <p><label>Categoria</label><?php echo $item['category'] ?><label>Fecha</label><?php echo $item['pubDate'] ?> </p>
+                                    </dt>
+                                    <?php
                                 }
-                                echo "</ul>\n";
+                                echo "</dl>\n";
                                 ?>
                             </div>
                             <div class="content">
                                 <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Hoy
-                                        <i class="fa fa-circle text-danger"></i> Ayer
-                                    </div>
                                     <hr>
                                     <div class="stats">
                                         <i class="fa fa-check"></i> Cikapp noticias
@@ -207,7 +202,7 @@
                                                     </label>
                                                 </td>
                                                 <td>Tarea1
-</td>
+                                                </td>
                                                 <td class="td-actions text-right">
                                                     <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
                                                         <i class="fa fa-edit"></i>
@@ -304,7 +299,7 @@
                         </li>
                         <li>
                             <a href="#">
-                               Blog
+                                Blog
                             </a>
                         </li>
                     </ul>
@@ -318,7 +313,7 @@
     </div>
 </div>
 
-<?php include 'structure/footer.php';?>
+<?php include 'structure/footer.php'; ?>
 
 
 

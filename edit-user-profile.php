@@ -146,47 +146,6 @@ $Obj_operaciones = new OperacionesMYSQL();
                                             $Obj_operaciones->actualizarEstudios($idUsuario, $selEducacion);
                                         }
                                     }
-
-
-//
-//                                    if (isset($_POST['chkBasica'])) {
-//                                        $chkBasica = $_POST['chkBasica'];
-//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkBasica)) {
-//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkBasica);
-//                                        }
-//                                    }
-//                                    if (isset($_POST['chkMedia'])) {
-//                                        $chkMedia = $_POST['chkMedia'];
-//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkMedia)) {
-//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkMedia);
-//                                        }
-//                                    }
-//                                    if (isset($_POST['chkcft'])) {
-//                                        $chkcft = $_POST['chkcft'];
-//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkcft)) {
-//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkcft);
-//                                        }
-//                                    }
-//                                    if (isset($_POST['chkIp'])) {
-//                                        $chkIp = $_POST['chkIp'];
-//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkIp)) {
-//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkIp);
-//                                        }
-//                                    }
-//                                    if (isset($_POST['chkUniversidad'])) {
-//                                        $chkUniversidad = $_POST['chkUniversidad'];
-//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkUniversidad)) {
-//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkUniversidad);
-//                                        }
-//                                    }
-//                                    if (isset($_POST['chkOtro'])) {
-//                                        $chkOtro = $_POST['chkOtro'];
-//                                        if ($Obj_operaciones->comprobarUsuarioEducacion($idUsuario, $chkOtro)) {
-//                                            $Obj_operaciones->agregarEstudios($idUsuario, $chkOtro);
-//                                        }
-//                                    }
-
-
                                     if (isset($_POST['areasInteres'][0], $_POST['areasInteres'][1], $_POST['areasInteres'][2])) {
                                         $areaInteres = $_POST['areasInteres'][0] . "," . $_POST['areasInteres'][1] . "," . $_POST['areasInteres'][2];
                                     } elseif (isset($_POST['areasInteres'][0], $_POST['areasInteres'][1])) {
@@ -238,7 +197,6 @@ $Obj_operaciones = new OperacionesMYSQL();
                                             echo $msg;
                                         }
                                     }
-
 
                                     $test = $Obj_operaciones->editarUsuario($idUsuario, $nombre, $apellido, $apellidoM, $email, $skype, $COMUNA_ID, $areaInteres, $idIngles, $video);
 
@@ -450,7 +408,7 @@ $Obj_operaciones = new OperacionesMYSQL();
                                                             $query = "SELECT * FROM educacion;";
                                                             $resultado = $mysqli->query($query);
                                                             while ($rows = $resultado->fetch_assoc()) {
-                                                                if ($Obj_operaciones->comprobarUsuarioEducacion($_SESSION['idUsuario'],$rows['educacion_id'])) {
+                                                                if ($Obj_operaciones->comprobarUsuarioEducacion($_SESSION['idUsuario'], $rows['educacion_id'])) {
                                                                     print("<option value='" . $rows['educacion_id'] . "' selected='selected'>" . $rows['educacion_nombre'] . "</option>");
                                                                 } else {
                                                                     print("<option value='" . $rows['educacion_id'] . "' >" . $rows['educacion_nombre'] . "</option>");
