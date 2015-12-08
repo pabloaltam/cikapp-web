@@ -214,7 +214,8 @@
                                                         <div class="control-group">
                                                             <label></label>
                                                             <div class="controls">
-                                                                <input type="hidden" name="rut" value="11111111-1"/>
+                                                                <input type="hidden" name="rut" value="<?php $idEmpresa;?>"/>
+                                                                <input type="hidden" name="accion" value="agregar"/>
                                                                 <button type="submit" class="btn btn-primary">
                                                                     Publicar
                                                                 </button>

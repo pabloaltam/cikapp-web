@@ -1,4 +1,15 @@
-<?php include 'structure/navbarFinSession.php'; ?>
+<?php
+@session_start();
+if (isset($_SESSION['idUsuario'])) {
+    
+} else {
+    header('Location: index.php');
+}
+include 'structure/navbarFinSession.php';
+include './include/ejecutar_en_db.php';
+
+$Obj_operaciones = new OperacionesMYSQL();
+?>
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
@@ -28,7 +39,7 @@
                         <p>Mensajes</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="mostrar-avisos.php">
                         <i class="pe-7s-portfolio"></i>
                         <p>Ofertas de empleos</p>
@@ -41,7 +52,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="edit-user-profile.php">
                         <i class="pe-7s-magic-wand"></i>
                         <p>Editar perfil</p>
@@ -56,6 +67,7 @@
             </ul>
         </div>
     </div>
+
 
     <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
@@ -104,6 +116,14 @@
 
 
         <div class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="card ">
+                        <div class="header">
+            
+                        
+        <div class="content">
             <?php
             ini_set("display_errors", 1);
             include 'structure/navbar.php';
@@ -114,7 +134,7 @@
                 <h2>Ofertas de empleo en tu ciudad</h2>
                 <p>Listado de todas las publicaciones realizadas hasta la fecha:</p>  
                 <?php
-                include './include/ejecutar_en_db.php';
+              
                 $OBJ_operaciones = new OperacionesMYSQL();
                 if (isset($_GET['idPos']) && !empty($_GET['idPos'])) {
                     if ($OBJ_operaciones->YaPostulo($_SESSION['idUsuario'], $_GET['idPos'])) {
@@ -180,43 +200,53 @@
             </div>
 
         </div>
+                         
+                            
+                            </div>
+                        </div>
 
 
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Inicio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Nosotros
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Nosotros
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; 2015 <a href="http://www.creative-tim.com">Cikapp</a>
-                </p>
+                    </div>
+                </div>
             </div>
-        </footer>
-
-    </div>
-</div>
-<?php include './structure/footer.php';?>
 
 
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Inicio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Nosotros
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Nosotros
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy; 2015 <a href="http://www.creative-tim.com">Cikapp</a>
+                    </p>
+                </div>
+            </footer>
 
+        </div>
+
+        <?php
+    include './structure/footer.php';
+    ?> 
+</body>
+</html>

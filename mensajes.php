@@ -140,6 +140,7 @@ $Obj_operaciones = new OperacionesMYSQL();
 
                                                 if (isset($_POST['message']) && !empty($_POST['message'])) {
                                                   
+                                                    $usuario = $_POST['user'];
                                                     $mensaje = $_POST['message'];
                                                     $revisar_conversacion = "SELECT `hash` FROM `grupo_mensajes` WHERE (`usuario_uno`='$mi_id' AND `usuario_dos`='$usuario') OR (`usuario_uno`='$usuario' AND `usuario_dos`='$mi_id')";
                                                     $resultado = $mysqli->query($revisar_conversacion);
@@ -186,11 +187,12 @@ $Obj_operaciones = new OperacionesMYSQL();
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">				
+                                            <div class="form-group">
+                                                <input type="hidden" value="<?php $usuario?>" name="usuario">
                                                 <label for="message">Mensaje</label>
                                                 <textarea id="message" name="message" placeholder="Ingresar mensaje"  class="form-control" rows="3"></textarea>
                                             </div>
-                                            <button id="send" class="btn btn-primary" >Enviar</button>						
+                                            <input id="send" type="submit" class="btn btn-primary" value="Enviar">			
                                         </form>
                                     </div>
                                 </section>	
