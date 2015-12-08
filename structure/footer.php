@@ -21,6 +21,7 @@
 <script src="structure/js/light-bootstrap-dashboard.js"></script>
 <script src="structure/bstrap/js/bootstrap.min.js"></script>
 <script src="structure/js/login.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#exito').alert();
@@ -46,4 +47,6 @@
         tagLimit: 3
     });
 </script>
+</body>
+</html>
 

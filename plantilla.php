@@ -1,6 +1,15 @@
-<?php include 'structure/navbarFinSession.php'; ?>
+<?php
+@session_start();
+if (isset($_SESSION['idUsuario'])) {
+    
+} else {
+    header('Location: index.php');
+}
+include 'structure/navbarFinSession.php';
+include './include/ejecutar_en_db.php';
 
-
+$Obj_operaciones = new OperacionesMYSQL();
+?>
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
@@ -36,14 +45,14 @@
                         <p>Ofertas de empleos</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="mis-postulaciones.php">
                         <i class="pe-7s-folder"></i>
                         <p>Mis postulaciones</p>
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="edit-user-profile.php">
                         <i class="pe-7s-magic-wand"></i>
                         <p>Editar perfil</p>
@@ -58,6 +67,7 @@
             </ul>
         </div>
     </div>
+
 
     <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
@@ -106,86 +116,63 @@
 
 
         <div class="content">
-            <div class="container">
-                <h2>Mis postulaciones</h2>
-                <p>Listado de mis postulaciones.</p>  
-                
-                            <?php
-            include './include/ejecutar_en_db.php';
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="card ">
+                        <div class="header">
             
-            $MiObjeto = new OperacionesMYSQL();
-            $resultado = $MiObjeto->postulacionesUsuario($_SESSION['idUsuario']);
-            ?>                
-                <table class="table table-striped table-bordered table-hover table-responsive">
-                    <thead>
-                        <tr>
-                            <th>CARGO</th> 
-                            <th>LUGAR DE TRABAJO</th>
-                            <th>CONTRATO</th>
-                            <th>JORNADA LABORAL</th>
-                            <th>DESCRIPCION</th>
-                            <th>FECHA PUBLICACIÓN</th>
-                            <th>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-            while ($rows=$resultado->fetch_assoc()){
-            ?>
-                        <tr>
-                            <td><?php echo $rows['cargo']; ?></td>
-                            <td><?php echo $rows['COMUNA_NOMBRE'] . ", " . $rows['REGION_NOMBRE'] . ", " . $rows['PAIS_NOMBRE'];?></td>
-                            <td><?php echo $rows['tipo_contrato']; ?></td>
-                            <td><?php echo $rows['tipo_jornada']; ?></td>
-                            <td><?php echo $rows['publicacion']; ?></td>
-                            <td><?php echo $rows['fecha_publicacion']; ?></td>
-                            <td><a href="mis-postulaciones.php?idP=<?php echo $rows['id'];?>&idU=<?php echo $rows['USUARIO_ID'];?>&type=Del">Eliminar esta publicación</a></td>                
-                        </tr>
-                        <?php
-            }
-                        ?>
-                    </tbody>
-                </table>
+                            
+                            
+<!--                            TODO EL CONTENIDO-->
+                            
+                            
+                            
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
+
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Inicio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Nosotros
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Nosotros
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy; 2015 <a href="http://www.creative-tim.com">Cikapp</a>
+                    </p>
+                </div>
+            </footer>
+
         </div>
 
-
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Inicio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Nosotros
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Nosotros
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; 2015 <a href="http://www.creative-tim.com">Cikapp</a>
-                </p>
-            </div>
-        </footer>
-
-    </div>
-</div>
-<?php
-                        include './structure/footer.php';
-?>
-
-
+        <?php
+    include './structure/footer.php';
+    ?> 
+</body>
+</html>

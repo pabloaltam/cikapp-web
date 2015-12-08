@@ -1,6 +1,4 @@
 <?php include 'structure/navbarFinSession.php'; ?>
-
-
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
 
@@ -218,7 +216,7 @@
 
     </div>
 </div>
-</body>
-</html>
+<?php include './structure/footer.php';?>
+
 
 
