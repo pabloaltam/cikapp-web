@@ -85,12 +85,16 @@
         $obj = new OperacionesMYSQL();
         $user = str_replace('.', '', $user);
         if($obj->RutValidateLoginEnterprise($user)) {
+            echo '1';
             require('conexion.php'); //Incluimos la conexion a la base de datos.
             $sql = "SELECT * FROM empresa WHERE rut='$user' and password='$pass'";
             if($result = $mysqli->query($sql)){
+                echo '2';
                 if ($rows = $result->fetch_assoc()) {
                         @session_start();
+                        echo '3';
                         if(sesion_iniciada()){
+                            echo '4';
                             logout();
                         }
                         $_SESSION['idEmpresa'] = $rows['idEmpresa'];
@@ -110,15 +114,17 @@
                         return TRUE;
                 
                 } else {
+                    echo '5';
                     echo '<p>No ha podido iniciar sesión, intente más tarde</p>';
                     return FALSE;
                 }
             } else {
+                echo '6';
                 echo '<p>Su empresa no se encuentra en nuestra base de datos, por favor regístrese primero</p>';
                 return FALSE;
             }
-            $mysqli->close();
         }else{
+            echo '7';
             echo '<p>Rut no válido, ingréselo correctamente</p>';
             return FALSE;
         }

@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-ini_set("display_errors", 1);
 if (isset($_GET["cod"]) && isset($_GET["Type"])) {
     $codigo = $_GET["cod"];
     if ($_GET["Type"] === "usuario") {
@@ -20,7 +19,7 @@ if (isset($_GET["cod"]) && isset($_GET["Type"])) {
                 $resultado = $OBJ->validarCodigo($_GET["cod"]);
                 if ($resultado != NULL) {
                     if ($resultado) {
-                        header("Location: ../edit-user-profile.php?pri=1");
+                        header("Location: /edit-user-profile.php?pri=1");
                     } else {
                         print '<h1>Ups...</h1>'
                                 . '<p>No hemos podido confirmar su cuenta de usuario.</p>';
@@ -39,16 +38,27 @@ if (isset($_GET["cod"]) && isset($_GET["Type"])) {
         $result = $mysqli->query($query);
         while ($rows = $result->fetch_assoc()) {
             if (loginEmpresaCon($rows['rut'], $rows['password'])) {
+                echo 'a';
                 $OBJ = new OperacionesMYSQL();
                 $resultado = $OBJ->validarCodigoEmpresa($_GET["cod"]);
                 if ($resultado != NULL) {
+                    echo 'b';
                     if ($resultado) {
-                        header("Location: ../edit-enterprise-profile.php?pri=1");
+                        echo 'c';
+                        echo $_SESSION['rutEmpresa']." ". $_SESSION[idEmpresa];
+                         ?>
+                                <script type="text/javascript">
+                                    window.location = "/edit-enterprise-profile.php?pri=1";
+                                </script>
+
+                                <?php
                     } else {
+                        echo 'D';
                         print '<h1>Ups...</h1>'
                                 . '<p>No hemos podido confirmar su cuenta de empresa. </p>';
                     }
                 } else {
+                    echo 'E';
                     print "<h1>Ups...</h1>"
                             . "<p>La cuenta de su empresa ya ha sido confirmada anteriormente. ir a <a href='../login.php'>Login</a></p>";
                 }

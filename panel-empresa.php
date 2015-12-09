@@ -110,16 +110,31 @@
                         <div class="card ">
                             <div class="header">
                                 <h4 class="title">Noticias</h4>
-                                <p class="category">...</p>
+                                <p class="category">Diario financiero RSS</p>
+                            </div>
+                            <div class="container-fluid"  style="height:300px; overflow-x: hidden;">
+                                <?php
+                                include "structure/rss/lastRSS.php";
+                                $rss = new lastRSS;
+                                $rss->cache_dir = './temp';
+                                $rss->cache_time = 1200;
+                                // cargar archivo RSS
+                                $rs = $rss->get('https://www.df.cl/noticias/site/list/port/rss.xml');
+                                // Muestra titulo y enlace
+                                echo "<dl>\n";
+                                foreach ($rs['items'] as $item) {
+                                    ?>
+                                    <dt><a href='<?php echo $item['link'] ?> '><?php echo $item['title'] ?> </a>
+                                        <p><?php echo $item['description'] ?></p>
+                                        <p><label>Categoria</label><?php echo $item['category'] ?><label>Fecha</label><?php echo $item['pubDate'] ?> </p>
+                                    </dt>
+                                    <?php
+                                }
+                                echo "</dl>\n";
+                                ?>
                             </div>
                             <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
-
                                 <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Hoy
-                                        <i class="fa fa-circle text-danger"></i> Ayer
-                                    </div>
                                     <hr>
                                     <div class="stats">
                                         <i class="fa fa-check"></i> Cikapp noticias

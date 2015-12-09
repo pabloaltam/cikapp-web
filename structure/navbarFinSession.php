@@ -75,7 +75,7 @@
 
                             </li>
                             <?php
-                        } elseif (isset($_SESSION['nombreEmpleado'])) {
+                        } elseif (isset($_SESSION['rutEmpresa'])) {
                             ?>
                             <li>
                                 <a title="Ver mi perfil" href="./perfil-empresa.php" role="button"><i class="fa fa-user"></i></a>

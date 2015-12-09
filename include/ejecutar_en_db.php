@@ -102,6 +102,7 @@ class OperacionesMYSQL {
 
     function RutValidateLoginUser($rut) {
         $rut = str_replace('.', '', $rut);
+        if(substr($rut, 0,2)>71){
         if (preg_match('/^(\d{1,9})-((\d|k|K){1})$/', $rut, $d)) {
             $s = 1;
             $r = $d[1];
@@ -123,6 +124,9 @@ class OperacionesMYSQL {
                 return FALSE;
             }
         }
+    }else {
+        return FALSE;
+    }
     }
 
     function RutValidateLoginEnterprise($rut) {
@@ -230,7 +234,7 @@ class OperacionesMYSQL {
         $pass = sha1(md5($password1));
         include("./include/conexion.php");
         $rut = str_replace('.', '', $rut);
-        echo 'cod=' . $codigo . " - ";
+       
 
         $sql = "INSERT INTO empresa (rut, email, password, codigo) VALUES ('$rut','$email','$pass','$codigo');";
         if ($this->RutEmpresaValidate($rut)) {
